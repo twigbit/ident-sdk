@@ -5,6 +5,11 @@ import android.os.Bundle
 import com.twigbit.identsdk.IdentificationActivity
 import com.twigbit.identsdk.Message
 import android.content.Intent.getIntent
+import com.twigbit.identsdk.DropinRequest
+import android.provider.DocumentsContract.EXTRA_ERROR
+import android.app.Activity
+import android.content.Intent
+
 
 
 
@@ -28,8 +33,19 @@ class MainActivity : IdentificationActivity() {
 
     val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
-        val dropInRequest = DropInRequest()
-            .clientToken("RmluZ2VycHJpbnQiOiI")
+        val dropInRequest = DropinRequest("RmluZ2VycHJpbnQiOiI")
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_IDENTIFICATION) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Success. Update the UI to reflect the successful identification
+                // and fetch the user data from the server where they were delivered.
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // The user canceled the identification
+            } else {
+                // An error occured during the identification
+            }
+        }
     }
 }
