@@ -88,8 +88,6 @@ To receive the SDK's identification state callbacks in your activity, extend the
 To receive the identification state events, you must implement the `onStateChanged` method. As this method might be called from a different thread, be sure to run all UI operations on your UI thread explicity. 
 
 
-
-
 ```kotlin
 class MainActivity : IdentificationActivity() {
     override fun onStateChanged(state: String, data: String?) {
@@ -100,12 +98,12 @@ class MainActivity : IdentificationActivity() {
                 }
                 IdentificationManager.STATE_ACCESSRIGHTS -> {
                     // A list of the id-card fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
-                    // TODO continue with runIdent()
-                    // TODO better parameter typing
+                    // TODO @dev continue with runIdent(), this was treated non-blocking until now. 
+                    // TODO @dev better parameter typing
                 }
                 IdentificationManager.STATE_CARD_INSERTED -> {
                     // A card was attached to the NFC reader
-                    // TODO show empty card and detach data.
+                    // TODO @dev show empty card and detach data.
                 }
                 IdentificationManager.STATE_ENTER_PIN -> {
                     // The id cards PIN was requested. Display a PIN dialog to the user.
@@ -121,11 +119,18 @@ class MainActivity : IdentificationActivity() {
                 }
                 IdentificationManager.STATE_BAD -> {
                     // Bad state. Display an error/issue dialog to the user.
-                    // TODO figure out reasons for bad state, offer solutions, i.e. id card blocked, id card detached. More granular apporach needed. 
+                    // TODO @dev figure out reasons for bad state, offer solutions, i.e. id card blocked, id card detached. More granular apporach needed. 
                 }
             }
         }
     }
+}
+```
+Start the identification flow by calling the `IdentificationManager.startIdent` Method from your `IdentificationActivity`. The `identificationManager` object is accessible through your parent activity.
+
+```kotlin
+fun onStartIdent(v: View) {
+  identificationManager.startIdent("https://...") // TODO("Your tcTokenURL here")
 }
 ```
 
@@ -140,14 +145,6 @@ class MainActivity : IdentificationActivity() {
     }
 }
 
-```
-
-Start the identification flow by calling the `IdentificationManager.startIdent` Method from your `IdentificationActivity`.
-
-```kotlin
-fun onStartIdent(v: View) {
-  identificationManager.startIdent("https://...") // TODO("Your tcTokenURL here")
-}
 ```
 
 ### (comming soon) Usage with [AusweisIdent](https://www.ausweisident.de)
@@ -166,7 +163,6 @@ val ausweisIdentTcTokenUrl = AusweisIdentBuilder()
         .build()
 ```
 
-### Sample (coming soon)
 ### Sample
 
 A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system. 
