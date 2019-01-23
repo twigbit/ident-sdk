@@ -1,12 +1,9 @@
 package com.twigbit.identsdk.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.twigbit.identsdk.IdentificationActivity
 import com.twigbit.identsdk.Message
-import android.content.Intent.getIntent
-import com.twigbit.identsdk.DropinRequest
-import android.provider.DocumentsContract.EXTRA_ERROR
+import com.twigbit.identsdk.DropInRequest
 import android.app.Activity
 import android.content.Intent
 
@@ -33,7 +30,7 @@ class MainActivity : IdentificationActivity() {
 
     val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
-        val dropInRequest = DropinRequest("RmluZ2VycHJpbnQiOiI")
+        val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI")
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

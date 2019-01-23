@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.twigbit.identsdk.ui.DropinIdentificationActivity
 
-class DropinRequest(private val clientToken: String){
+class DropInRequest(private val clientToken: String){
     val EXTRA_CLIENT_TOKEN = "twigbit-ident-extra-client-token"
     fun getIntent(context: Context): Intent{
         val intent = Intent(context, DropinIdentificationActivity::class.java)
