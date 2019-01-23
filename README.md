@@ -49,17 +49,17 @@ Maven:
 </dependency>
 ```
 
-### Identify users with the Drop-In UI (coming soon)
+### Identify users with the Drop-in UI (coming soon)
 
 To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI.
 
-To start an identification process, simply create a DropinRequest with your client tokent and start the activity for the result.
+To start an identification process, simply create a `DropInRequest` with your servers tcTokenURL and start the activity for the result.
 
 ```kotlin
-val REQUEST_CODE_IDENTIFICATION = 0;
+val REQUEST_CODE_IDENTIFICATION = 0
 
 private fun startDropInIdentification(){
-    val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI") // your client token
+    val dropInRequest = DropInRequest("https://...") // your tcToken Endpoint
     startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
 }
 ```
@@ -83,7 +83,7 @@ To receive the identification result, you should override your activities `onAct
 
 ### Implement your own UI
 
-To host you have the Activity integrating the identifcation flow extend the ``IdentificationActivty` and implement the abstract methods.
+To host you have the Activity integrating the identifcation flow extend the `IdentificationActivty` and implement the abstract methods.
 
 ```kotlin
 class MainActivity : IdentificationActivity() {
@@ -100,6 +100,30 @@ class MainActivity : IdentificationActivity() {
     }
 }
 
+```
+
+Start the identification flow by calling the `IdentificationManager.startIdent` Method from your `IdentificationActivity`.
+
+```kotlin
+fun onStartIdent(v: View) {
+  identificationManager.startIdent("https://...") // TODO("Your tcTokenURL here")
+}
+```
+
+### (comming soon) Usage with [AusweisIdent](https://www.ausweisident.de)
+
+This SDK provides useful helpers, if you are planing to use the [AusweisIdent](https://www.ausweisident.de) product.
+AusweisIdent is a product offered by the Bundesdruckerei GmbH and Governikus KG.
+
+In order to use AusweisIdent you need to provide the Ident SDK with a tcTokenURL pointing to an AusweisIdent server.
+
+```kotlin
+val ausweisIdentTcTokenUrl = AusweisIdentBuilder()
+        .scope(AUSWEISIDENT_SCOPE_FAMILYNAMES)
+        .scope(AUSWEISIDENT_SCOPE_PLACEOFBIRTH)
+        .clientId("ABCDEFG")
+        .redirectUrl("https://yourserver.com")
+        .build()
 ```
 
 ### Sample (coming soon)
