@@ -17,11 +17,12 @@ We are aiming to extract and eliminate the recurring code and configuration that
 - Lightweight- besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
 - Drop-in UI - Provide a simple, customizable drop in UI as a quick integration with identification processes
 - (coming soon) Capability check- check whether the users device has the required architecture and NFC capabilities
-- (coming soon) Build an identification app as a zero-dependency option for the integration
+- (coming soon) A custom identification app as a zero-dependency option for the integration
+- (coming soon) Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see limitations below) 
 
 ### Limitations
 
-- The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.01. Unfortunalety, we are bound to that limitation. (comming soon) This SDK provides a fallback to prompt the user to install the official [AusweisApp2](https://www.ausweisapp.bund.de/).
+- The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.03. Unfortunalety, we are bound to that limitation. 
 
 ## Usage
 
@@ -49,7 +50,9 @@ Maven:
 </dependency>
 ```
 
-### Identify users with the Drop-In UI (beta)
+
+
+### Option 1: Identify users with the Drop-In UI (alpha)
 
 To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI.
 
@@ -81,15 +84,15 @@ To receive the identification result, you should override your activities `onAct
     }
 ```
 
-### Implement your own UI
+### Option 2: Implement your own UI
 
-To receive the SDK's identification state callbacks in your activity, extend the `IdentificationActivty`. This will bind an`IdentificationManager` instance to your activities lifecycle. 
+To receive the SDK's identification state callbacks in your activity, extend the `IdentificationActivty`. This will bind an `IdentificationManager` instance to your activities lifecycle. 
 
 To receive the identification state events, you must implement the `onStateChanged` method. As this method might be called from a different thread, be sure to run all UI operations on your UI thread explicity. 
 
-
 ```kotlin
 class MainActivity : IdentificationActivity() {
+    // TODO @dev rename to `onIdentificationStateChanged`
     override fun onStateChanged(state: String, data: String?) {
         runOnUiThread {
             when (state) {
@@ -134,23 +137,9 @@ fun onStartIdent(v: View) {
 }
 ```
 
-### Get JSON Messanges for deeper control (coming soon)
+### Usage with [AusweisIdent](https://www.ausweisident.de) (alpha) 
 
-If you want to get access to the AusweisApp2 SDK's string messages for deeper control over the hardware or some other reasons, implement the `onMessage` callback. 
-
-```kotlin
-class MainActivity : IdentificationActivity() {
-    override fun onMessage(message: Message) {
-        
-    }
-}
-
-```
-
-### (comming soon) Usage with [AusweisIdent](https://www.ausweisident.de)
-
-This SDK provides useful helpers, if you are planing to use the [AusweisIdent](https://www.ausweisident.de) product.
-AusweisIdent is a product offered by the Bundesdruckerei GmbH and Governikus KG.
+This SDK provides useful helpers, if you are planing to use [AusweisIdent](https://www.ausweisident.de) offered by the Bundesdruckerei GmbH and Governikus KG. 
 
 In order to use AusweisIdent you need to provide the Ident SDK with a tcTokenURL pointing to an AusweisIdent server.
 
@@ -163,9 +152,33 @@ val ausweisIdentTcTokenUrl = AusweisIdentBuilder()
         .build()
 ```
 
+### Get raw JSON Messanges (alpha)
+
+If you want to get access to the AusweisApp2 SDK's string messages, implement the `onMessage` callback. This should only be used for debugging purposes. 
+
+```kotlin
+class MainActivity : IdentificationActivity() {
+    
+    ...
+    
+    override fun onMessage(message: Message) {
+        // Log the message, etc. 
+    }
+}
+
+```
+
+
+
 ### Sample
 
 A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system. 
+
+### 0-dependency integration (coming soon) with dedicated Identification App 
+
+### Backlog / Nice to have
+
+- Vibrate on message (configuration option necessary?)
 
 ### Copyright
 
