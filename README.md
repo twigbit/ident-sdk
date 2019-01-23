@@ -1,57 +1,70 @@
 # Twigbit Ident SDK
 
+| Status    | Version          |
+| --------- | ---------------- |
+| **DRAFT** | 0.1.0 unreleased |
+
+**NOTICE:** This is a confidential document.
+<!-- @moritz TODO: cooler disclosure satz -->
+
 The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating the SDK.
 
 ### Features
-  * Simplify the tedious [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) configuration
-  * Replace the JSON based messanging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
-  * Lightweight- besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
-  * Drop-in UI - Provide a simple, customizable drop in UI as a quick integration with identification processes
-  * (coming soon) Capability check- check whether the users device has the required architecture and NFC capabilities
-  * (coming soon) Build an identification app as a zero-dependency option for the integration
-  
-### Limitations 
-  * The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.01. Unfortunalety, we are bound to that limitation. 
-  
-## Usage 
 
-The usage examples are provided in Kotlin. The integration works in Java analogously. 
+- Simplify the tedious [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) configuration
+- Replace the JSON based messanging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
+- Lightweight- besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
+- Drop-in UI - Provide a simple, customizable drop in UI as a quick integration with identification processes
+- (coming soon) Capability check- check whether the users device has the required architecture and NFC capabilities
+- (coming soon) Build an identification app as a zero-dependency option for the integration
+
+### Limitations
+
+- The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.01. Unfortunalety, we are bound to that limitation. (comming soon) This SDK provides a fallback to prompt the user to install the official [AusweisApp2](https://www.ausweisapp.bund.de/).
+
+## Usage
+
+The usage examples are provided in Kotlin. The integration works in Java analogously.
 
 ### Download
-To get acces to the SDK, please [get in touch](https://www.twigbit.com/ident). 
+
+To get access to the SDK, please [get in touch](https://www.twigbit.com/ident).
 
 Gradle:
+
 ```gradle
 dependencies {
- implementation 'com.twigbit.identsdk:identsdk:1.0.0'
+  implementation 'com.twigbit.identsdk:identsdk:1.0.0'
 }
 ```
 
 Maven:
+
 ```xml
 <dependency>
-<groupId>com.twigbit.identsdk</groupId>
-<artifactId>identsdk</artifactId>
-<version>1.0.0</version>
+  <groupId>com.twigbit.identsdk</groupId>
+  <artifactId>identsdk</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
 
 ### Identify users with the Drop-In UI (coming soon)
 
-To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI. 
+To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI.
 
-To start an identification process, simply create a DropinRequest with your client tokent and start the activity for the result. 
+To start an identification process, simply create a DropinRequest with your client tokent and start the activity for the result.
 
 ```kotlin
 val REQUEST_CODE_IDENTIFICATION = 0;
-    private fun startDropInIdentification(){
-        val dropInRequest = DropinRequest("RmluZ2VycHJpbnQiOiI") // your client token
-        startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
-    }
+
+private fun startDropInIdentification(){
+    val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI") // your client token
+    startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
+}
 ```
 
-To receive the identification result, you should override your activities `onActivityResult`. 
+To receive the identification result, you should override your activities `onActivityResult`.
 
 ```kotlin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -68,10 +81,9 @@ To receive the identification result, you should override your activities `onAct
     }
 ```
 
+### Implement your own UI
 
-### Implement your own UI 
-
-To host you have the Activity integrating the identifcation flow extend the ``IdentificationActivty` and implement the abstract methods. 
+To host you have the Activity integrating the identifcation flow extend the ``IdentificationActivty` and implement the abstract methods.
 
 ```kotlin
 class MainActivity : IdentificationActivity() {
@@ -90,10 +102,10 @@ class MainActivity : IdentificationActivity() {
 
 ```
 
-### Sample (coming soon) 
+### Sample (coming soon)
 
 ### Copyright
 
 ```
-Copyright 2018 Moritz Morgenroth. All rights reserved. 
+Copyright 2018 Moritz Morgenroth. All rights reserved.
 ```
