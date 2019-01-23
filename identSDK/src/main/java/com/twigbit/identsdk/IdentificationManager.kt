@@ -100,7 +100,7 @@ class IdentificationManager(val callback: Callback){
         }
 
         // Pass raw sdk messageJson to callback for debugging/migration
-        callback.onMessage(message)
+        //callback.onMessage(message)
 
         if(message.card != null){
             this.state = STATE_CARD_INSERTED
@@ -109,14 +109,14 @@ class IdentificationManager(val callback: Callback){
             IdentificationUtil.MSG_AUTH -> {
                 if(!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error"){
                     // An error occured
-                    callback.onError(message.result!!.description)
+                    //callback.onError(message.result!!.description)
                     authInProgress = false
                     return
                 }
                 else if(messageJson.indexOf("url") != -1){
                     val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
                     state = STATE_COMPLETE
-                    callback.onComplete(s)
+                    //callback.onComplete(s)
                 }
                 else{
                     authInProgress = true
@@ -149,12 +149,7 @@ class IdentificationManager(val callback: Callback){
     }
 
     interface Callback {
-        fun onError(message: String)
-        fun onMessage(message: Message)
-        fun onComplete(url: String)
-        fun onStateChanged(state: String) {
-            Log.d("IdentificationManager", "State changed to $state")
-        }
+        fun onStateChanged(state: String, data: String?)
     }
 
     private var authInProgress: Boolean = false
@@ -162,7 +157,7 @@ class IdentificationManager(val callback: Callback){
 
     private var state: String = STATE_DEFAULT
         set(value) {
-            this.callback.onStateChanged(value)
+            this.callback.onStateChanged(value, null)
         }
 
     companion object {

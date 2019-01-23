@@ -49,7 +49,7 @@ Maven:
 </dependency>
 ```
 
-### Identify users with the Drop-In UI (coming soon)
+### Identify users with the Drop-In UI (beta)
 
 To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI.
 
@@ -59,7 +59,7 @@ To start an identification process, simply create a DropinRequest with your clie
 val REQUEST_CODE_IDENTIFICATION = 0;
 
 private fun startDropInIdentification(){
-    val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI") // your client token
+    val dropInRequest = DropInRequest("jlisiasegljisgilj") // your client token
     startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
 }
 ```
@@ -83,26 +83,68 @@ To receive the identification result, you should override your activities `onAct
 
 ### Implement your own UI
 
-To host you have the Activity integrating the identifcation flow extend the ``IdentificationActivty` and implement the abstract methods.
+To receive the SDK's identification state callbacks in your activity, extend the `IdentificationActivty`. This will bind an`IdentificationManager` instance to your activities lifecycle. 
+
+To receive the identification state events, you must implement the `onStateChanged` method. As this method might be called from a different thread, be sure to run all UI operations on your UI thread explicity. 
+
+
+
 
 ```kotlin
 class MainActivity : IdentificationActivity() {
-    override fun onError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onStateChanged(state: String, data: String?) {
+        runOnUiThread {
+            when (state) {
+                IdentificationManager.STATE_COMPLETE -> {
+                    // The identification was complete, display a success message to the user and fetch the identification result from the server
+                }
+                IdentificationManager.STATE_ACCESSRIGHTS -> {
+                    // A list of the id-card fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
+                    // TODO continue with runIdent()
+                    // TODO better parameter typing
+                }
+                IdentificationManager.STATE_CARD_INSERTED -> {
+                    // A card was attached to the NFC reader
+                    // TODO show empty card and detach data.
+                }
+                IdentificationManager.STATE_ENTER_PIN -> {
+                    // The id cards PIN was requested. Display a PIN dialog to the user.
+                    // To continue the identification process, call identificationManager.setPin(pin: String)
+                }
+                IdentificationManager.STATE_ENTER_PUK -> {
+                    // The id cards PUK was requested. Display a PUK dialog to the user.
+                    // To continue the identification process, call identificationManager.setPuk(puk: String)
+                }
+                IdentificationManager.STATE_ENTER_CAN -> {
+                    // The id cards CAN was requested. Display a CAN dialog to the user.
+                    // To continue the identification process, call identificationManager.setCan(can: String)
+                }
+                IdentificationManager.STATE_BAD -> {
+                    // Bad state. Display an error/issue dialog to the user.
+                    // TODO figure out reasons for bad state, offer solutions, i.e. id card blocked, id card detached. More granular apporach needed. 
+                }
+            }
+        }
     }
+}
+```
 
+### Get JSON Messanges for deeper control (coming soon)
+
+If you want to get access to the AusweisApp2 SDK's string messages for deeper control over the hardware or some other reasons, implement the `onMessage` callback. 
+
+```kotlin
+class MainActivity : IdentificationActivity() {
     override fun onMessage(message: Message) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onComplete(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        
     }
 }
 
 ```
 
-### Sample (coming soon)
+### Sample
+
+A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system. 
 
 ### Copyright
 
