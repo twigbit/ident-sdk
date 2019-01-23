@@ -107,5 +107,5 @@ class MainActivity : IdentificationActivity() {
 ### Copyright
 
 ```
-Copyright 2018 Moritz Morgenroth. All rights reserved.
+Copyright 2018 twigbit technologies GmbH. All rights reserved.
 ```
