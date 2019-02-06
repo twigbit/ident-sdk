@@ -165,7 +165,6 @@ class MainActivity : IdentificationActivity() {
         // Log the message, etc. 
     }
 }
-
 ```
 
 
