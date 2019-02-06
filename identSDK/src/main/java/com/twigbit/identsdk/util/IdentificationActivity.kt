@@ -12,15 +12,15 @@ import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.os.Bundle
 import com.twigbit.identsdk.model.IdentificationManager
-import com.twigbit.identsdk.util.NfcInterceptorActivity
 
-abstract class IdentificationActivity : NfcInterceptorActivity(), IdentificationManager.Callback {
-    var identificationManager = IdentificationManager(this)
+abstract class IdentificationActivity : NfcInterceptorActivity() {
+    var identificationManager = IdentificationManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         identificationManager.bind(applicationContext)
     }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)

@@ -21,7 +21,12 @@ import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
 import com.twigbit.identsdk.util.IdentMode
 import com.twigbit.identsdk.util.IdentificationUtil
 
-class IdentificationManager(val callback: Callback){
+class IdentificationManager{
+    // TODO refactor into callback array or else replace by setter
+    var callback : Callback? = null
+    fun addCallback(callback: Callback){
+        this.callback = callback
+    }
 
     // Initialize the auth Process via this function
     fun bind(context: Context){
@@ -31,11 +36,13 @@ class IdentificationManager(val callback: Callback){
         context.unbindService(sdkConnection)
     }
 
-    fun startIdent(redirectUri: String, clientId: String) {
+
+    @Deprecated("Deprecated in favor of AusweisIdentHelper confiuration helper")
+    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
         val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
         send(cmd)
     }
-    fun startIdentWithURL(tokenURL: String) {
+    fun startIdent(tokenURL: String) {
         val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${tokenURL}\" }"
         send(cmd)
     }
@@ -151,7 +158,13 @@ class IdentificationManager(val callback: Callback){
     }
 
     interface Callback {
-        fun onStateChanged(state: String, data: String?)
+        fun onCompleted(resultUrl: String)
+        fun onRequestAccessRights(accessRights: ArrayList<String>)
+        fun onCardRecognized(card: IdentificationCard)
+        fun onRequestPin()
+        fun onRequestPuk()
+        fun onRequestCan()
+        fun onError(error: IdentificationError)
     }
 
     private var authInProgress: Boolean = false
@@ -159,7 +172,8 @@ class IdentificationManager(val callback: Callback){
 
     private var state: String = STATE_DEFAULT
         set(value) {
-            this.callback.onStateChanged(value, null)
+            // TODO migrate to new callback interface logic, hide state based logic.
+            //this.callback.onStateChanged(value, null)
         }
 
     companion object {

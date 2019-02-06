@@ -21,7 +21,6 @@ Elsewise tell Governikus to move from their docs.
 Currently Unused
 
 // TODO: Check under which conditions the NFC filter maifest configuration is needed. Maybe unnecessarry in activities filterin for other intents?
-d
 
 
  */

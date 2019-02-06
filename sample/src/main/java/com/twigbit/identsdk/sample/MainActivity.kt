@@ -6,22 +6,21 @@ import com.twigbit.identsdk.util.Message
 import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
+import android.support.v7.app.AppCompatActivity
 
 
-
-
-class MainActivity : IdentificationActivity() {
-    override fun onError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onMessage(message: Message) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onComplete(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
+//    override fun onError(message: String) {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//
+//    override fun onMessage(message: Message) {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
+//
+//    override fun onComplete(url: String) {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

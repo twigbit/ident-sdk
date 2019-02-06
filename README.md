@@ -11,11 +11,14 @@
 ### 0.1.1
 
 * [ausweisident] Return Result URL directly, refactor call redirects into optional method in AusweisIdent helper.
-* [core] Refactor onStateChanged into interface
+* [ausweisident] Server implementation guide.
+* [core] Explicitly handle result URL. 
+* [core] Refactor state callbacks into interface.
+* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
 
-### Roadmap
+### Roadmap/Backlog
 
-* Make inheritance from IdentificationActivity optional. Weaker inheritance model and moce logic into explicitly set callback. 
+* Make inheritance from IdentificationActivity optional by making the `IdentificationManager` livecycle aware.
 * Vibrate on NFC message.
 
 ---
@@ -26,12 +29,12 @@ We are aiming to extract and eliminate the recurring code and configuration that
 ## Features
 
 - Simplify the tedious [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) configuration
-- Replace the JSON based messanging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
+- Replace the JSON based messaging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
 - Lightweight — besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
 - Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes
 - (coming soon) Capability check- check whether the users device has the required architecture and NFC capabilities
 - (coming soon) A custom identification app as a zero-dependency option for the integration
-- (coming soon) Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see limitations below) 
+- (uncertain) Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see limitations below) 
 
 ## Limitations
 
@@ -63,8 +66,6 @@ Maven:
 </dependency>
 ```
 
-
-
 ### Option 1: Identify users with the Drop-In UI (alpha)
 
 To get started quickly and have the SDK take care of the entire identification process for you, you can use the build-in Drop-in UI.
@@ -88,7 +89,7 @@ To receive the identification result, you should override your activities `onAct
             if (resultCode == Activity.RESULT_OK) {
                 // Success. Update the UI to reflect the successful identification
                 // and fetch the user data from the server where they were delivered.
-                // TODO:(@moritz) get resultURL
+                val resultUrl = data.getParcelableExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // The user canceled the identification
             } else {
@@ -98,73 +99,102 @@ To receive the identification result, you should override your activities `onAct
     }
 ```
 
-### Option 2: Implement your own UI with DropIn-Activity
+### Option 2: Implement your own UI
 
-To receive the SDK's identification state callbacks in your activity, extend the `IdentificationActivty`. This will bind an `IdentificationManager` instance to your activities lifecycle. 
+To receive the SDK's identification state callbacks in your activity, implement the `IdentificationManager.Callback` interface and extend the `IdentificationActivty` to bind an `IdentificationManager` instance to your activities lifecycle. 
 
-To receive the identification state events, you must implement the `onStateChanged` method. As this method might be called from a different thread, be sure to run all UI operations on your UI thread explicity. 
+ In your activities `onCreate` method, add the callback to the manager and start the identifcation process. 
 
+ > _**Note:** As the callback method might be called from a different thread, be sure to run all UI operations on your UI thread explicitly._
+
+<!--**Example Activity**
 ```kotlin
-val callback = object : IdentificationCallback {
-    override fun onComplete(resultUrl: string) {
+class ExampleActivity: AppCompatActivity() {
 
+    lateinit val mIdent: Ident
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mIdent = Ident.newInstance(this, ...)
     }
-    override fun onNeedsUserInput(mode: string /** PIN | CAN | PUK */) {
 
-    }
-    override fun onError(error: IdentificationError) {
-
-    }
-}
-
-class MainActivity : IdentificationActivity() {
-    // TODO @dev rename to `onIdentificationStateChanged`
-    override fun onStateChanged(state: String, data: String?) {
-        runOnUiThread {
-            when (state) {
-                IdentificationManager.STATE_COMPLETE -> {
-                    // The identification was complete, display a success message to the user and fetch the identification result from the server
-                    // TODO:(@moritz) get resultURL
-                }
-                IdentificationManager.STATE_ACCESSRIGHTS -> {
-                    // A list of the id-card fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
-                    // TODO @dev continue with runIdent(), this was treated non-blocking until now. 
-                    // TODO @dev better parameter typing
-                }
-                IdentificationManager.STATE_CARD_INSERTED -> {
-                    // A card was attached to the NFC reader
-                    // TODO @dev show empty card and detach data.
-                }
-                IdentificationManager.STATE_ENTER_PIN -> {
-                    // The id cards PIN was requested. Display a PIN dialog to the user.
-                    // To continue the identification process, call identificationManager.setPin(pin: String)
-                }
-                IdentificationManager.STATE_ENTER_PUK -> {
-                    // The id cards PUK was requested. Display a PUK dialog to the user.
-                    // To continue the identification process, call identificationManager.setPuk(puk: String)
-                }
-                IdentificationManager.STATE_ENTER_CAN -> {
-                    // The id cards CAN was requested. Display a CAN dialog to the user.
-                    // To continue the identification process, call identificationManager.setCan(can: String)
-                }
-                IdentificationManager.STATE_BAD -> {
-                    // Bad state. Display an error/issue dialog to the user.
-                    // TODO @dev figure out reasons for bad state, offer solutions, i.e. id card blocked, id card detached. More granular apporach needed. 
-                }
-            }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        if (tag != null) {
+            mIdent.dispatchNfcTag(tag)
         }
     }
 }
-```
-Start the identification flow by calling the `IdentificationManager.startIdent` Method from your `IdentificationActivity`. The `identificationManager` object is accessible through your parent activity.
+```-->
 
 ```kotlin
-fun onStartIdent(v: View) {
-  identificationManager.startIdent("https://...") // TODO("Your tcTokenURL here")
+
+
+class MainActivity : IdentificationActivity() {
+
+   val identificationCallback = object: IdentificationManager.Callback{
+        override fun onCompleted(resultUrl: String) {
+            // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
+        }
+
+        override fun onRequestAccessRights(accessRights: ArrayList<String>) {
+            // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
+            // TODO continue with runIdent()
+        }
+
+        override fun onCardRecognized(card: IdentificationCard) {
+            // A card was attached to the NFC reader
+            // TODO @dev implement card model from JSON message params.
+        }
+
+        override fun onRequestPin() {
+            // The id cards PIN was requested. Display a PIN dialog to the user.
+            // To continue the identification process, call identificationManager.setPin(pin: String)
+        }
+
+        override fun onRequestPuk() {
+            // The id cards PUK was requested. Display a PUK dialog to the user.
+            // To continue the identification process, call identificationManager.setPuk(puk: String)
+        }
+
+        override fun onRequestCan() {
+            // The id cards CAN was requested. Display a CAN dialog to the user.
+            // To continue the identification process, call identificationManager.setCan(can: String)
+        }
+
+        override fun onError(error: IdentificationError) {
+            // An error occured. Display an error/issue dialog to the user.
+        }
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        identificationManager.addCallback(identificationCallback)
+    }
 }
 ```
 
-> _Comment:_ Maybe create a livecycle aware alternative that does not require exteding the IdentificationActivity. There might be some specific cases where extension is unwanted. + Flatter architecture - Need to pass down NFC intends explicitly. Noted on roadmap. 
+To start the identification process call the `identificationManagers.startIdent` method with your `tcTokenUrl`. 
+
+
+```kotlin
+identificationManager.startIdent(tcTokenUrl)
+```
+
+
+
+> _**Note:** We are working on a lifecycle aware alternative to the IdentificationActivity to give you the flexibility to inherit from your own base activity. This requires you to to override the `onNewIntent` method of the activity and pass down intents to the identificationManager:_
+> ```kotlin
+> override fun onNewIntent(intent: Intent?) {
+>     super.onNewIntent(intent)
+>     val tag = intent!!.getParcelableExtra<Tag>fdapter.EXTRA_TAG)
+>     if (tag != null) {
+>         identificationManager.dispatchTag(tag)
+>     }
+> }
+> ```
 
 ### Usage with [AusweisIdent](https://www.ausweisident.de) (alpha) 
 
@@ -182,38 +212,39 @@ val ausweisIdentTcTokenUrl = AusweisIdentBuilder()
         .build()
 ```
 
-#### Get the result
-You will get an url from the SDK as described above. Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. In order to continue the AusweisIdent flow you nee.
+Then, you can start the identification process like described above, passing the `ausweisIdentTcTokenUrl` as a paramter. 
 
-> _Warning: if you decide to call the url on your own you need to make sure to store and send cookies  y_
+```kotlin
+identificationManager.startIdent(ausweisIdentTcTokenUrl)
+```
+
+#### Get the result
+
+You will get an url from the SDK as described above. Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info. 
+
+```
+https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWjA6ar5gahrGSI823sFa4&state=123456
+```
+
+> _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
+
+> _**Note:** We are working on implementing helper methods to simplify this process._
 
 #### Server side implementation
 
-### Get raw JSON Messanges (alpha)
+1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
+2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
-If you want to get access to the AusweisApp2 SDK's string messages, implement the `onMessage` callback. This should only be used for debugging purposes. 
-
-```kotlin
-class MainActivity : IdentificationActivity() {
-    
-    ...
-    
-    override fun onMessage(message: Message) {
-        // Log the message, etc. 
-    }
-}
-```
-
+Please see the AusweisIdent documentation for further details or check out our [server sample](#) (coming soon).
+<!-- TODO: server sample link -->
 
 
 ### Sample
 
-A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system. 
-
-### 0-dependency integration (coming soon) with dedicated Identification App 
+A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system.
 
 ### Copyright
 
 ```
-Copyright 2018 twigbit technologies GmbH. All rights reserved.
+(c) Copyright 2018 twigbit technologies GmbH. All rights reserved.
 ```
