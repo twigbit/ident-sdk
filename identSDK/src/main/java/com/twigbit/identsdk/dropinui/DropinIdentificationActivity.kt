@@ -1,10 +1,8 @@
-package com.twigbit.identsdk.ui
+package com.twigbit.identsdk.dropinui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.twigbit.identsdk.IdentificationActivity
-import com.twigbit.identsdk.IdentificationManager
-import com.twigbit.identsdk.Message
+import com.twigbit.identsdk.util.IdentificationActivity
+import com.twigbit.identsdk.model.IdentificationManager
 import com.twigbit.identsdk.R
 
 class DropinIdentificationActivity : IdentificationActivity() {

@@ -1,4 +1,4 @@
-package com.twigbit.identsdk.ui
+package com.twigbit.identsdk.dropinui
 
 
 import android.os.Bundle

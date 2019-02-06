@@ -5,7 +5,7 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk
+package com.twigbit.identsdk.util
 
 import android.app.Activity
 import android.app.PendingIntent

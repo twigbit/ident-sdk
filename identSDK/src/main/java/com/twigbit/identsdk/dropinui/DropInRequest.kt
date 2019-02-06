@@ -1,9 +1,7 @@
-package com.twigbit.identsdk
+package com.twigbit.identsdk.dropinui
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.twigbit.identsdk.ui.DropinIdentificationActivity
 
 class DropInRequest(private val clientToken: String){
     val EXTRA_CLIENT_TOKEN = "twigbit-ident-extra-client-token"

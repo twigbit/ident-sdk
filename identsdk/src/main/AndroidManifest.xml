@@ -3,7 +3,7 @@
           package="com.twigbit.identsdk">
 
     <application>
-        <activity android:name=".ui.DropinIdentificationActivity">
+        <activity android:name=".dropinui.DropinIdentificationActivity">
         </activity>
     </application>
 

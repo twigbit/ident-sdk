@@ -5,7 +5,7 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk
+package com.twigbit.identsdk.model
 
 
 import android.content.ComponentName
@@ -18,6 +18,8 @@ import android.os.RemoteException
 import android.util.Log
 import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
+import com.twigbit.identsdk.util.IdentMode
+import com.twigbit.identsdk.util.IdentificationUtil
 
 class IdentificationManager(val callback: Callback){
 
