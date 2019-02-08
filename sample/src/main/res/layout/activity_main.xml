@@ -25,6 +25,7 @@
                                                   android:id="@+id/buttonDropIn"
                                                   app:layout_constraintTop_toBottomOf="@+id/textTitle"
                                                   android:layout_marginTop="48dp"
+                                                  android:backgroundTint="@color/colorPrimaryDark"
                                                   android:text="Test Drop-In UI"
     />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2C2A3D</color>
-    <color name="colorPrimaryDark">#3A2D32</color>
-    <color name="colorAccent">#F13030</color>
-    <color name="twigbitAccent">#24D985</color>
+    <color name="colorPrimaryDark">#2C2A3D</color>
+    <color name="colorAccent">#24D985</color>
 </resources>
