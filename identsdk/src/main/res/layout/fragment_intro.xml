@@ -23,6 +23,7 @@
                                                   android:layout_height="wrap_content"
                                                   android:id="@+id/buttonStart"
                                                   android:padding="8dp"
+                                                  android:foregroundTint="@color/colorPrimaryDark"
                                                   android:text="@string/drop_in_intro_button" app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
