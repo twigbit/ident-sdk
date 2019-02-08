@@ -7,6 +7,7 @@ import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
@@ -25,7 +26,10 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startDropInIdentification()
+
+        buttonDropIn.setOnClickListener {
+            startDropInIdentification()
+        }
     }
 
     val REQUEST_CODE_IDENTIFICATION = 0;
