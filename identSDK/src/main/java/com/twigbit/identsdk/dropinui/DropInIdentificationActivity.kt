@@ -9,7 +9,12 @@ import com.twigbit.identsdk.model.IdentificationManager
 
 class DropInIdentificationActivity : IdentificationActivity() {
     val introFragment = IntroFragment()
-    val l
+    val loaderFragment = LoaderFragment()
+    val accessRightsFragment = AccessRightsFragment()
+    val authorisationFragment = AuthorisationFragment()
+    val successFragment = SuccessFragment()
+    val errorFragment = ErrorFragment()
+
     val identificationCallback = object: IdentificationManager.Callback{
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
@@ -51,7 +56,9 @@ class DropInIdentificationActivity : IdentificationActivity() {
         setContentView(R.layout.activity_dropin_identification)
 
         identificationManager.addCallback(identificationCallback)
-        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
+        //identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, introFragment).commit()
     }
 }
     /*

@@ -25,6 +25,7 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        startDropInIdentification()
     }
 
     val REQUEST_CODE_IDENTIFICATION = 0;
