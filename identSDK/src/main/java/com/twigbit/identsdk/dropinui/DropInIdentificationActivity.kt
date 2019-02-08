@@ -8,6 +8,8 @@ import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
 
 class DropInIdentificationActivity : IdentificationActivity() {
+    val introFragment = IntroFragment()
+    val l
     val identificationCallback = object: IdentificationManager.Callback{
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
