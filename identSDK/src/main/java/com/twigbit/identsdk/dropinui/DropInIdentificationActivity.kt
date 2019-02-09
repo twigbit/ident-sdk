@@ -1,11 +1,13 @@
 package com.twigbit.identsdk.dropinui
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.twigbit.identsdk.util.IdentificationActivity
 import com.twigbit.identsdk.R
 import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
+import kotlinx.android.synthetic.main.fragment_intro.*
 
 class DropInIdentificationActivity : IdentificationActivity() {
     val introFragment = IntroFragment()
@@ -49,7 +51,9 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // An error occured. Display an error/issue dialog to the user.
         }
     }
-
+    fun showFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +61,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
 
         identificationManager.addCallback(identificationCallback)
         //identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, introFragment).commit()
+        showFragment(introFragment)
     }
 }
     /*
