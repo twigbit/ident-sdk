@@ -4,8 +4,6 @@
 | --------- | ---------------- |
 | **DRAFT** | 0.1.1 unreleased |
 
-**NOTICE:** This is a confidential document.
-
 ## Changelog 
 
 ### 0.1.1
