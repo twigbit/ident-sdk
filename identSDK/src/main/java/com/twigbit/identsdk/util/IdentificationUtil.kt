@@ -5,7 +5,7 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk
+package com.twigbit.identsdk.util
 
 import com.google.gson.Gson
 import java.net.URLEncoder

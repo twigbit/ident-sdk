@@ -5,7 +5,7 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk
+package com.twigbit.identsdk.model
 
 
 import android.content.ComponentName
@@ -18,8 +18,15 @@ import android.os.RemoteException
 import android.util.Log
 import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
+import com.twigbit.identsdk.util.IdentMode
+import com.twigbit.identsdk.util.IdentificationUtil
 
-class IdentificationManager(val callback: Callback){
+class IdentificationManager{
+    // TODO refactor into callback array or else replace by setter
+    var callback : Callback? = null
+    fun addCallback(callback: Callback){
+        this.callback = callback
+    }
 
     // Initialize the auth Process via this function
     fun bind(context: Context){
@@ -29,11 +36,13 @@ class IdentificationManager(val callback: Callback){
         context.unbindService(sdkConnection)
     }
 
-    fun startIdent(redirectUri: String, clientId: String) {
+
+    @Deprecated("Deprecated in favor of AusweisIdentHelper confiuration helper")
+    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
         val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
         send(cmd)
     }
-    fun startIdentWithURL(tokenURL: String) {
+    fun startIdent(tokenURL: String) {
         val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${tokenURL}\" }"
         send(cmd)
     }
@@ -100,7 +109,7 @@ class IdentificationManager(val callback: Callback){
         }
 
         // Pass raw sdk messageJson to callback for debugging/migration
-        callback.onMessage(message)
+        //callback.onMessage(message)
 
         if(message.card != null){
             this.state = STATE_CARD_INSERTED
@@ -109,14 +118,14 @@ class IdentificationManager(val callback: Callback){
             IdentificationUtil.MSG_AUTH -> {
                 if(!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error"){
                     // An error occured
-                    callback.onError(message.result!!.description)
+                    //callback.onError(message.result!!.description)
                     authInProgress = false
                     return
                 }
                 else if(messageJson.indexOf("url") != -1){
                     val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
                     state = STATE_COMPLETE
-                    callback.onComplete(s)
+                    //callback.onComplete(s)
                 }
                 else{
                     authInProgress = true
@@ -149,12 +158,13 @@ class IdentificationManager(val callback: Callback){
     }
 
     interface Callback {
-        fun onError(message: String)
-        fun onMessage(message: Message)
-        fun onComplete(url: String)
-        fun onStateChanged(state: String) {
-            Log.d("IdentificationManager", "State changed to $state")
-        }
+        fun onCompleted(resultUrl: String)
+        fun onRequestAccessRights(accessRights: ArrayList<String>)
+        fun onCardRecognized(card: IdentificationCard)
+        fun onRequestPin()
+        fun onRequestPuk()
+        fun onRequestCan()
+        fun onError(error: IdentificationError)
     }
 
     private var authInProgress: Boolean = false
@@ -162,7 +172,8 @@ class IdentificationManager(val callback: Callback){
 
     private var state: String = STATE_DEFAULT
         set(value) {
-            this.callback.onStateChanged(value)
+            // TODO migrate to new callback interface logic, hide state based logic.
+            //this.callback.onStateChanged(value, null)
         }
 
     companion object {
