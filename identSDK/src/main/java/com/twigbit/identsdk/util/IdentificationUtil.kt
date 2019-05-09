@@ -30,6 +30,7 @@ object IdentificationUtil {
     const val CMD_SET_CAN = "SET_CAN"
     const val PARAM_TCTOKEN = "tcTokenURL"
     const val PARAM_VALUE = "value"
+    const val PARAM_CMD = "cmd"
 
 
     val gson = Gson()
@@ -39,6 +40,9 @@ object IdentificationUtil {
 
     fun buildTokenUrl(redirectUrl: String, clientId: String): String {
         return "https://ref-ausweisident.eid-service.de/oic/authorize?scope=FamilyNames+GivenNames+AcademicTitle+PlaceOfBirth+DateOfBirth+PlaceOfResidence+&response_type=code&redirect_uri=${URLEncoder.encode(redirectUrl, "UTF-8")}&state=123456&&client_id=$clientId&acr_values=integrated"
+    }
+    fun buildCmdString(cmd: String, payload: Pair<String, String>? = null): String{
+        return "{\"$PARAM_CMD\": \"${cmd}\" " + if (payload!= null) ", \"${payload.first}\": \"${payload.second}\"" else "" + "}"
     }
 }
 

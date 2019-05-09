@@ -43,12 +43,13 @@ class IdentificationManager{
         send(cmd)
     }
     fun startIdent(tokenURL: String) {
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
     }
 
     fun setPin(pin: String){
         val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
+        val newCmd =
         send(cmd)
     }
     fun setPuk(puk: String){
@@ -59,9 +60,11 @@ class IdentificationManager{
         val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_CAN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${can}\"}"
         send(cmd)
     }
-    fun acceptAccessRights(accept: Boolean){
-        val cmd = "{\"cmd\": \"${if(accept) IdentificationUtil.CMD_ACCEPT else IdentificationUtil.CMD_CANCEL}\" }"
-        send(cmd)
+    fun acceptAccessRights(){
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_ACCEPT))
+    }
+    fun cancel(){
+        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
     }
 
     // TODO implement getCertificate
