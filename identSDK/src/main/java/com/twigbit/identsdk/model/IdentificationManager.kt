@@ -88,6 +88,7 @@ class IdentificationManager{
             }
         } catch (e: Exception) {
             // TODO error
+            // FIXME 20190509 This sometimes gets called without an error message. Possibly due to improperly terminated background service. 
             Log.e(TAG, "Could not sendRaw command to SDK")
             //Log.e(TAG, e.message)
         }
