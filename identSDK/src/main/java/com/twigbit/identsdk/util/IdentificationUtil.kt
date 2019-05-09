@@ -42,7 +42,7 @@ object IdentificationUtil {
         return "https://ref-ausweisident.eid-service.de/oic/authorize?scope=FamilyNames+GivenNames+AcademicTitle+PlaceOfBirth+DateOfBirth+PlaceOfResidence+&response_type=code&redirect_uri=${URLEncoder.encode(redirectUrl, "UTF-8")}&state=123456&&client_id=$clientId&acr_values=integrated"
     }
     fun buildCmdString(cmd: String, payload: Pair<String, String>? = null): String{
-        return "{\"$PARAM_CMD\": \"${cmd}\" " + if (payload!= null) ", \"${payload.first}\": \"${payload.second}\"" else "" + "}"
+        return "{\"$PARAM_CMD\": \"${cmd}\" " + (if (payload!= null) ", \"${payload.first}\": \"${payload.second}\"" else "") + "}"
     }
 }
 
