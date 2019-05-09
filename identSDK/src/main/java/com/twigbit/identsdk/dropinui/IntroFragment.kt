@@ -16,17 +16,15 @@ import kotlinx.android.synthetic.main.fragment_intro.view.*
  */
 class IntroFragment : Fragment() {
 
-    fun getDropInActivity(): DropInIdentificationActivity{
-        return activity as DropInIdentificationActivity
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v =  inflater.inflate(R.layout.fragment_intro, container, false)
+        val v = inflater.inflate(R.layout.fragment_intro, container, false)
         v.buttonStart.setOnClickListener {
-            (getDropInActivity()).showFragment(getDropInActivity().loaderFragment)
+            activity?.asDropInActivity()!!.startIdent()
+            activity!!.asDropInActivity()!!.showFragment(activity!!.asDropInActivity()!!.loaderFragment)
         }
         return v;
     }

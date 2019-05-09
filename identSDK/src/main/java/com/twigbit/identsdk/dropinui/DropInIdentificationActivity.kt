@@ -1,5 +1,6 @@
 package com.twigbit.identsdk.dropinui
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -9,6 +10,10 @@ import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
 import com.twigbit.identsdk.util.Tags
+
+fun Activity.asDropInActivity(): DropInIdentificationActivity?{
+    if(this is DropInIdentificationActivity) return this else return null
+}
 
 class DropInIdentificationActivity : IdentificationActivity() {
     val introFragment = IntroFragment()
@@ -68,8 +73,17 @@ class DropInIdentificationActivity : IdentificationActivity() {
         setContentView(R.layout.activity_dropin_identification)
 
         identificationManager.addCallback(identificationCallback)
-        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
         showFragment(introFragment)
+    }
+
+    fun startIdent(){
+        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
+    }
+
+    // TODO set optimal ident work
+    override fun onDestroy() {
+        // TODO cancel the ident process, unbind from service
+        super.onDestroy()
     }
 }
     /*

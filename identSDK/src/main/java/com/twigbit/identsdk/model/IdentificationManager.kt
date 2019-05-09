@@ -36,35 +36,31 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
 
-
-    @Deprecated("Deprecated in favor of AusweisIdentHelper configuration helper")
-    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
-        send(cmd)
-    }
     fun startIdent(tokenURL: String) {
-//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
+        //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
     }
 
     fun setPin(pin: String){
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
-        val newCmd =
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_VALUE, pin)))
     }
     fun setPuk(puk: String){
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PUK}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${puk}\"}"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PUK}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${puk}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PUK, Pair(IdentificationUtil.PARAM_VALUE, puk)))
+
     }
     fun setCan(can: String){
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_CAN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${can}\"}"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_CAN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${can}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_CAN, Pair(IdentificationUtil.PARAM_VALUE, can)))
     }
     fun acceptAccessRights(){
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_ACCEPT))
     }
     fun cancel(){
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_CANCEL))
+
     }
 
     // TODO implement getCertificate
@@ -164,7 +160,7 @@ class IdentificationManager{
                 this.state = STATE_ENTER_CAN
             }
 
-            else -> Log.d(TAG, "Unhandled messageJson ${message}")
+//            else -> Log.d(TAG, "Unhandled messageJson ${message}")
         }
 
     }
