@@ -110,7 +110,7 @@ class IdentificationManager{
 //            callback.onComplete(s)
 //        }
 
-//        Log.d(TAG, messageJson);
+        Log.d(TAG, messageJson);
 
         val message = IdentificationUtil.parseJson(messageJson)
         Log.d(TAG, message.toString());

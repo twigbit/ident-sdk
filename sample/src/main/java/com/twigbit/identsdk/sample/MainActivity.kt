@@ -1,8 +1,6 @@
 package com.twigbit.identsdk.sample
 
 import android.os.Bundle
-import com.twigbit.identsdk.util.IdentificationActivity
-import com.twigbit.identsdk.util.Message
 import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent

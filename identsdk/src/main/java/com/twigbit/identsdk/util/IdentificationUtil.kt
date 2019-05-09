@@ -50,15 +50,28 @@ class Command {
     val cmd: String = ""
 }
 
+// "aux":{"validityDate":"2019-05-09"},"chat":{"effective":["Address","PlaceOfBirth","DateOfBirth","DoctoralDegree","FamilyName","GivenNames"],"optional":[],"required":["Address","PlaceOfBirth","DateOfBirth","DoctoralDegree","FamilyName","GivenNames"]}
+
 class Message {
     val msg: String = ""
     val name: String = ""
     val card: Card? = null
     val result: Result? = null
-
+    val chat: AccessRightPayload? = null
     override fun toString(): String {
-        return "Message(msg='$msg', name='$name', result='$result',  card='$card')"
+        return "Message(msg='$msg', name='$name', card=$card, result=$result, chat=$chat)"
     }
+
+}
+
+class AccessRightPayload{
+    val effective: List<String>? = null;
+    val optional: List<String>? = null;
+    val required: List<String>? = null;
+    override fun toString(): String {
+        return "AccessRightPayload(effective=$effective, optional=$optional, required=$required)"
+    }
+
 }
 
 class Card {
