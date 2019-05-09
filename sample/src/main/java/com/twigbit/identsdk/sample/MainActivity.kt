@@ -7,7 +7,6 @@ import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
-import com.twigbit.identsdk.util.Secrets
 import kotlinx.android.synthetic.main.activity_main.*
 
 
