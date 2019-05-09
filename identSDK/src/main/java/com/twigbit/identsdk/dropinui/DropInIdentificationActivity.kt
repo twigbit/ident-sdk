@@ -9,6 +9,7 @@ import com.twigbit.identsdk.R
 import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
+import com.twigbit.identsdk.util.IdentificationUtil
 import com.twigbit.identsdk.util.Tags
 
 fun Activity.asDropInActivity(): DropInIdentificationActivity?{
@@ -77,7 +78,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
     }
 
     fun startIdent(){
-        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN))
+        identificationManager.startIdent(IdentificationUtil.buildTokenUrl(intent.getStringExtra(DropInRequest.EXTRA_REDIRECT_URL), intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN)))
     }
 
     // TODO set optimal ident work

@@ -36,6 +36,12 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
 
+    @Deprecated("Deprecated in favor of AusweisIdentHelper configuration helper")
+    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
+        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
+        send(cmd)
+    }
+
     fun startIdent(tokenURL: String) {
         //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))

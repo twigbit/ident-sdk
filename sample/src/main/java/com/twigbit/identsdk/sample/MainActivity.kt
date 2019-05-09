@@ -7,6 +7,7 @@ import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import com.twigbit.identsdk.util.Secrets
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -34,7 +35,7 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
 
     val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
-        val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI")
+        val dropInRequest = DropInRequest(Secrets.CLIENT_SECRET, Secrets.CLIENT_REDIRECT_URL)
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
