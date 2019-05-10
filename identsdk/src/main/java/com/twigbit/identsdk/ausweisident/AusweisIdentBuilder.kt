@@ -33,14 +33,14 @@ class AusweisIdentBuilder {
     fun build(): String {
         val b = Uri.Builder()
 
-        b.scheme("https://")
+        b.scheme("https")
         b.authority(host)
-        b.appendPath(OPENID_AUTHORIZATION_ENDPOINT)
+        b.appendEncodedPath(OPENID_AUTHORIZATION_ENDPOINT)
 
-        b.appendQueryParameter("clientId", clientId)
+        b.appendQueryParameter("client_id", clientId)
         b.appendQueryParameter("redirect_uri", redirectUrl)
 
-        if (scopes.isNotEmpty()) b.appendQueryParameter("scopes", scopes.joinToString(" "))
+        if (scopes.isNotEmpty()) b.appendQueryParameter("scope", scopes.joinToString(" "))
         if (state.isNotBlank()) b.appendQueryParameter("state", state)
         if (nonce.isNotBlank()) b.appendQueryParameter("nonce", nonce)
 
@@ -53,6 +53,6 @@ class AusweisIdentBuilder {
     companion object {
         const val OPENID_HOST = "ausweis-ident.de"
         const val OPENID_HOST_REF = "ref-ausweisident.eid-service.de"
-        const val OPENID_AUTHORIZATION_ENDPOINT = "/oic/authorize"
+        const val OPENID_AUTHORIZATION_ENDPOINT = "oic/authorize"
     }
 }
