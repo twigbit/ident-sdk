@@ -26,7 +26,7 @@ This project is actively under development. For informations, contact [ident@twi
 * [core] Refactor state callbacks into interface.
 * [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
 
-## Milesstones
+## Milestones
 
 ### 0.2.0 
 * [dropin] Dropin UI basic implementation
