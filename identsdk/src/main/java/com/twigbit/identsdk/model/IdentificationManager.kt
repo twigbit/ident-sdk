@@ -145,7 +145,8 @@ class IdentificationManager{
                 }
             };
             IdentificationUtil.MSG_ACCESS_RIGHTS -> {
-                // TODO pass accept messageJson
+                callback?.onRequestAccessRights(message.chat!!.effective!!)
+
                 // TODO dont automatically accept the access rights. This should be based on user interaction.
                 //sendCommand(IdentificationUtil.CMD_ACCEPT)
             }
@@ -166,6 +167,7 @@ class IdentificationManager{
                 this.state = STATE_ENTER_CAN
             }
 
+
 //            else -> Log.d(TAG, "Unhandled messageJson ${message}")
         }
 
@@ -173,7 +175,7 @@ class IdentificationManager{
 
     interface Callback {
         fun onCompleted(resultUrl: String)
-        fun onRequestAccessRights(accessRights: ArrayList<String>)
+        fun onRequestAccessRights(accessRights: List<String>)
         fun onCardRecognized(card: IdentificationCard)
         fun onRequestPin()
         fun onRequestPuk()
