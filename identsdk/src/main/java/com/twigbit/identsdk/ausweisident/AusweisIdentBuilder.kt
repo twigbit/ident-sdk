@@ -3,16 +3,23 @@ package com.twigbit.identsdk.ausweisident
 import android.net.Uri
 
 /**
- * Usage:
+ * Enables declarative building of the `tcTokenUrl` required for AusweisIdent.
+ *
+ * Fluid API to construct a `tcTokenUrl`.
+ * Calls to [clientId] and [redirectUrl] methods are required.
+ *
+ * Example:
  *
  * ```
  * val ausweisIdentTcTokenUrl: String = AusweisIdentBuilder()
- *   .scope(AUSWEISIDENT_SCOPE_FAMILYNAMES)
- *   .scope(AUSWEISIDENT_SCOPE_PLACEOFBIRTH)
+ *   .scope(AusweisIdentScopes.BirthName)
+ *   .scope(AusweisIdentScopes.GivenNames)
  *   .state("123456")
  *   .clientId("ABCDEFG")
  *   .redirectUrl("https://yourserver.com")
  *   .build()
+ * ```
+ *
  */
 class AusweisIdentBuilder {
 
@@ -23,13 +30,50 @@ class AusweisIdentBuilder {
     private var redirectUrl: String = ""
     private val scopes: MutableSet<String> = LinkedHashSet()
 
+    /**
+     * Set the AusweisIdent Server Endpoint.
+     *
+     * @param host Must not contain the scheme (e.g. ausweis-ident.de and not https://ausw...)
+     */
+    fun host(host: String) = apply { this.host = host }
+
+    /**
+     * Set the AusweisIdent Server Endpoint to the default one for the reference / test system.
+     *
+     * @param enable Weather to enable or disable the reference endpoint.
+     */
     fun ref(enable: Boolean = true) = apply { host = if (enable) OPENID_HOST_REF else OPENID_HOST }
+
+    /**
+     * Add a scope. See [AusweisIdentScopes] for currently available ones.
+     *
+     * @param scope String Identifier of the scope. Check AusweisIdent docs for details.
+     */
     fun scope(scope: String) = apply { scopes.add(scope) }
+
+    /**
+     * Set the OpenID state parameter
+     */
     fun state(state: String) = apply { this.state = state }
+
+    /**
+     * Set the OpenID nonce parameter
+     */
     fun nonce(nonce: String) = apply { this.nonce = nonce }
+
+    /**
+     * Set your the AusweisIdent clientId.
+     */
     fun clientId(clientId: String) = apply { this.clientId = clientId }
+
+    /**
+     * Set your AusweisIdent redirectUrl. Must match the one, you set in your AusweisIdent registration.
+     */
     fun redirectUrl(redirectUrl: String) = apply { this.redirectUrl = redirectUrl }
 
+    /**
+     * Build the `tcTokenUrl`
+     */
     fun build(): String {
         val b = Uri.Builder()
 
