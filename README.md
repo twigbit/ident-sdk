@@ -1,5 +1,13 @@
 # Twigbit Ident SDK
 
+The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
+We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating the SDK. 
+Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
+
+# Roadmap 
+
+This project is actively under development. For informations, contact 
+
 | Status    | Version          |
 | --------- | ---------------- |
 | **DRAFT** | 0.1.1 unreleased |
@@ -14,33 +22,42 @@
 * [core] Refactor state callbacks into interface.
 * [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
 
-### Roadmap/Backlog
+## Milesstones
 
+### 0.2.0 
+* [dropin] Dropin UI basic implementation
+* [core] Persistant abstractions for the command and message system
+* [core] Test simplified configuration procedure
+* [ausweisident] Configuration helper
+
+### 0.3.0
+* [core] Extract all constants, create persistant models
+
+### Nice to have 
+
+* Implement drop-in-ui v1
 * Make inheritance from IdentificationActivity optional by making the `IdentificationManager` livecycle aware.
 * Vibrate on NFC message.
+* Capability check- check whether the users device has the required architecture and NFC capabilities
+* A custom identification app as a zero-dependency option for the integration
+* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
 
 ---
 
-The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
-We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating the SDK.
+# Documentation 
+
+All code is provided in Kotlin. The integration works in Java analogously, all samples are interchangable.
 
 ## Features
 
 - Simplify the tedious [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) configuration
 - Replace the JSON based messaging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
 - Lightweight — besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
-- Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes
-- (coming soon) Capability check- check whether the users device has the required architecture and NFC capabilities
-- (coming soon) A custom identification app as a zero-dependency option for the integration
-- (uncertain) Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see limitations below) 
+- Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes 
 
-## Limitations
+## Quick start 
 
-- The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.03. Unfortunalety, we are bound to that limitation. 
-
-## Usage
-
-The usage examples are provided in Kotlin. The integration works in Java analogously.
+TODO document the quick start approach with 
 
 ### Download
 
@@ -50,7 +67,7 @@ Gradle:
 
 ```gradle
 dependencies {
-  implementation 'com.twigbit.identsdk:identsdk:1.0.0'
+  implementation 'com.twigbit.identsdk:identsdk:0.2.0'
 }
 ```
 
@@ -63,6 +80,7 @@ Maven:
   <version>1.0.0</version>
 </dependency>
 ```
+
 
 ### Option 1: Identify users with the Drop-In UI (alpha)
 
@@ -242,6 +260,11 @@ Please see the AusweisIdent documentation for further details or check out our [
 A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system.
 
 ### Copyright
+
+### Limitations
+
+- The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.03. Unfortunalety, we are bound to that limitation. 
+
 
 ```
 (c) Copyright 2018 twigbit technologies GmbH. All rights reserved.
