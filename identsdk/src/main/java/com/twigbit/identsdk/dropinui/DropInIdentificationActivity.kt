@@ -30,10 +30,15 @@ class DropInIdentificationActivity : IdentificationActivity() {
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
         }
 
-        override fun onRequestAccessRights(accessRights: ArrayList<String>) {
+        override fun onRequestAccessRights(accessRights: List<String>) {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
-            // TODO continue with runIdent()
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
+
+            // for the moment just accept them
+            // TODO implement UI
+            identificationManager.acceptAccessRights();
+
+            supportFragmentManager.beginTransaction().replace(R.id.container, accessRightsFragment).commit()
         }
 
         override fun onCardRecognized(card: IdentificationCard) {
