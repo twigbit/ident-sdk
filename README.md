@@ -4,9 +4,13 @@ The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisA
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating the SDK. 
 Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
 
+[![twigbit technologies GmbH](docs/images/logo-twigbit.png)](https://www.twigbit.com)
+[![Governikus GmbH & Co. KG](docs/images/logo-governikus.png)](https://www.governikus.de/)
+[![AusweisIDent](docs/images/logo-ausweisident.png)](https://www.ausweisident.de/)
+
 # Roadmap 
 
-This project is actively under development. For informations, contact 
+This project is actively under development. For informations, contact [ident@twigbit.com](mailto:ident@twigbit.com) .
 
 | Status    | Version          |
 | --------- | ---------------- |
