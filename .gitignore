@@ -9,3 +9,6 @@
 /build
 /captures
 .externalNativeBuild
+identsdk/src/main/java/com/twigbit/identsdk/util/Secrets\.kt
+
+sample/src/main/java/com/twigbit/identsdk/sample/Secrets\.kt

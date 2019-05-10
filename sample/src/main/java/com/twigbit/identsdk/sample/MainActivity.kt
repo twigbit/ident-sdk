@@ -1,12 +1,11 @@
 package com.twigbit.identsdk.sample
 
 import android.os.Bundle
-import com.twigbit.identsdk.util.IdentificationActivity
-import com.twigbit.identsdk.util.Message
 import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
@@ -25,11 +24,15 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        buttonDropIn.setOnClickListener {
+            startDropInIdentification()
+        }
     }
 
     val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
-        val dropInRequest = DropInRequest("RmluZ2VycHJpbnQiOiI")
+        val dropInRequest = DropInRequest(Secrets.CLIENT_SECRET, Secrets.CLIENT_REDIRECT_URL)
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

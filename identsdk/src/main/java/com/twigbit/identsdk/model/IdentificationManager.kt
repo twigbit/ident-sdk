@@ -36,35 +36,47 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
 
-
-    @Deprecated("Deprecated in favor of AusweisIdentHelper confiuration helper")
+    @Deprecated("Deprecated in favor of AusweisIdentHelper configuration helper")
     fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
-        val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
+        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
         send(cmd)
     }
+
     fun startIdent(tokenURL: String) {
-        val cmd = "{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"${tokenURL}\" }"
-        send(cmd)
+        //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
     }
 
     fun setPin(pin: String){
-        val cmd = "{\"cmd\": \"SET_PIN\", \"value\": \"${pin}\"}"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_VALUE, pin)))
     }
     fun setPuk(puk: String){
-        val cmd = "{\"cmd\": \"SET_PUK\", \"value\": \"${puk}\"}"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PUK}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${puk}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PUK, Pair(IdentificationUtil.PARAM_VALUE, puk)))
+
     }
     fun setCan(can: String){
-        val cmd = "{\"cmd\": \"SET_CAN\", \"value\": \"${can}\"}"
-        send(cmd)
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_CAN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${can}\"}"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_CAN, Pair(IdentificationUtil.PARAM_VALUE, can)))
     }
+    fun acceptAccessRights(){
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_ACCEPT))
+    }
+    fun cancel(){
+//        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_CANCEL))
+
+    }
+
+    // TODO implement getCertificate
 
     // temporary method to make IdentificationLogic reusable in Showcase
     @Deprecated("This method is only available for early adopter migration and debugging, will be removed for production")
     fun sendRaw(cmd: String){
         send(cmd)
     }
+
 
     private fun sendCommand(cmd: String?) {
         if(cmd == null) return;
@@ -81,8 +93,9 @@ class IdentificationManager{
             }
         } catch (e: Exception) {
             // TODO error
+            // FIXME 20190509 This sometimes gets called without an error message. Possibly due to improperly terminated background service. 
             Log.e(TAG, "Could not sendRaw command to SDK")
-            Log.e(TAG, e.message)
+            //Log.e(TAG, e.message)
         }
     }
 
@@ -97,7 +110,7 @@ class IdentificationManager{
 //            callback.onComplete(s)
 //        }
 
-//        Log.d(TAG, messageJson);
+        Log.d(TAG, messageJson);
 
         val message = IdentificationUtil.parseJson(messageJson)
         Log.d(TAG, message.toString());
@@ -133,7 +146,8 @@ class IdentificationManager{
             };
             IdentificationUtil.MSG_ACCESS_RIGHTS -> {
                 // TODO pass accept messageJson
-                sendCommand(IdentificationUtil.CMD_ACCEPT)
+                // TODO dont automatically accept the access rights. This should be based on user interaction.
+                //sendCommand(IdentificationUtil.CMD_ACCEPT)
             }
             IdentificationUtil.MSG_INSERT_CARD -> {
                 this.state = STATE_INSERT
@@ -152,7 +166,7 @@ class IdentificationManager{
                 this.state = STATE_ENTER_CAN
             }
 
-            else -> Log.d(TAG, "Unhandled messageJson ${message}")
+//            else -> Log.d(TAG, "Unhandled messageJson ${message}")
         }
 
     }
@@ -172,14 +186,11 @@ class IdentificationManager{
 
     private var state: String = STATE_DEFAULT
         set(value) {
-            // TODO migrate to new callback interface logic, hide state based logic.
-            //this.callback.onStateChanged(value, null)
+            field = value
         }
 
     companion object {
-
         const val TAG = "IdentificationManager"
-
         const val STATE_DEFAULT = "Default"
         const val STATE_CONNECTED = "Connected"
         const val STATE_DISCONNECTED = "Disconnected"
