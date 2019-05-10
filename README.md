@@ -61,7 +61,7 @@ All code is provided in Kotlin. The integration works in Java analogously, all s
 
 ## Quick start 
 
-TODO document the quick start approach with 
+TODO document the quick start approach with drop in ui and ausweisident config helper
 
 ### Download
 
@@ -73,16 +73,6 @@ Gradle:
 dependencies {
   implementation 'com.twigbit.identsdk:identsdk:0.2.0'
 }
-```
-
-Maven:
-
-```xml
-<dependency>
-  <groupId>com.twigbit.identsdk</groupId>
-  <artifactId>identsdk</artifactId>
-  <version>1.0.0</version>
-</dependency>
 ```
 
 
