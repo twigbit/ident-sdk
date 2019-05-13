@@ -35,6 +35,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
 
+            accessRightsFragment.accessRights = ArrayList(accessRights)
             // for the moment just accept them
             showFragment(accessRightsFragment)
 
