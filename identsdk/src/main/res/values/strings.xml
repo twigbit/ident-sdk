@@ -3,10 +3,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unknown_value">Unbekannter Wert</string>
     <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones. </string>
     <string name="drop_in_error">Ein Fehler ist aufgetreten. </string>
     <string name="drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones. </string>
     <string name="drop_in_intro_button">Starten</string>
     <string name="drop_in_accept">Akzeptieren</string>
     <string name="drop_in_deny">Abbrechen</string>
+    <string name="access_right_academit_title">Akademischer Titel</string>
 </resources>

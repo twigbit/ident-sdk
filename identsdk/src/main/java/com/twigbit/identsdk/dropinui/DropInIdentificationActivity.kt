@@ -11,6 +11,7 @@ import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
 import com.twigbit.identsdk.util.IdentificationUtil
+import com.twigbit.identsdk.util.StringUtil
 import com.twigbit.identsdk.util.Tags
 
 fun Activity.asDropInActivity(): DropInIdentificationActivity?{
@@ -35,7 +36,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
 
-            accessRightsFragment.accessRights = ArrayList(accessRights)
+            accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it)})
             // for the moment just accept them
             showFragment(accessRightsFragment)
 

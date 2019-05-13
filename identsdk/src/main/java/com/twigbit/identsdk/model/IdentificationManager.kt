@@ -20,6 +20,7 @@ import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
 import com.twigbit.identsdk.util.IdentMode
 import com.twigbit.identsdk.util.IdentificationUtil
+import com.twigbit.identsdk.util.StringUtil
 
 class IdentificationManager{
     // TODO refactor into callback array or else replace by setter
