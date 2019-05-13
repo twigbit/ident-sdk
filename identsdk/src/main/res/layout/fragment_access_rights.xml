@@ -2,10 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:orientation="vertical">
+              android:layout_height="match_parent" android:orientation="vertical" android:paddingTop="24dp"
+>
 
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:layout_height="match_parent" android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical" android:clipToPadding="false" android:clipChildren="false"
+                      android:padding="8dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="Der Folgende Dienstanbierter möchte Ihre Identität überprüfen:"
+                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                      android:layout_marginBottom="8dp"/>
+            <android.support.v7.widget.CardView android:layout_width="match_parent"
+                                                android:layout_marginBottom="8dp"
+                                                android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
+                        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:layout_marginRight="16dp"
+                                   android:src="@drawable/ic_service_provider"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                      android:orientation="vertical"
+                                      android:layout_weight="1">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                      android:text="Dienstanbieter"
+                                      android:textColor="@color/colorAccent"
+                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                      android:text="Twigbit Technologies GmbH"
+                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                      android:layout_marginBottom="8dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
+                        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                   android:layout_marginRight="16dp"
+                                   android:layout_gravity="center"
+                                   android:src="@drawable/ic_person"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                      android:orientation="vertical"
+                                      android:layout_weight="1">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                      android:text="Zweck der Auskunft"
+                                      android:textColor="@color/colorAccent"
+                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                      android:text="Selbstauskunft"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="Folgende Attribute werden ausgelesen" android:layout_marginBottom="8dp" android:textAppearance="@style/TextAppearance.MaterialComponents.Body2#"/>
+            <android.support.v7.widget.CardView android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                        android:layout_height="match_parent"
+                                                        android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <android.support.design.button.MaterialButton android:layout_width="match_parent"

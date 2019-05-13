@@ -66,7 +66,9 @@ class IdentificationManager{
     fun cancel(){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_CANCEL))
-
+    }
+    fun getCertificate(){
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_GET_CERTIFICATE))
     }
 
     // TODO implement getCertificate
