@@ -7,4 +7,6 @@
     <string name="drop_in_error">Ein Fehler ist aufgetreten. </string>
     <string name="drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones. </string>
     <string name="drop_in_intro_button">Starten</string>
+    <string name="drop_in_accept">Akzeptieren</string>
+    <string name="drop_in_deny">Abbrechen</string>
 </resources>

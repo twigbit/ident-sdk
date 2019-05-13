@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import com.twigbit.identsdk.util.IdentificationActivity
 import com.twigbit.identsdk.R
+import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
 import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
@@ -35,8 +36,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
 
             // for the moment just accept them
-            // TODO implement UI
-            identificationManager.acceptAccessRights();
+            showFragment(accessRightsFragment)
 
             supportFragmentManager.beginTransaction().replace(R.id.container, accessRightsFragment).commit()
         }

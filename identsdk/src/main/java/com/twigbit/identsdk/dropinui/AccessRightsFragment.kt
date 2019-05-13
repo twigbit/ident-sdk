@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
+import kotlinx.android.synthetic.main.fragment_access_rights.*
+import kotlinx.android.synthetic.main.fragment_access_rights.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -19,8 +21,8 @@ class AccessRightsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_access_rights, container, false)
+        val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
+        v.buttonAccept.setOnClickListener { activity?.asDropInActivity()?.identificationManager?.getCertificate() }
+        return v
     }
-
-
 }
