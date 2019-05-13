@@ -78,7 +78,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
     }
 
     fun startIdent(){
-        identificationManager.startIdent(IdentificationUtil.buildTokenUrl(intent.getStringExtra(DropInRequest.EXTRA_REDIRECT_URL), intent.getStringExtra(DropInRequest.EXTRA_CLIENT_TOKEN)))
+        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_TC_TOKEN_URL))
     }
 
     // TODO set optimal ident work
