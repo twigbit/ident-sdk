@@ -4,11 +4,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="unknown_value">Unbekannter Wert</string>
-    <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones. </string>
-    <string name="drop_in_error">Ein Fehler ist aufgetreten. </string>
-    <string name="drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones. </string>
+    <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie
+        ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones.
+    </string>
+    <string name="drop_in_error">Ein Fehler ist aufgetreten.</string>
+    <string name="drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte
+        halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones.
+    </string>
     <string name="drop_in_intro_button">Starten</string>
     <string name="drop_in_accept">Akzeptieren</string>
     <string name="drop_in_deny">Abbrechen</string>
-    <string name="access_right_academit_title">Akademischer Titel</string>
+    <string name="access_right_artistic_name">Ordens- / Künstlername</string>
+    <string name="access_right_birth_name">Geburtsname</string>
+    <string name="access_right_date_of_birth">Geburtsdatum</string>
+    <string name="access_right_date_of_expiry">Ablaufdatum</string>
+    <string name="access_right_doc_type">Dokumentenart</string>
+    <string name="access_right_family_name">Familienname</string>
+    <string name="access_right_given_name">Rufname</string>
+    <string name="access_right_issuing_state">Ausstellender Staat</string>
+    <string name="access_right_nationality">Staatsangehöritgkeit</string>
+    <string name="access_right_restricted_id">Nebenbestimmungen I</string>
+    <string name="access_right_place_of_pirth">Geburtsort</string>
+    <string name="access_right_place_of_residence">Wohnort</string>
+    <string name="access_right_academic_title">Akademisches Grad</string>
 </resources>
