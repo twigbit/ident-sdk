@@ -2,11 +2,13 @@ package com.twigbit.identsdk.dropinui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
+import com.twigbit.identsdk.util.Tags
 import kotlinx.android.synthetic.main.fragment_authorisation.view.*
 
 /**
@@ -49,6 +51,7 @@ class AuthorisationFragment : Fragment() {
     }
     fun onEntered(pin: String){
         // TODO check pin lenght
+        Log.d(Tags.TAG_IDENT_DEBUG, "Pin entered $pin");
         when(mode) {
             MODE_CAN -> {
                 activity?.asDropInActivity()?.identificationManager?.setCan(pin)

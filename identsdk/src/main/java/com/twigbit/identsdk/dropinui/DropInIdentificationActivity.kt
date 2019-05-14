@@ -48,6 +48,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // To continue the identification process, call identificationManager.setPin(pin: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPin Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PIN
+            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PIN) }
             showFragment(authorisationFragment)
         }
 
@@ -56,6 +57,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // To continue the identification process, call identificationManager.setPuk(puk: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPuk Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PUK
+            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PUK) }
             showFragment(authorisationFragment)
         }
 
@@ -64,6 +66,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // To continue the identification process, call identificationManager.setCan(can: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestCan Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_CAN
+            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_CAN) }
             showFragment(authorisationFragment)
         }
 
