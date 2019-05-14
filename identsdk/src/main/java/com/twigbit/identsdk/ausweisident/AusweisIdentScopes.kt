@@ -16,5 +16,4 @@ object AusweisIdentScopes {
     const val DOCUMENT_TYPE = "DocumentType"
     const val RESIDENT_PERMIT = "ResidencePermitI"
     const val DATE_OF_EXPIRY = "DateOfExpiry"
-
 }

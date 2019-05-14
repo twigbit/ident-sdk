@@ -60,20 +60,24 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:text="Folgende Attribute werden ausgelesen" android:layout_marginBottom="16dp" android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+                      android:text="Folgende Attribute werden ausgelesen" android:layout_marginBottom="16dp"
+                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
             <android.support.v7.widget.CardView android:layout_width="match_parent"
                                                 android:layout_height="wrap_content">
                 <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
-                              android:layout_height="wrap_content"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:text="Attribute"
-                          android:textColor="@color/colorAccent"
-                          android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
-                <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:id="@+id/recyclerView"
-                                                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                                                        android:layout_weight="1"/>
+                              android:layout_height="wrap_content">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:text="Attribute"
+                              android:layout_marginLeft="16dp"
+                              android:layout_marginTop="16dp"
+                              android:textColor="@color/colorAccent"
+                              android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:id="@+id/recyclerView"
+                                                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                                                            android:layout_weight="1"/>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>

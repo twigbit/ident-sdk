@@ -23,7 +23,7 @@ class AccessRightsFragment : Fragment() {
     var accessRights: ArrayList<String> = arrayListOf()
         set(value) {
             field = value
-            Log.d(Tags.TAG_IDENT_DEBUG,accessRights.toString() )
+            Log.d(Tags.TAG_IDENT_DEBUG, accessRights.toString())
             adapter.data = value
             adapter.notifyDataSetChanged()
         }
@@ -35,11 +35,17 @@ class AccessRightsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
-        v.buttonAccept.setOnClickListener { activity?.asDropInActivity()?.identificationManager?.getCertificate() }
+        v.buttonAccept.setOnClickListener {
+            activity?.asDropInActivity()?.identificationManager?.acceptAccessRights()
+            activity?.asDropInActivity()?.showFragment(activity?.asDropInActivity()?.loaderFragment!!)
+        }
+        v.buttonDeny.setOnClickListener { activity?.asDropInActivity()?.identificationManager?.getCertificate() }
         v.recyclerView.adapter = adapter
         return v
     }
 }
+
+// TODO display the certificate information
 
 class MyAdapter(var data: ArrayList<String>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
@@ -48,15 +54,17 @@ class MyAdapter(var data: ArrayList<String>) :
 
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): MyAdapter.MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MyAdapter.MyViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.holder_access_right, parent, false)
         return MyViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if(position == data.size-1) holder.view.divider.visibility = View.GONE
+        if (position == data.size - 1) holder.view.divider.visibility = View.GONE
         holder.view.text.text = data.get(position)
     }
 
