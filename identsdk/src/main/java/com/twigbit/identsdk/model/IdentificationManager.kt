@@ -18,6 +18,7 @@ import android.os.RemoteException
 import android.util.Log
 import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
+import com.twigbit.identsdk.util.Card
 import com.twigbit.identsdk.util.IdentMode
 import com.twigbit.identsdk.util.IdentificationUtil
 import com.twigbit.identsdk.util.StringUtil
@@ -155,6 +156,7 @@ class IdentificationManager{
             }
             IdentificationUtil.MSG_INSERT_CARD -> {
                 this.state = STATE_INSERT
+                callback?.onCardRecognized(message.card)
             }
             IdentificationUtil.MSG_ENTER_PIN -> {
                 this.mode = IdentMode.PIN
@@ -179,7 +181,7 @@ class IdentificationManager{
     interface Callback {
         fun onCompleted(resultUrl: String)
         fun onRequestAccessRights(accessRights: List<String>)
-        fun onCardRecognized(card: IdentificationCard)
+        fun onCardRecognized(card: Card?)
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()

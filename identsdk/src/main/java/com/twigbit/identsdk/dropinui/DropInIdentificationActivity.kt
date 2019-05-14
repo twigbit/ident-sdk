@@ -4,15 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import com.twigbit.identsdk.util.IdentificationActivity
 import com.twigbit.identsdk.R
-import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
-import com.twigbit.identsdk.model.IdentificationCard
 import com.twigbit.identsdk.model.IdentificationError
 import com.twigbit.identsdk.model.IdentificationManager
-import com.twigbit.identsdk.util.IdentificationUtil
-import com.twigbit.identsdk.util.StringUtil
-import com.twigbit.identsdk.util.Tags
+import com.twigbit.identsdk.util.*
 
 fun Activity.asDropInActivity(): DropInIdentificationActivity?{
     if(this is DropInIdentificationActivity) return this else return null
@@ -23,6 +18,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
     val loaderFragment = LoaderFragment()
     val accessRightsFragment = AccessRightsFragment()
     val authorisationFragment = AuthorisationFragment()
+    val insertCardFragment = InsertCardFragment()
     val successFragment = SuccessFragment()
     val errorFragment = ErrorFragment()
 
@@ -39,14 +35,12 @@ class DropInIdentificationActivity : IdentificationActivity() {
             accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it)})
             // for the moment just accept them
             showFragment(accessRightsFragment)
-
-            supportFragmentManager.beginTransaction().replace(R.id.container, accessRightsFragment).commit()
         }
 
-        override fun onCardRecognized(card: IdentificationCard) {
+        override fun onCardRecognized(card: Card?) {
             // A card was attached to the NFC reader
-            // TODO @dev implement card model from JSON message params.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onCardRecognized Callback")
+            showFragment(insertCardFragment)
         }
 
         override fun onRequestPin() {
@@ -56,7 +50,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
         }
 
         override fun onRequestPuk() {
-            // The id cards PUK was requested. Display a PUK dialog to the user.
+            // The id cards PUK was requested. Display a PUK diaphlog to the user.
             // To continue the identification process, call identificationManager.setPuk(puk: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPuk Callback")
         }
