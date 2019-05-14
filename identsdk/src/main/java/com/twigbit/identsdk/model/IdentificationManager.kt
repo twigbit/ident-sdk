@@ -38,12 +38,6 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
 
-    @Deprecated("Deprecated in favor of AusweisIdentHelper configuration helper")
-    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
-        send(cmd)
-    }
-
     fun startIdent(tokenURL: String) {
         //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
@@ -51,7 +45,7 @@ class IdentificationManager{
 
     fun setPin(pin: String){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_VALUE, pin)))
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PIN, Pair(IdentificationUtil.PARAM_VALUE, pin)))
     }
     fun setPuk(puk: String){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PUK}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${puk}\"}"
@@ -71,21 +65,6 @@ class IdentificationManager{
     }
     fun getCertificate(){
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_GET_CERTIFICATE))
-    }
-
-    // TODO implement getCertificate
-
-    // temporary method to make IdentificationLogic reusable in Showcase
-    @Deprecated("This method is only available for early adopter migration and debugging, will be removed for production")
-    fun sendRaw(cmd: String){
-        send(cmd)
-    }
-
-
-    private fun sendCommand(cmd: String?) {
-        if(cmd == null) return;
-        val cmdJson = "{\"cmd\": \"${cmd}\"}"
-        send(cmdJson)
     }
 
     private fun send(cmd: String) {
