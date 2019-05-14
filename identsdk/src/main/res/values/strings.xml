@@ -4,9 +4,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="unknown_value">Unbekannter Wert</string>
-    <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie
-        ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones.
-    </string>
     <string name="drop_in_attach_card">Bitte halten Sie ihren Personalausweis jetzt für den gesamten Vorgang gegen den
         NFC Sensor Ihres Smartphones.
     </string>
@@ -17,6 +14,11 @@
     <string name="drop_in_intro_button">Starten</string>
     <string name="drop_in_accept">Akzeptieren</string>
     <string name="drop_in_deny">Abbrechen</string>
+    <string name="drop_in_enter_can">Bitte geben sie die CAN ein:</string>
+    <string name="drop_in_enter_pin">Bitte geben sie ihre PIN ein:</string>
+    <string name="drop_in_enter_puk">Bitte geben sie ihre PUK ein:</string>
+
+
     <string name="access_right_artistic_name">Ordens- / Künstlername</string>
     <string name="access_right_birth_name">Geburtsname</string>
     <string name="access_right_date_of_birth">Geburtsdatum</string>
@@ -30,4 +32,8 @@
     <string name="access_right_place_of_pirth">Geburtsort</string>
     <string name="access_right_place_of_residence">Wohnort</string>
     <string name="access_right_academic_title">Akademisches Grad</string>
+    <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie
+        ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones.
+    </string>
+    <string name="drop_in_continue">Weiter</string>
 </resources>

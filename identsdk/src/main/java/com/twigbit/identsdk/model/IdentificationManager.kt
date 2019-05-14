@@ -154,6 +154,8 @@ class IdentificationManager{
                 // TODO dont automatically accept the access rights. This should be based on user interaction.
                 //sendCommand(IdentificationUtil.CMD_ACCEPT)
             }
+
+            // TODO remove state and mode, mostly deprecated in favor of callback
             IdentificationUtil.MSG_INSERT_CARD -> {
                 this.state = STATE_INSERT
                 callback?.onCardRecognized(message.card)
@@ -161,15 +163,17 @@ class IdentificationManager{
             IdentificationUtil.MSG_ENTER_PIN -> {
                 this.mode = IdentMode.PIN
                 this.state = STATE_ENTER_PIN
+                callback?.onRequestPin()
             }
             IdentificationUtil.MSG_ENTER_PUK -> {
                 this.mode = IdentMode.PUK
-
                 this.state = STATE_ENTER_PUK
+                callback?.onRequestPuk()
             }
             IdentificationUtil.MSG_ENTER_CAN -> {
                 this.mode = IdentMode.CAN
                 this.state = STATE_ENTER_CAN
+                callback?.onRequestCan()
             }
 
 

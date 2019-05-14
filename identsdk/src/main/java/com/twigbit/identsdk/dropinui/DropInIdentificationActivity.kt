@@ -47,18 +47,24 @@ class DropInIdentificationActivity : IdentificationActivity() {
             // The id cards PIN was requested. Display a PIN dialog to the user.
             // To continue the identification process, call identificationManager.setPin(pin: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPin Callback")
+            authorisationFragment.mode = AuthorisationFragment.MODE_PIN
+            showFragment(authorisationFragment)
         }
 
         override fun onRequestPuk() {
             // The id cards PUK was requested. Display a PUK diaphlog to the user.
             // To continue the identification process, call identificationManager.setPuk(puk: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPuk Callback")
+            authorisationFragment.mode = AuthorisationFragment.MODE_PUK
+            showFragment(authorisationFragment)
         }
 
         override fun onRequestCan() {
             // The id cards CAN was requested. Display a CAN dialog to the user.
             // To continue the identification process, call identificationManager.setCan(can: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestCan Callback")
+            authorisationFragment.mode = AuthorisationFragment.MODE_CAN
+            showFragment(authorisationFragment)
         }
 
         override fun onError(error: IdentificationError) {
