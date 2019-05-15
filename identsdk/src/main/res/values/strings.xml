@@ -7,7 +7,6 @@
     <string name="drop_in_attach_card">Bitte halten Sie ihren Personalausweis jetzt für den gesamten Vorgang gegen den
         NFC Sensor Ihres Smartphones.
     </string>
-    <string name="drop_in_error">Ein Fehler ist aufgetreten.</string>
     <string name="drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte
         halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones.
     </string>
@@ -19,6 +18,7 @@
     <string name="drop_in_enter_pin">Bitte geben sie ihre PIN ein:</string>
     <string name="drop_in_enter_puk">Bitte geben sie ihre PUK ein:</string>
     <string name="drop_in_success">Ihre Daten wurden erfolgreich an den Dienstanbieter übermittelt.</string>
+    <string name="drop_in_error">Ein Fehler ist aufgetreten.</string>
 
 
     <string name="access_right_artistic_name">Ordens- / Künstlername</string>

@@ -21,7 +21,7 @@
 
     <android.support.design.button.MaterialButton android:layout_width="match_parent"
                                                   android:layout_height="wrap_content"
-                                                  android:id="@+id/buttonStart"
+                                                  android:id="@+id/buttonFinish"
                                                   android:padding="8dp"
                                                   android:foregroundTint="@color/colorPrimaryDark"
                                                   android:text="@string/drop_in_finish"
