@@ -10,18 +10,7 @@ import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
-//    override fun onError(message: String) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun onMessage(message: Message) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun onComplete(url: String) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
+class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +21,6 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
         }
     }
 
-    val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
         val tcTokenUrl = AusweisIdentBuilder()
             .ref()
@@ -47,6 +35,8 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
         val dropInRequest = DropInRequest(tcTokenUrl)
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
+
+    val REQUEST_CODE_IDENTIFICATION = 0;
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_IDENTIFICATION) {
             if (resultCode == Activity.RESULT_OK) {
