@@ -21,6 +21,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
+    val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
         val tcTokenUrl = AusweisIdentBuilder()
             .ref()
@@ -36,7 +37,6 @@ class MainActivity: AppCompatActivity() {
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
 
-    val REQUEST_CODE_IDENTIFICATION = 0;
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_IDENTIFICATION) {
             if (resultCode == Activity.RESULT_OK) {
