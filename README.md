@@ -14,33 +14,28 @@ This project is actively under development. For informations, contact [ident@twi
 
 | Status    | Version          |
 | --------- | ---------------- |
-| **DRAFT** | 0.1.1 unreleased |
+| **WIP** | 0.1.1 unreleased |
 
-## Changelog 
+## Changelog/Milestones
 
 ### 0.1.1
-
 * [ausweisident] Return Result URL directly, refactor call redirects into optional method in AusweisIdent helper.
-* [ausweisident] Server implementation guide.
-* [core] Explicitly handle result URL. 
-* [core] Refactor state callbacks into interface.
-* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
-
-## Milestones
-
-### 0.2.0 
-* [dropin] Dropin UI basic implementation
-* [core] Persistant abstractions for the command and message system
-* [core] Test simplified configuration procedure
 * [ausweisident] Configuration helper
+* [core] Refactor state into callbacks.
+* [core] Persistant abstractions for the command and message system
+* [dropin] Dropin UI basic implementation
 
-### 0.3.0
-* [core] Extract all constants, create persistant models
+
+### Backlog 
+* [dropin] Dropin styling & certificate view
+* [core] Explicitly handle result URL. 
+* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
+* [core] Test simplified configuration procedure.
+* [ausweisident] Server implementation guide.
+
 
 ### Nice to have 
 
-* Implement drop-in-ui v1
-* Make inheritance from IdentificationActivity optional by making the `IdentificationManager` livecycle aware.
 * Vibrate on NFC message.
 * Capability check- check whether the users device has the required architecture and NFC capabilities
 * A custom identification app as a zero-dependency option for the integration
