@@ -26,6 +26,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
+            showFragment(successFragment)
         }
 
         override fun onRequestAccessRights(accessRights: List<String>) {
@@ -73,6 +74,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
         override fun onError(error: IdentificationError) {
             // An error occured. Display an error/issue dialog to the user.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onError Callback")
+            showFragment(errorFragment)
         }
     }
     fun showFragment(fragment: Fragment){

@@ -63,6 +63,7 @@ class AuthorisationFragment : Fragment() {
                 activity?.asDropInActivity()?.identificationManager?.setPuk(pin)
             }
         }
+        activity?.asDropInActivity()?.showFragment(activity?.asDropInActivity()?.loaderFragment!!)
     }
 
     companion object {
@@ -70,7 +71,6 @@ class AuthorisationFragment : Fragment() {
         const val MODE_PIN = 1;
         const val MODE_PUK = 2;
         const val KEY_MODE = "key-mode"
-
     }
 
     override fun setArguments(args: Bundle?) {
@@ -93,6 +93,4 @@ class AuthorisationFragment : Fragment() {
             }
             field = value
         }
-
-
 }
