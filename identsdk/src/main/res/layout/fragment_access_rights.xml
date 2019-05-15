@@ -8,7 +8,7 @@
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:clipToPadding="false" android:clipChildren="false"
-                      android:padding="8dp">
+                      android:padding="24dp">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="Der Folgende Dienstanbierter möchte Ihre Identität überprüfen:"
                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -82,7 +82,7 @@
         </LinearLayout>
     </ScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal" android:padding="16dp">
         <android.support.design.button.MaterialButton android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonDeny"
