@@ -18,8 +18,7 @@ import android.os.RemoteException
 import android.util.Log
 import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
-import com.twigbit.identsdk.util.IdentMode
-import com.twigbit.identsdk.util.IdentificationUtil
+import com.twigbit.identsdk.util.*
 
 class IdentificationManager{
     // TODO refactor into callback array or else replace by setter
@@ -36,12 +35,6 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
 
-    @Deprecated("Deprecated in favor of AusweisIdentHelper configuration helper")
-    fun startIdentWithAusweisIdent(redirectUri: String, clientId: String) {
-        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${IdentificationUtil.buildTokenUrl(redirectUri, clientId)}\" }"
-        send(cmd)
-    }
-
     fun startIdent(tokenURL: String) {
         //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_RUN_AUTH}\", \"${IdentificationUtil.PARAM_TCTOKEN}\": \"${tokenURL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
@@ -49,7 +42,7 @@ class IdentificationManager{
 
     fun setPin(pin: String){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PIN}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${pin}\"}"
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_VALUE, pin)))
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PIN, Pair(IdentificationUtil.PARAM_VALUE, pin)))
     }
     fun setPuk(puk: String){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_SET_PUK}\", \"${IdentificationUtil.PARAM_VALUE}\": \"${puk}\"}"
@@ -66,36 +59,23 @@ class IdentificationManager{
     fun cancel(){
 //        val cmd = "{\"cmd\": \"${IdentificationUtil.CMD_CANCEL}\" }"
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_CANCEL))
-
     }
-
-    // TODO implement getCertificate
-
-    // temporary method to make IdentificationLogic reusable in Showcase
-    @Deprecated("This method is only available for early adopter migration and debugging, will be removed for production")
-    fun sendRaw(cmd: String){
-        send(cmd)
-    }
-
-
-    private fun sendCommand(cmd: String?) {
-        if(cmd == null) return;
-        val cmdJson = "{\"cmd\": \"${cmd}\"}"
-        send(cmdJson)
+    fun getCertificate(){
+        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_GET_CERTIFICATE))
     }
 
     private fun send(cmd: String) {
-        Log.d(TAG,  "Sending command: " + cmd)
+        Log.d(Tags.TAG_IDENT_DEBUG,  "Sending command: " + cmd)
         try {
             if (!sdk!!.send(sdkCallback.mSessionID, cmd)) {
                 // TODO error
-                Log.e(TAG, "Could not sendRaw command to SDK")
+                Log.e(Tags.TAG_IDENT_DEBUG, "Could not sendRaw command to SDK")
             }
         } catch (e: Exception) {
             // TODO error
             // FIXME 20190509 This sometimes gets called without an error message. Possibly due to improperly terminated background service. 
-            Log.e(TAG, "Could not sendRaw command to SDK")
-            //Log.e(TAG, e.message)
+            Log.e(Tags.TAG_IDENT_DEBUG, "Could not sendRaw command to SDK")
+            //Log.e(Tags.TAG_IDENT_DEBUG, e.message)
         }
     }
 
@@ -103,41 +83,35 @@ class IdentificationManager{
         // Workaround for extracting the url from the messageJson.
 
         // TODO refactor for production
-//        if (messageJson.indexOf("url") != -1) {
-//            // it contains the response
-//            val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
-//            state = STATE_COMPLETE
-//            callback.onComplete(s)
-//        }
+        if (messageJson.indexOf("url") != -1) {
+            // it contains the response
+            val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
+            callback?.onCompleted(s)
+        }
 
-        Log.d(TAG, messageJson);
+        Log.d(Tags.TAG_IDENT_DEBUG, messageJson);
 
         val message = IdentificationUtil.parseJson(messageJson)
-        Log.d(TAG, message.toString());
+        Log.d(Tags.TAG_IDENT_DEBUG, message.toString());
 
         if (message == null) {
-            state = STATE_BAD
-            Log.d(TAG, "Bad state")
+            Log.d(Tags.TAG_IDENT_DEBUG, "Bad state")
             return
         }
 
         // Pass raw sdk messageJson to callback for debugging/migration
         //callback.onMessage(message)
 
-        if(message.card != null){
-            this.state = STATE_CARD_INSERTED
-        }
         when(message.msg) {
             IdentificationUtil.MSG_AUTH -> {
                 if(!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error"){
                     // An error occured
-                    //callback.onError(message.result!!.description)
+                    callback?.onError(message.result!!.description)
                     authInProgress = false
                     return
                 }
                 else if(messageJson.indexOf("url") != -1){
                     val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
-                    state = STATE_COMPLETE
                     //callback.onComplete(s)
                 }
                 else{
@@ -145,27 +119,31 @@ class IdentificationManager{
                 }
             };
             IdentificationUtil.MSG_ACCESS_RIGHTS -> {
-                // TODO pass accept messageJson
+                callback?.onRequestAccessRights(message.chat!!.effective!!)
+
                 // TODO dont automatically accept the access rights. This should be based on user interaction.
                 //sendCommand(IdentificationUtil.CMD_ACCEPT)
             }
+
+            // TODO remove state and mode, mostly deprecated in favor of callback
             IdentificationUtil.MSG_INSERT_CARD -> {
-                this.state = STATE_INSERT
+                callback?.onCardRecognized(message.card)
             }
             IdentificationUtil.MSG_ENTER_PIN -> {
                 this.mode = IdentMode.PIN
-                this.state = STATE_ENTER_PIN
+                callback?.onRequestPin()
             }
             IdentificationUtil.MSG_ENTER_PUK -> {
                 this.mode = IdentMode.PUK
-
-                this.state = STATE_ENTER_PUK
+                callback?.onRequestPuk()
             }
             IdentificationUtil.MSG_ENTER_CAN -> {
                 this.mode = IdentMode.CAN
-                this.state = STATE_ENTER_CAN
+                callback?.onRequestCan()
             }
-
+//            IdentificationUtil.MSG_READER -> {
+//                callback?.onCardRecognized(message.card)
+//            }
 //            else -> Log.d(TAG, "Unhandled messageJson ${message}")
         }
 
@@ -173,24 +151,18 @@ class IdentificationManager{
 
     interface Callback {
         fun onCompleted(resultUrl: String)
-        fun onRequestAccessRights(accessRights: ArrayList<String>)
-        fun onCardRecognized(card: IdentificationCard)
+        fun onRequestAccessRights(accessRights: List<String>)
+        fun onCardRecognized(card: Card?) // when the card is null, there is no card available
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()
-        fun onError(error: IdentificationError)
+        fun onError(error: String)
     }
 
     private var authInProgress: Boolean = false
     private var mode: IdentMode = IdentMode.PIN
 
-    private var state: String = STATE_DEFAULT
-        set(value) {
-            field = value
-        }
-
     companion object {
-        const val TAG = "IdentificationManager"
         const val STATE_DEFAULT = "Default"
         const val STATE_CONNECTED = "Connected"
         const val STATE_DISCONNECTED = "Disconnected"
@@ -231,32 +203,30 @@ class IdentificationManager{
 
         @Throws(RemoteException::class)
         override fun sdkDisconnected() {
-            Log.d(TAG, "SDK Disconnected")
-            state = STATE_DISCONNECTED
+            Log.d(Tags.TAG_IDENT_DEBUG, "SDK Disconnected")
         }
     }
 
     fun bindIdIdentificationService(context: Context) {
-        Log.d(TAG, "Binding auth service... ")
+        Log.d(Tags.TAG_IDENT_DEBUG, "Binding auth service... ")
 
         sdkConnection = object : ServiceConnection {
             override fun onServiceConnected(className: ComponentName, service: IBinder) {
-                Log.d(TAG, "Service Connected")
+                Log.d(Tags.TAG_IDENT_DEBUG, "Service Connected")
 
                 try {
                     sdk = IAusweisApp2Sdk.Stub.asInterface(service)
                     connectSDK()
                 } catch (e: ClassCastException) {
-                    Log.e(TAG, e.message)
+                    Log.e(Tags.TAG_IDENT_DEBUG, e.message)
                 }
                 // TODO callback
             }
 
             override fun onServiceDisconnected(className: ComponentName) {
                 // TODO callback
-                Log.d(TAG, "Service Disconnected")
+                Log.d(Tags.TAG_IDENT_DEBUG, "Service Disconnected")
                 sdk = null
-                state = STATE_DISCONNECTED
             }
         }
         val name = "com.governikus.ausweisapp2.START_SERVICE"
@@ -266,17 +236,17 @@ class IdentificationManager{
     }
 
     private fun connectSDK() {
-        Log.d(TAG, "Binding SDK...")
+        Log.d(Tags.TAG_IDENT_DEBUG, "Binding SDK...")
         try {
             if (!sdk!!.connectSdk(sdkCallback)) {
 
                 // TODO error
                 // already connected? Handle error...
-                Log.d(TAG, "Connection Issue")
+                Log.d(Tags.TAG_IDENT_DEBUG, "Connection Issue")
             }
         } catch (e: RemoteException) {
             // handle exception
-            Log.e(TAG, e.toString())
+            Log.e(Tags.TAG_IDENT_DEBUG, e.toString())
             // TODO error
         }
     }
@@ -286,7 +256,7 @@ class IdentificationManager{
             sdk?.updateNfcTag(sdkCallback.mSessionID, tag)
         } catch (e: Exception) {
             // TODO error
-            Log.d(TAG, "An error occured updating/dispating a NFC Tag")
+            Log.d(Tags.TAG_IDENT_DEBUG, "An error occured updating/dispating a NFC Tag")
         }
     }
 }

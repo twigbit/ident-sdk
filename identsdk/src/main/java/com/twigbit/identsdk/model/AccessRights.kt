@@ -1,9 +1,8 @@
-package com.twigbit.identsdk.ausweisident
+package com.twigbit.identsdk.model
 
-object AusweisIdentScopes {
-
+object AccessRights{
     const val BIRTH_NAME = "BirthName"
-    const val FAMILY_NAME = "FamilyNames"
+    const val FAMILY_NAME = "FamilyName"
     const val GIVEN_NAMES = "GivenNames"
     const val DATE_OF_BIRTH = "DateOfBirth"
     const val PLACE_OF_RECIDENCE = "PlaceOfResidence"

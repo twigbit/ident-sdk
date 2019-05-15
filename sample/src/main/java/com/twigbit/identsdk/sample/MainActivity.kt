@@ -5,10 +5,8 @@ import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
 import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
-import com.twigbit.identsdk.util.IdentificationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -40,9 +38,9 @@ class MainActivity /* : IdentificationActivity()*/ : AppCompatActivity() {
             .ref()
             .clientId(Secrets.CLIENT_ID)
             .redirectUrl(Secrets.CLIENT_REDIRECT_URL)
-            .scope(AusweisIdentScopes.FamilyNames)
-            .scope(AusweisIdentScopes.GivenNames)
-            .scope(AusweisIdentScopes.DateOfBirth)
+            .scope(AusweisIdentScopes.FAMILY_NAME)
+            .scope(AusweisIdentScopes.GIVEN_NAMES)
+            .scope(AusweisIdentScopes.DATE_OF_BIRTH)
             .state("123456")
             .build()
 

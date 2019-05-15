@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
+import kotlinx.android.synthetic.main.fragment_success.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,9 @@ class SuccessFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_success, container, false)
+        val v = inflater.inflate(R.layout.fragment_success, container, false)
+        v.buttonFinish.setOnClickListener { activity!!.finish() }
+        return v
     }
 
 

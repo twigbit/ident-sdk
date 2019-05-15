@@ -12,8 +12,8 @@ import android.net.Uri
  *
  * ```
  * val ausweisIdentTcTokenUrl: String = AusweisIdentBuilder()
- *   .scope(AusweisIdentScopes.BirthName)
- *   .scope(AusweisIdentScopes.GivenNames)
+ *   .scope(AusweisIdentScopes.BIRTH_NAME)
+ *   .scope(AusweisIdentScopes.GIVEN_NAMES)
  *   .state("123456")
  *   .clientId("ABCDEFG")
  *   .redirectUrl("https://yourserver.com")
