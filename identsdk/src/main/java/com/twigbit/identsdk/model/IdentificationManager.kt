@@ -86,7 +86,6 @@ class IdentificationManager{
         if (messageJson.indexOf("url") != -1) {
             // it contains the response
             val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
-            state = STATE_COMPLETE
             callback?.onCompleted(s)
         }
 
@@ -96,7 +95,6 @@ class IdentificationManager{
         Log.d(Tags.TAG_IDENT_DEBUG, message.toString());
 
         if (message == null) {
-            state = STATE_BAD
             Log.d(Tags.TAG_IDENT_DEBUG, "Bad state")
             return
         }
@@ -104,20 +102,16 @@ class IdentificationManager{
         // Pass raw sdk messageJson to callback for debugging/migration
         //callback.onMessage(message)
 
-        if(message.card != null){
-            this.state = STATE_CARD_INSERTED
-        }
         when(message.msg) {
             IdentificationUtil.MSG_AUTH -> {
                 if(!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error"){
                     // An error occured
-                    //callback.onError(message.result!!.description)
+                    callback?.onError(message.result!!.description)
                     authInProgress = false
                     return
                 }
                 else if(messageJson.indexOf("url") != -1){
                     val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
-                    state = STATE_COMPLETE
                     //callback.onComplete(s)
                 }
                 else{
@@ -133,26 +127,23 @@ class IdentificationManager{
 
             // TODO remove state and mode, mostly deprecated in favor of callback
             IdentificationUtil.MSG_INSERT_CARD -> {
-                this.state = STATE_INSERT
                 callback?.onCardRecognized(message.card)
             }
             IdentificationUtil.MSG_ENTER_PIN -> {
                 this.mode = IdentMode.PIN
-                this.state = STATE_ENTER_PIN
                 callback?.onRequestPin()
             }
             IdentificationUtil.MSG_ENTER_PUK -> {
                 this.mode = IdentMode.PUK
-                this.state = STATE_ENTER_PUK
                 callback?.onRequestPuk()
             }
             IdentificationUtil.MSG_ENTER_CAN -> {
                 this.mode = IdentMode.CAN
-                this.state = STATE_ENTER_CAN
                 callback?.onRequestCan()
             }
-
-
+//            IdentificationUtil.MSG_READER -> {
+//                callback?.onCardRecognized(message.card)
+//            }
 //            else -> Log.d(TAG, "Unhandled messageJson ${message}")
         }
 
@@ -161,20 +152,15 @@ class IdentificationManager{
     interface Callback {
         fun onCompleted(resultUrl: String)
         fun onRequestAccessRights(accessRights: List<String>)
-        fun onCardRecognized(card: Card?)
+        fun onCardRecognized(card: Card?) // when the card is null, there is no card available
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()
-        fun onError(error: IdentificationError)
+        fun onError(error: String)
     }
 
     private var authInProgress: Boolean = false
     private var mode: IdentMode = IdentMode.PIN
-
-    private var state: String = STATE_DEFAULT
-        set(value) {
-            field = value
-        }
 
     companion object {
         const val STATE_DEFAULT = "Default"
@@ -218,7 +204,6 @@ class IdentificationManager{
         @Throws(RemoteException::class)
         override fun sdkDisconnected() {
             Log.d(Tags.TAG_IDENT_DEBUG, "SDK Disconnected")
-            state = STATE_DISCONNECTED
         }
     }
 
@@ -242,7 +227,6 @@ class IdentificationManager{
                 // TODO callback
                 Log.d(Tags.TAG_IDENT_DEBUG, "Service Disconnected")
                 sdk = null
-                state = STATE_DISCONNECTED
             }
         }
         val name = "com.governikus.ausweisapp2.START_SERVICE"

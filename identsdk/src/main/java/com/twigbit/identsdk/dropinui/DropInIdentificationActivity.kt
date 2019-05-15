@@ -71,7 +71,7 @@ class DropInIdentificationActivity : IdentificationActivity() {
             showFragment(authorisationFragment)
         }
 
-        override fun onError(error: IdentificationError) {
+        override fun onError(error: String) {
             // An error occured. Display an error/issue dialog to the user.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onError Callback")
             showFragment(errorFragment)
