@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import com.twigbit.identsdk.R
-import com.twigbit.identsdk.model.IdentificationError
-import com.twigbit.identsdk.model.IdentificationManager
+import com.twigbit.identsdk.core.Card
+import com.twigbit.identsdk.core.IdentificationActivity
+import com.twigbit.identsdk.core.IdentificationManager
 import com.twigbit.identsdk.util.*
 
 fun Activity.asDropInActivity(): DropInIdentificationActivity?{

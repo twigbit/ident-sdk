@@ -1,4 +1,4 @@
-package com.twigbit.identsdk.model
+package com.twigbit.identsdk.core
 
 object AccessRights{
     const val BIRTH_NAME = "BirthName"

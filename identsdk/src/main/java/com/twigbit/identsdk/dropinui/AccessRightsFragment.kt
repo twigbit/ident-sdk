@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
-import com.twigbit.identsdk.model.IdentificationManager
 import com.twigbit.identsdk.util.Tags
 import kotlinx.android.synthetic.main.fragment_access_rights.view.*
 import kotlinx.android.synthetic.main.holder_access_right.view.*

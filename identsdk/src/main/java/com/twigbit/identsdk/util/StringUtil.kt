@@ -2,8 +2,7 @@ package com.twigbit.identsdk.util
 
 import android.content.Context
 import com.twigbit.identsdk.R
-import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
-import com.twigbit.identsdk.model.AccessRights
+import com.twigbit.identsdk.core.AccessRights
 
 object StringUtil{
     fun translate(context: Context, string: String): String{

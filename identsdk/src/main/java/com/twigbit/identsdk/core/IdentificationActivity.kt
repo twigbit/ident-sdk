@@ -5,13 +5,13 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk.util
+package com.twigbit.identsdk.core
 
 import android.content.Intent
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.os.Bundle
-import com.twigbit.identsdk.model.IdentificationManager
+import com.twigbit.identsdk.util.NfcInterceptorActivity
 
 abstract class IdentificationActivity : NfcInterceptorActivity() {
     var identificationManager = IdentificationManager()
