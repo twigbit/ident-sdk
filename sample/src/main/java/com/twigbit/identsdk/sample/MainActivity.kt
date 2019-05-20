@@ -19,8 +19,15 @@ class MainActivity: AppCompatActivity() {
         buttonDropIn.setOnClickListener {
             startDropInIdentification()
         }
+        buttonCustomAuth.setOnClickListener {
+            startIdentificationActivity()
+        }
     }
 
+    private fun startIdentificationActivity(){
+        val intent = Intent(this, IndependentIdentificationActivity::class.java)
+        startActivity(intent)
+    }
     val REQUEST_CODE_IDENTIFICATION = 0;
     private fun startDropInIdentification(){
         val tcTokenUrl = AusweisIdentBuilder()

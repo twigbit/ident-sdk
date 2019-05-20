@@ -7,4 +7,9 @@
         android:layout_height="match_parent"
         tools:context=".IndependentIdentificationActivity">
 
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent" android:id="@+id/container">
+    </FrameLayout>
+
+
 </android.support.constraint.ConstraintLayout>
