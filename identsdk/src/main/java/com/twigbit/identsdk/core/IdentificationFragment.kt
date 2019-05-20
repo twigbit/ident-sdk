@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import java.lang.Exception
 
 class IdentificationFragment : Fragment() {
-
-
     var identificationManager = IdentificationManager()
 
     override fun onStart() {

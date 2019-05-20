@@ -103,7 +103,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
 }
 
 interface IsIdentificationUI{
-    val identificationManager: IdentificationManager;
+    val identificationManager: IdentificationManager?;
     fun showLoader();
     fun startIdent();
 }

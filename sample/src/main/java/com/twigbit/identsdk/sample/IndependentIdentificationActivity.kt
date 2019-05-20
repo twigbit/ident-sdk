@@ -24,18 +24,28 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
             .state("123456")
             .build()
-        identificationFragment.identificationManager.startIdent(tcTokenUrl);
+        if(identificationFragment != null)identificationFragment!!.identificationManager.startIdent(tcTokenUrl);
     }
     override fun showLoader() {
         showFragment(loaderFragment)
     }
 
-    var identificationFragment: IdentificationFragment = IdentificationFragment.newInstance(this)
-    override val identificationManager: IdentificationManager = identificationFragment.identificationManager
+    var identificationFragment: IdentificationFragment? = null
+    override val identificationManager: IdentificationManager?
+        get() {
+            return identificationFragment?.identificationManager
+        }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_independent_identification)
+
+
+        identificationFragment = IdentificationFragment.newInstance(this)
+        identificationFragment!!.identificationManager.addCallback(identificationCallback)
+
+        showFragment(introFragment)
     }
 
     // Mirrored from drop in ui
