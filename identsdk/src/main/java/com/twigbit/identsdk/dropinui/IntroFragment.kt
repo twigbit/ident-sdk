@@ -23,8 +23,8 @@ class IntroFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_intro, container, false)
         v.buttonStart.setOnClickListener {
-            activity?.asDropInActivity()!!.startIdent()
-            activity!!.asDropInActivity()!!.showFragment(activity!!.asDropInActivity()!!.loaderFragment)
+            activity?.asIdentificationUI()!!.startIdent()
+            activity!!.asIdentificationUI()!!.showLoader()
         }
         return v;
     }

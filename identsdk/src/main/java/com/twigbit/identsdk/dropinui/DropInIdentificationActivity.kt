@@ -9,12 +9,14 @@ import com.twigbit.identsdk.core.Card
 import com.twigbit.identsdk.core.IdentificationActivity
 import com.twigbit.identsdk.core.IdentificationManager
 import com.twigbit.identsdk.util.*
+import kotlinx.android.synthetic.main.fragment_intro.*
 
-fun Activity.asDropInActivity(): DropInIdentificationActivity?{
-    if(this is DropInIdentificationActivity) return this else return null
+fun Activity.asIdentificationUI(): IsIdentificationUI?{
+    if(this is IsIdentificationUI) return this else return null
 }
 
-class DropInIdentificationActivity : IdentificationActivity() {
+class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationUI {
+
     val introFragment = IntroFragment()
     val loaderFragment = LoaderFragment()
     val accessRightsFragment = AccessRightsFragment()
@@ -90,13 +92,18 @@ class DropInIdentificationActivity : IdentificationActivity() {
         showFragment(introFragment)
     }
 
-    fun startIdent(){
+    override fun startIdent(){
         identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_TC_TOKEN_URL))
     }
 
-    // TODO set optimal ident work
-    override fun onDestroy() {
-        // TODO cancel the ident process, unbind from service
-        super.onDestroy()
+
+    override fun showLoader() {
+        showFragment(loaderFragment);
     }
+}
+
+interface IsIdentificationUI{
+    val identificationManager: IdentificationManager;
+    fun showLoader();
+    fun startIdent();
 }

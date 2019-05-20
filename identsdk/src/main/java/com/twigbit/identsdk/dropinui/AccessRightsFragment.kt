@@ -35,10 +35,10 @@ class AccessRightsFragment : Fragment() {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
         v.buttonAccept.setOnClickListener {
-            activity?.asDropInActivity()?.identificationManager?.acceptAccessRights()
-            activity?.asDropInActivity()?.showFragment(activity?.asDropInActivity()?.loaderFragment!!)
+            activity?.asIdentificationUI()?.identificationManager?.acceptAccessRights()
+            activity?.asIdentificationUI()?.showLoader()
         }
-        v.buttonDeny.setOnClickListener { activity?.asDropInActivity()?.identificationManager?.getCertificate() }
+        v.buttonDeny.setOnClickListener { activity?.asIdentificationUI()?.identificationManager?.getCertificate() }
         v.recyclerView.adapter = adapter
         return v
     }

@@ -25,10 +25,9 @@ class IdentificationFragment : Fragment() {
         val TAG = "com.twigbit.identsdk.core.IdentificationFragment"
 
         fun newInstance(activity: AppCompatActivity): IdentificationFragment {
-
             // try to get the fragment instance if it is already attached
             val fm = activity.supportFragmentManager
-            var identificationFragment: IdentificationFragment? = fm.findFragmentByTag(TAG) as IdentificationFragment
+            var identificationFragment: IdentificationFragment? = fm.findFragmentByTag(TAG) as IdentificationFragment?
             if (identificationFragment == null) {
                 identificationFragment = IdentificationFragment()
                 try {
