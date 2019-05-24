@@ -34,7 +34,7 @@ class MainActivity: AppCompatActivity() {
             .ref()
             .clientId(Secrets.CLIENT_ID)
             .redirectUrl(Secrets.CLIENT_REDIRECT_URL)
-            .scope(AusweisIdentScopes.FAMILY_NAME)
+            .scope(AusweisIdentScopes.FAMILY_NAMES)
             .scope(AusweisIdentScopes.GIVEN_NAMES)
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
             .state("123456")
