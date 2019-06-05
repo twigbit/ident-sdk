@@ -1,21 +1,88 @@
-package com.twigbit.identsdk.dropinui
+package com.twigbit.identsdk.sample
 
-import android.app.Activity
+import android.content.Intent
+import android.nfc.NfcAdapter
+import android.nfc.Tag
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import com.twigbit.identsdk.R
+import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
+import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
 import com.twigbit.identsdk.core.Card
-import com.twigbit.identsdk.core.IdentificationActivity
+import com.twigbit.identsdk.core.IdentificationFragment
 import com.twigbit.identsdk.core.IdentificationManager
-import com.twigbit.identsdk.util.*
-import kotlinx.android.synthetic.main.fragment_intro.*
+import com.twigbit.identsdk.dropinui.*
+import com.twigbit.identsdk.util.ForegroundDispatcher
+import com.twigbit.identsdk.util.StringUtil
+import com.twigbit.identsdk.util.Tags
 
-fun Activity.asIdentificationUI(): IsIdentificationUI?{
-    if(this is IsIdentificationUI) return this else return null
-}
+class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+    override fun startIdent() {
+        val tcTokenUrl = AusweisIdentBuilder()
+            .ref()
+            .clientId(Secrets.CLIENT_ID)
+            .redirectUrl(Secrets.CLIENT_REDIRECT_URL)
+            .scope(AusweisIdentScopes.FAMILY_NAMES)
+            .scope(AusweisIdentScopes.GIVEN_NAMES)
+            .scope(AusweisIdentScopes.DATE_OF_BIRTH)
+            .state("123456")
+            .build()
+        if(identificationFragment != null)identificationFragment!!.identificationManager.startIdent(tcTokenUrl);
+    }
+    override fun showLoader() {
+        showFragment(loaderFragment)
+    }
 
-class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationUI {
+    var identificationFragment: IdentificationFragment? = null
+    override val identificationManager: IdentificationManager?
+        get() {
+            return identificationFragment?.identificationManager
+        }
+
+    /*
+    To receive and dispatch NFC tags to the SDK, we need to initalize a forground dispatcher and attach it to the lifecycle.
+    Then, we can pass Tag Intents from the `onNewIntent` to the `Identificationmanager`
+     */
+
+    var mDispatcher: ForegroundDispatcher? = null;
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_independent_identification)
+
+
+        identificationFragment = IdentificationFragment.newInstance(this)
+        identificationFragment!!.identificationManager.addCallback(identificationCallback)
+
+        // Initialize the NFC Tag foreground dispatcher
+        mDispatcher = ForegroundDispatcher(this)
+
+        showFragment(introFragment)
+    }
+    public override fun onResume() {
+        super.onResume()
+        mDispatcher!!.enable()
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        mDispatcher!!.disable()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        if (tag != null) {
+            identificationManager?.dispatchNfcTag(tag)
+        }
+    }
+
+    /*
+    These are the same fragments used by the drop in UI.
+    For a custom UI implementation, you could implement your own fragments with your own UI components
+     */
 
     val introFragment = IntroFragment()
     val loaderFragment = LoaderFragment()
@@ -36,7 +103,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
 
-            accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it)})
+            accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@IndependentIdentificationActivity, it)})
             // for the moment just accept them
             showFragment(accessRightsFragment)
         }
@@ -81,29 +148,6 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         }
     }
     fun showFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(com.twigbit.identsdk.R.id.container, fragment).commit()
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dropin_identification)
-
-        identificationManager.addCallback(identificationCallback)
-        showFragment(introFragment)
-    }
-
-    override fun startIdent(){
-        identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_TC_TOKEN_URL))
-    }
-
-
-    override fun showLoader() {
-        showFragment(loaderFragment);
-    }
-}
-
-interface IsIdentificationUI{
-    val identificationManager: IdentificationManager?;
-    fun showLoader();
-    fun startIdent();
 }

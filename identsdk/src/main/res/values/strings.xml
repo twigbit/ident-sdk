@@ -20,20 +20,25 @@
     <string name="drop_in_success">Ihre Daten wurden erfolgreich an den Dienstanbieter übermittelt.</string>
     <string name="drop_in_error">Ein Fehler ist aufgetreten.</string>
 
-
-    <string name="access_right_artistic_name">Ordens- / Künstlername</string>
+    <string name="access_right_address">Wohnort</string>
     <string name="access_right_birth_name">Geburtsname</string>
-    <string name="access_right_date_of_birth">Geburtsdatum</string>
-    <string name="access_right_date_of_expiry">Ablaufdatum</string>
-    <string name="access_right_doc_type">Dokumentenart</string>
     <string name="access_right_family_name">Familienname</string>
-    <string name="access_right_given_name">Rufname</string>
-    <string name="access_right_issuing_state">Ausstellender Staat</string>
+    <string name="access_right_given_names">Rufname</string>
+    <string name="access_right_place_of_birth">Geburtsort</string>
+    <string name="access_right_date_of_birth">Geburtsdatum</string>
+    <string name="access_right_doctoral_degree">Akademisches Grad</string>
+    <string name="access_right_artistic_name">Ordens- / Künstlername</string>
+    <string name="access_right_pseudonym">Pseudonym</string>
+    <string name="access_right_valid_until">Ablaufdatum</string>
     <string name="access_right_nationality">Staatsangehöritgkeit</string>
-    <string name="access_right_restricted_id">Nebenbestimmungen I</string>
-    <string name="access_right_place_of_pirth">Geburtsort</string>
-    <string name="access_right_place_of_residence">Wohnort</string>
-    <string name="access_right_academic_title">Akademisches Grad</string>
+    <string name="access_right_issuing_country">Ausstellender Staat</string>
+    <string name="access_right_document_type">Dokumentenart</string>
+    <string name="access_right_residence_permit_i">Aufenthaltserlaubnis</string>
+    <string name="access_right_residence_permit_ii">Aufenthaltserlaubnis 2</string>
+    <string name="access_right_community_id">community_id</string>
+    <string name="access_right_address_verification">Wohnortverifikation</string>
+    <string name="access_right_age_verification">Altersverifikation</string>
+
     <string name="drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie
         ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones.
     </string>

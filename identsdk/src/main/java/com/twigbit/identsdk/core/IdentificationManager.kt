@@ -5,7 +5,7 @@
  * Written by Moritz Morgenroth <development@moritzmorgenroth.de>
  */
 
-package com.twigbit.identsdk.model
+package com.twigbit.identsdk.core
 
 
 import android.content.ComponentName
@@ -35,16 +35,28 @@ class IdentificationManager{
         context.unbindService(sdkConnection)
     }
     fun startIdent(tokenURL: String) {
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_RUN_AUTH, Pair(IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
+        send(
+            IdentificationUtil.buildCmdString(
+                IdentificationUtil.CMD_RUN_AUTH, Pair(
+                    IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
     }
     fun setPin(pin: String){
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PIN, Pair(IdentificationUtil.PARAM_VALUE, pin)))
+        send(
+            IdentificationUtil.buildCmdString(
+                IdentificationUtil.CMD_SET_PIN, Pair(
+                    IdentificationUtil.PARAM_VALUE, pin)))
     }
     fun setPuk(puk: String){
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_PUK, Pair(IdentificationUtil.PARAM_VALUE, puk)))
+        send(
+            IdentificationUtil.buildCmdString(
+                IdentificationUtil.CMD_SET_PUK, Pair(
+                    IdentificationUtil.PARAM_VALUE, puk)))
     }
     fun setCan(can: String){
-        send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_SET_CAN, Pair(IdentificationUtil.PARAM_VALUE, can)))
+        send(
+            IdentificationUtil.buildCmdString(
+                IdentificationUtil.CMD_SET_CAN, Pair(
+                    IdentificationUtil.PARAM_VALUE, can)))
     }
     fun acceptAccessRights(){
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_ACCEPT))
@@ -243,7 +255,7 @@ class IdentificationManager{
         }
     }
 
-    internal fun dispatchNfcTag(tag: Tag){
+    fun dispatchNfcTag(tag: Tag){
         try {
             sdk?.updateNfcTag(sdkCallback.mSessionID, tag)
         } catch (e: Exception) {

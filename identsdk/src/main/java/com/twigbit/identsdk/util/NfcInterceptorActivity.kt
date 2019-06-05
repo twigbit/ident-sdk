@@ -22,7 +22,6 @@ Currently Unused
 
 // TODO: Check under which conditions the NFC filter maifest configuration is needed. Maybe unnecessarry in activities filterin for other intents?
 
-
  */
 open class NfcInterceptorActivity : AppCompatActivity() {
     var mDispatcher: ForegroundDispatcher? = null;

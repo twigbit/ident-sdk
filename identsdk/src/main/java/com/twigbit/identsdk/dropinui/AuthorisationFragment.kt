@@ -54,16 +54,16 @@ class AuthorisationFragment : Fragment() {
         Log.d(Tags.TAG_IDENT_DEBUG, "Pin entered $pin");
         when(mode) {
             MODE_CAN -> {
-                activity?.asDropInActivity()?.identificationManager?.setCan(pin)
+                activity?.asIdentificationUI()?.identificationManager?.setCan(pin)
             }
             MODE_PIN -> {
-                activity?.asDropInActivity()?.identificationManager?.setPin(pin)
+                activity?.asIdentificationUI()?.identificationManager?.setPin(pin)
             }
             MODE_PUK -> {
-                activity?.asDropInActivity()?.identificationManager?.setPuk(pin)
+                activity?.asIdentificationUI()?.identificationManager?.setPuk(pin)
             }
         }
-        activity?.asDropInActivity()?.showFragment(activity?.asDropInActivity()?.loaderFragment!!)
+        activity?.asIdentificationUI()?.showLoader()
     }
 
     companion object {
