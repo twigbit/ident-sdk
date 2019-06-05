@@ -255,7 +255,7 @@ class IdentificationManager{
         }
     }
 
-    internal fun dispatchNfcTag(tag: Tag){
+    fun dispatchNfcTag(tag: Tag){
         try {
             sdk?.updateNfcTag(sdkCallback.mSessionID, tag)
         } catch (e: Exception) {

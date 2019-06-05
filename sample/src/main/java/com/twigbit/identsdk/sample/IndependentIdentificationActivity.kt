@@ -1,5 +1,8 @@
 package com.twigbit.identsdk.sample
 
+import android.content.Intent
+import android.nfc.NfcAdapter
+import android.nfc.Tag
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +13,7 @@ import com.twigbit.identsdk.core.Card
 import com.twigbit.identsdk.core.IdentificationFragment
 import com.twigbit.identsdk.core.IdentificationManager
 import com.twigbit.identsdk.dropinui.*
+import com.twigbit.identsdk.util.ForegroundDispatcher
 import com.twigbit.identsdk.util.StringUtil
 import com.twigbit.identsdk.util.Tags
 
@@ -36,6 +40,13 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             return identificationFragment?.identificationManager
         }
 
+    /*
+    To receive and dispatch NFC tags to the SDK, we need to initalize a forground dispatcher and attach it to the lifecycle.
+    Then, we can pass Tag Intents from the `onNewIntent` to the `Identificationmanager`
+     */
+
+    var mDispatcher: ForegroundDispatcher? = null;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +56,34 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
         identificationFragment = IdentificationFragment.newInstance(this)
         identificationFragment!!.identificationManager.addCallback(identificationCallback)
 
+        // Initialize the NFC Tag foreground dispatcher
+        mDispatcher = ForegroundDispatcher(this)
+
         showFragment(introFragment)
     }
+    public override fun onResume() {
+        super.onResume()
+        mDispatcher!!.enable()
+    }
 
-    // Mirrored from drop in ui
+    public override fun onPause() {
+        super.onPause()
+        mDispatcher!!.disable()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        if (tag != null) {
+            identificationManager?.dispatchNfcTag(tag)
+        }
+    }
+
+    /*
+    These are the same fragments used by the drop in UI.
+    For a custom UI implementation, you could implement your own fragments with your own UI components
+     */
+
     val introFragment = IntroFragment()
     val loaderFragment = LoaderFragment()
     val accessRightsFragment = AccessRightsFragment()
