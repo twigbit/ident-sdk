@@ -141,6 +141,7 @@ For concenience, we make it available within the activity with a getter.
 class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
 
     var identificationFragment: IdentificationFragment? = null
+    // convenience getter
     override val identificationManager: IdentificationManager?
         get() {
             return identificationFragment?.identificationManager
@@ -159,7 +160,47 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
 
 ### Dispatching NFC Tags to the manager
 
-In order to read the id cards data from the NFC chip, you need to dispatch.
+In order to read the id cards data from the NFC chip, you need to dispatch NFC tags from your activity to the `IdentificationManager`.
+
+Add this code to your activity to receive and pass the NFC intents: 
+
+```kotlin
+ /*
+    To receive and dispatch NFC tags to the SDK, we need to initalize a forground dispatcher and attach it to the lifecycle.
+    Then, we can pass Tag Intents from the `onNewIntent` to the `Identificationmanager`
+     */
+
+    var mDispatcher: ForegroundDispatcher? = null;
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+       
+        // ... 
+       
+        // Initialize the NFC Tag foreground dispatcher
+        mDispatcher = ForegroundDispatcher(this)
+    }
+    public override fun onResume() {
+        super.onResume()
+        mDispatcher!!.enable()
+    }
+
+    public override fun onPause() {
+        super.onPause()
+        mDispatcher!!.disable()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        // dispatch NFC tag intents to the manager
+        super.onNewIntent(intent)
+        val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        if (tag != null) {
+            identificationManager?.dispatchNfcTag(tag)
+        }
+    }
+```
+
+
 
 To receive the SDK's identification state callbacks in your activity, implement the `IdentificationManager.Callback` interface and extend the `IdentificationActivty` to bind an `IdentificationManager` instance to your activities lifecycle. 
 
@@ -167,32 +208,6 @@ To receive the SDK's identification state callbacks in your activity, implement 
 
  > _**Note:** As the callback method might be called from a different thread, be sure to run all UI operations on your UI thread explicitly._
 
-<!--**Example Activity**
-```kotlin
-class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
-    override fun startIdent() {
-        val tcTokenUrl = AusweisIdentBuilder()
-            .ref()
-            .clientId(Secrets.CLIENT_ID)
-            .redirectUrl(Secrets.CLIENT_REDIRECT_URL)
-            .scope(AusweisIdentScopes.FAMILY_NAMES)
-            .scope(AusweisIdentScopes.GIVEN_NAMES)
-            .scope(AusweisIdentScopes.DATE_OF_BIRTH)
-            .state("123456")
-            .build()
-        if(identificationFragment != null)identificationFragment!!.identificationManager.startIdent(tcTokenUrl);
-    }
-  
-    var identificationFragment: IdentificationFragment? = null
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        ... 
-        
-        identificationFragment = IdentificationFragment.newInstance(this)
-        identificationFragment!!.identificationManager.addCallback(identificationCallback)
-    }
-}
-```-->
 
 ```kotlin
 

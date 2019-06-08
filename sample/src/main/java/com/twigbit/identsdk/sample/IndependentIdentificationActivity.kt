@@ -35,6 +35,7 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
     }
 
     var identificationFragment: IdentificationFragment? = null
+    // convenience getter
     override val identificationManager: IdentificationManager?
         get() {
             return identificationFragment?.identificationManager
