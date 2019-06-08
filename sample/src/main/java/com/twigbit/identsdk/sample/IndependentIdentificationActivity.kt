@@ -28,13 +28,14 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
             .state("123456")
             .build()
-        if(identificationFragment != null)identificationFragment!!.identificationManager.startIdent(tcTokenUrl);
+        identificationFragment?.identificationManager?.startIdent(tcTokenUrl);
     }
     override fun showLoader() {
         showFragment(loaderFragment)
     }
 
     var identificationFragment: IdentificationFragment? = null
+    // convenience getter
     override val identificationManager: IdentificationManager?
         get() {
             return identificationFragment?.identificationManager
