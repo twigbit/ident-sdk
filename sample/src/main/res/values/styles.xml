@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <!--<item name="twigbitIdentTextAppearanceBody">@style/textAppearanceAwesome</item>-->
+    </style>
+    <style name="TextAppearanceOverline" parent="">
+        <item name="android:textSize">30sp</item>
+    </style>
+    <style name="textAppearanceAwesome" parent="TextAppearance.MaterialComponents.Headline1">
+
     </style>
     <style name="TwigbitTheme" parent="AppTheme">
     </style>
