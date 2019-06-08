@@ -33,13 +33,13 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [ausweisident] Configuration helper
 * [core] Refactor state into callbacks.
 * [core] Persistant abstractions for the command and message system
+* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
 * [dropin] Dropin UI basic implementation
 
 
 ### Backlog 
 * [dropin] Dropin styling & certificate view
 * [core] Explicitly handle result URL. 
-* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
 * [core] Test simplified configuration procedure.
 * [ausweisident] Server implementation guide.
 * [ausweisident] Provide Util for evaluating the result URL.
