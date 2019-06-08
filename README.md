@@ -18,9 +18,9 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 
 # Roadmap 
 
-##This project is actively under development. 
+## This project is actively under development.
 
-For informations, contact [ident@twigbit.com](mailto:ident@twigbit.com) .
+For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 | Status    | Version          |
 | --------- | ---------------- |
@@ -124,15 +124,42 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 
 ## Implement your own UI 
 
-### COMING SOON
+To implement your own identificication UI, you can use a custom activity and react to the IdentificationManagers callbacks.
 
-First, add the drop in ui as a dependency to your projects `build.gradle` file. 
+First, you need to add the ident-sdk as a dependency to your projects `build.gradle`
 
 ```gradle
 dependencies {
   implementation 'com.twigbit.identsdk:ident-sdk:0.1.1'
 }
 ```
+
+Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
+For concenience, we make it available within the activity with a getter.
+
+```kotlin
+class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+
+    var identificationFragment: IdentificationFragment? = null
+    override val identificationManager: IdentificationManager?
+        get() {
+            return identificationFragment?.identificationManager
+        }
+   
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // ... 
+       
+        identificationFragment = IdentificationFragment.newInstance(this)
+        identificationFragment!!.identificationManager.addCallback(identificationCallback)
+        
+    }
+}
+```
+
+
+### Dispatching NFC Tags to the manager
+
+In order to read the id cards data from the NFC chip, you need to dispatch.
 
 To receive the SDK's identification state callbacks in your activity, implement the `IdentificationManager.Callback` interface and extend the `IdentificationActivty` to bind an `IdentificationManager` instance to your activities lifecycle. 
 
@@ -142,28 +169,32 @@ To receive the SDK's identification state callbacks in your activity, implement 
 
 <!--**Example Activity**
 ```kotlin
-class ExampleActivity: AppCompatActivity() {
-
-    lateinit val mIdent: Ident
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mIdent = Ident.newInstance(this, ...)
+class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+    override fun startIdent() {
+        val tcTokenUrl = AusweisIdentBuilder()
+            .ref()
+            .clientId(Secrets.CLIENT_ID)
+            .redirectUrl(Secrets.CLIENT_REDIRECT_URL)
+            .scope(AusweisIdentScopes.FAMILY_NAMES)
+            .scope(AusweisIdentScopes.GIVEN_NAMES)
+            .scope(AusweisIdentScopes.DATE_OF_BIRTH)
+            .state("123456")
+            .build()
+        if(identificationFragment != null)identificationFragment!!.identificationManager.startIdent(tcTokenUrl);
     }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        val tag = intent!!.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
-        if (tag != null) {
-            mIdent.dispatchNfcTag(tag)
-        }
+  
+    var identificationFragment: IdentificationFragment? = null
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ... 
+        
+        identificationFragment = IdentificationFragment.newInstance(this)
+        identificationFragment!!.identificationManager.addCallback(identificationCallback)
     }
 }
 ```-->
 
 ```kotlin
-
 
 class MainActivity : IdentificationActivity() {
 
