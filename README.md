@@ -201,79 +201,76 @@ Add this code to your activity to receive and pass the NFC intents:
 ```
 
 
+### Implementing the callback
 
-To receive the SDK's identification state callbacks in your activity, implement the `IdentificationManager.Callback` interface and extend the `IdentificationActivty` to bind an `IdentificationManager` instance to your activities lifecycle. 
-
- In your activities `onCreate` method, add the callback to the manager and start the identifcation process. 
-
- > _**Note:** As the callback method might be called from a different thread, be sure to run all UI operations on your UI thread explicitly._
-
+Finally, implement the `IdentificationManager.Callback` to listen and react to identification events.  
 
 ```kotlin
 
-class MainActivity : IdentificationActivity() {
-
-   val identificationCallback = object: IdentificationManager.Callback{
+val identificationCallback = object: IdentificationManager.Callback{
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
+            TODO("not implemented") 
         }
 
-        override fun onRequestAccessRights(accessRights: ArrayList<String>) {
+        override fun onRequestAccessRights(accessRights: List<String>) {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
-            // TODO continue with runIdent()
+            TODO("not implemented") 
         }
 
-        override fun onCardRecognized(card: IdentificationCard) {
+        override fun onCardRecognized(card: Card?) {
             // A card was attached to the NFC reader
-            // TODO @dev implement card model from JSON message params.
+            TODO("not implemented") 
         }
 
         override fun onRequestPin() {
             // The id cards PIN was requested. Display a PIN dialog to the user.
             // To continue the identification process, call identificationManager.setPin(pin: String)
+            TODO("not implemented") 
         }
 
         override fun onRequestPuk() {
-            // The id cards PUK was requested. Display a PUK dialog to the user.
+            // The id cards PUK was requested. Display a PUK diaphlog to the user.
             // To continue the identification process, call identificationManager.setPuk(puk: String)
+            TODO("not implemented") 
         }
 
         override fun onRequestCan() {
             // The id cards CAN was requested. Display a CAN dialog to the user.
             // To continue the identification process, call identificationManager.setCan(can: String)
+            TODO("not implemented") 
         }
 
-        override fun onError(error: IdentificationError) {
+        override fun onError(error: String) {
             // An error occured. Display an error/issue dialog to the user.
+            TODO("not implemented") 
         }
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        identificationManager.addCallback(identificationCallback)
-    }
-}
 ```
 
 To start the identification process call the `identificationManagers.startIdent` method with your `tcTokenUrl`. 
 
 
 ```kotlin
-identificationManager.startIdent(tcTokenUrl)
+val tcTokenUrl = AusweisIdentBuilder()
+            .ref()
+            .clientId("your-client-id")
+            .redirectUrl("your-redirect-url")
+            .state("your-persistant-id")
+            .scope(AusweisIdentScopes.FAMILY_NAMES)
+            .scope(AusweisIdentScopes.GIVEN_NAMES)
+            .scope(AusweisIdentScopes.DATE_OF_BIRTH)
+            .build()
+identificationFragment?.identificationManager?.startIdent(tcTokenUrl);
 ```
 
+For a fully working example, see [IndependentIdentificationActivity](sample/src/main/java/com/twigbit/identsdk/sample/IndependentIdentificationActivity.kt).
 
 
-> _**Note:** We are working on a lifecycle aware alternative to the IdentificationActivity to give you the flexibility to inherit from your own base activity. This requires you to to override the `onNewIntent` method of the activity and pass down intents to the identificationManager:_
-> ```kotlin
-> override fun onNewIntent(intent: Intent?) {
->     super.onNewIntent(intent)
->     val tag = intent!!.getParcelableExtra<Tag>fdapter.EXTRA_TAG)
->     if (tag != null) {
->         identificationManager.dispatchTag(tag)
->     }
-> }
-> ```
+### Handling the result URL 
+
+COMING SOON
+
 
 #### Server side implementation
 
