@@ -3,23 +3,25 @@
     <!-- Base application theme. -->
     <style name="TwigbitTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="twigbitIdentTextAppearanceHeadline">@style/textAppearanceBody</item>
+        <item name="twigbitIdentTextAppearanceOverline">@style/textAppearanceBody</item>
         <item name="twigbitIdentTextAppearanceBody">@style/textAppearanceBody</item>
+        <item name="twigbitIdentTextAppearanceButton">@style/textAppearanceBody</item>
+        <!--<item name="textAppearanceButton">?attr/twigbitIdentTextAppearanceButton</item>-->
     </style>
     <style name="TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <item name="android:textSize">30sp</item>
     </style>
     <style name="textAppearanceBody" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="android:textSize">12sp</item>
     </style>
-    <declare-styleable name="IdentificationTheme">
-        <attr name="textAppearanceAwesome" format="reference"/>
-
-    </declare-styleable>
-
-
+    <style name="textAppearanceHealine" parent="TextAppearance.MaterialComponents.Caption">
+    </style>
+    <style name="textAppearanceButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
