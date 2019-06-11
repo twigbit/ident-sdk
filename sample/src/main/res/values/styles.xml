@@ -8,9 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="twigbitIdentTextAppearanceBody">@style/textAppearanceBody</item>
+        <item name="twigbitIdentTextAppearanceButton">@style/textAppearanceButton</item>
     </style>
-    <style name="textAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="textAppearanceButtom" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">20sp</item>
     </style>
 
 

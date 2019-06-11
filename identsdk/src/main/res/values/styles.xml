@@ -6,26 +6,24 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="twigbitIdentTextAppearanceHeadline">@style/textAppearanceBody</item>
-        <item name="twigbitIdentTextAppearanceOverline">@style/textAppearanceBody</item>
+        <item name="twigbitIdentTextAppearanceHeadline">@style/textAppearanceHeadline</item>
+        <item name="twigbitIdentTextAppearanceOverline">@style/TextAppearanceOverline</item>
         <item name="twigbitIdentTextAppearanceBody">@style/textAppearanceBody</item>
-        <item name="twigbitIdentTextAppearanceButton">@style/textAppearanceBody</item>
-        <item name="textAppearanceButton">?attr/twigbitIdentTextAppearanceButton</item>
-        <!--<item name="buttonStyle">@style/IdentTheme.ButtonStyle</item>-->
     </style>
+
     <style name="TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <!--<item name="android:textSize">30sp</item>-->
     </style>
-    <style name="textAppearanceBody" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="textAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">16sp</item>
     </style>
-    <style name="textAppearanceHealine" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="textAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">22sp</item>
     </style>
     <style name="textAppearanceButton" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textAllCaps">true</item>
     </style>
-    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:textAppearance">?attr/twigbitIdentTextAppearanceOverline</item>
+    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAppearance">?attr/twigbitIdentTextAppearanceButton</item>
     </style>
 </resources>
