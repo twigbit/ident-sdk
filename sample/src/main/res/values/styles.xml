@@ -5,15 +5,17 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="twigbitIdentPrimaryButtonStyle">@style/twigbitIdentPrimaryButtonStyle</item>
     </style>
     <style name="textAppearanceButtom" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="twigbitIdentPrimaryButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="IdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">30sp</item>
     </style>
 

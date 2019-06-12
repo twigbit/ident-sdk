@@ -6,19 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="twigbitIdentTextAppearanceHeadline">@style/textAppearanceHeadline</item>
-        <item name="twigbitIdentTextAppearanceOverline">@style/TextAppearanceOverline</item>
-        <item name="twigbitIdentTextAppearanceBody">@style/textAppearanceBody</item>
-        <!--<item name="twigbitIdentPrimaryButtonStyle">@style/IdentTheme.ButtonStyle</item>-->
+        <item name="buttonStyle">@style/IdentTheme.ButtonStyle</item>
     </style>
 
-    <style name="TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
+    <style name="IdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <!--<item name="android:textSize">30sp</item>-->
     </style>
-    <style name="textAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="IdentTheme.TextAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="textAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="IdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">22sp</item>
     </style>
     <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
