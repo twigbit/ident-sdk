@@ -9,14 +9,10 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
-    <style name="textAppearanceButtom" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="TwigbitIdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="IdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textSize">30sp</item>
+    <style name="TwigbitIdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
     </style>
 
 

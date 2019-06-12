@@ -11,7 +11,7 @@ import com.google.gson.Gson
 import java.net.URLEncoder
 
 object IdentificationUtil {
-    const val MSG_ACCESS_RIGHTS = "ACCESS_RIGHTS"
+    const val MSG_twigbit_ident_access_rightS = "twigbit_ident_access_rightS"
     const val MSG_ENTER_PIN = "ENTER_PIN"
     const val MSG_ENTER_PUK = "ENTER_PUK"
     const val MSG_ENTER_CAN = "ENTER_CAN"

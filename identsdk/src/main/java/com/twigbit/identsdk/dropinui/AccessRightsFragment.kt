@@ -10,8 +10,8 @@ import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
 import com.twigbit.identsdk.util.Tags
-import kotlinx.android.synthetic.main.fragment_access_rights.view.*
-import kotlinx.android.synthetic.main.holder_access_right.view.*
+import kotlinx.android.synthetic.main.fragment_twigbit_ident_access_rights.view.*
+import kotlinx.android.synthetic.main.holder_twigbit_ident_access_right.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -33,7 +33,7 @@ class AccessRightsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
+        val v = inflater.inflate(R.layout.fragment_twigbit_ident_access_rights, container, false)
         v.buttonAccept.setOnClickListener {
             activity?.asIdentificationUI()?.identificationManager?.acceptAccessRights()
             activity?.asIdentificationUI()?.showLoader()
@@ -58,7 +58,7 @@ class MyAdapter(var data: ArrayList<String>) :
         viewType: Int
     ): MyAdapter.MyViewHolder {
         val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.holder_access_right, parent, false)
+            .inflate(R.layout.holder_twigbit_ident_access_right, parent, false)
         return MyViewHolder(v)
     }
 

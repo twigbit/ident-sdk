@@ -18,7 +18,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"
-            android:text="@string/drop_in_enter_pin" app:layout_constraintBottom_toTopOf="@+id/editPin"
+            android:text="@string/twigbit_ident_drop_in_enter_pin" app:layout_constraintBottom_toTopOf="@+id/editPin"
             tools:layout_editor_absoluteX="44dp"/>
     <EditText
             android:id="@+id/editPin"
@@ -41,6 +41,6 @@
                                                   android:id="@+id/buttonContinue"
                                                   android:padding="8dp"
                                                   android:foregroundTint="@color/colorPrimaryDark"
-                                                  android:text="@string/drop_in_continue"
+                                                  android:text="@string/twigbit_ident_drop_in_continue"
                                                   app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

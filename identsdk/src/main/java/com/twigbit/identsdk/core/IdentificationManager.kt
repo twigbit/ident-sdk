@@ -122,7 +122,7 @@ class IdentificationManager{
                     authInProgress = true
                 }
             };
-            IdentificationUtil.MSG_ACCESS_RIGHTS -> {
+            IdentificationUtil.MSG_twigbit_ident_access_rightS -> {
                 callback?.onRequestAccessRights(message.chat!!.effective!!)
 
                 // TODO dont automatically accept the access rights. This should be based on user interaction.

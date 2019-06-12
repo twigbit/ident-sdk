@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
-    <style name="IdentTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="TwigbitIdentTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="buttonStyle">@style/IdentTheme.ButtonStyle</item>
+        <item name="buttonStyle">@style/TwigbitIdentTheme.ButtonStyle</item>
     </style>
 
-    <style name="IdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
+    <style name="TwigbitIdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <!--<item name="android:textSize">30sp</item>-->
     </style>
-    <style name="IdentTheme.TextAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TwigbitIdentTheme.TextAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="IdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TwigbitIdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">22sp</item>
     </style>
-    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="TwigbitIdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textSize">30sp</item>
     </style>
 </resources>
