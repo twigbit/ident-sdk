@@ -19,10 +19,11 @@ COMING SOON
 
 ## Customizing the text content
 
-TODO tut add translations 
+If you want to customize the texts displayed or add translations to the Drop-In UI, you can override the string resource values.
+The values are all prefixed with `twigbit_ident_`. 
+For a full list of identification related string resources, that can be overridden, please look at the libraries [strings.xml](../identsdk/src/main/res/values/strings.xml)
 
-COMING SOON
-
+If you should add translations for different common languages, feel free to open a [pull request](https://github.com/twigbit/ident-sdk/pulls) to merge your translations to the library generally. Currently, the library only supports german.
 ## Styling the buttons 
 
 TODO mention material theming.
