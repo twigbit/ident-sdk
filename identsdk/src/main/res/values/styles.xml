@@ -9,6 +9,7 @@
         <item name="twigbitIdentTextAppearanceHeadline">@style/textAppearanceHeadline</item>
         <item name="twigbitIdentTextAppearanceOverline">@style/TextAppearanceOverline</item>
         <item name="twigbitIdentTextAppearanceBody">@style/textAppearanceBody</item>
+        <!--<item name="twigbitIdentPrimaryButtonStyle">@style/IdentTheme.ButtonStyle</item>-->
     </style>
 
     <style name="TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
@@ -20,10 +21,7 @@
     <style name="textAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">22sp</item>
     </style>
-    <style name="textAppearanceButton" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textAppearance">?attr/twigbitIdentTextAppearanceButton</item>
+    <style name="IdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">30sp</item>
     </style>
 </resources>
