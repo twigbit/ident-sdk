@@ -18,7 +18,9 @@
     <style name="TwigbitIdentTheme.TextAppearanceHeadline" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">22sp</item>
     </style>
-    <style name="TwigbitIdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textSize">30sp</item>
+    <style name="TwigbitIdentTheme.ButtonStyle" parent="Widget.MaterialComponents.Button">
     </style>
+    <style name="TwigbitIdentTheme.ButtonStyle.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+    </style>
+
 </resources>

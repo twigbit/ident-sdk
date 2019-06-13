@@ -90,7 +90,7 @@
                                                       android:layout_weight="1"
                                                       android:padding="8dp"
                                                       android:foregroundTint="@color/colorAccent"
-                                                      style="@style/Widget.MaterialComponents.Button.TextButton"
+                                                      style="@style/TwigbitIdentTheme.ButtonStyle.TextButton"
                                                       android:text="@string/twigbit_ident_drop_in_deny"/>
         <android.support.design.button.MaterialButton android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
@@ -99,6 +99,7 @@
                                                       android:layout_margin="8dp"
                                                       android:layout_weight="1"
                                                       android:foregroundTint="@color/colorPrimaryDark"
+                                                      style="@style/TwigbitIdentTheme.ButtonStyle"
                                                       android:text="@string/twigbit_ident_drop_in_accept"/>
     </LinearLayout>
 </LinearLayout>

@@ -26,8 +26,9 @@ For a full list of identification related string resources, that can be overridd
 If you should add translations for different common languages, feel free to open a [pull request](https://github.com/twigbit/ident-sdk/pulls) to merge your translations to the library generally. Currently, the library only supports german.
 ## Styling the buttons 
 
-TODO mention material theming.
+To customize the button appearance the app, you need to override `TwigbitIdentTheme.ButtonStyle` for the default raised buttons and `TwigbitIdentTheme.ButtonStyle` for the text button with you own custom button style implementation. 
+It is recommended that you extend a `MaterialComponent` as a base style, such as `Widget.MaterialComponents.Button`. 
 
-## Displaying a custom logo 
+##  Displaying custom icons
 
 COMING SOON
