@@ -122,27 +122,20 @@ class IdentificationManager{
                     authInProgress = true
                 }
             };
-            IdentificationUtil.MSG_twigbit_ident_access_rightS -> {
+            IdentificationUtil.MSG_ACCESS_RIGHTS -> {
                 callback?.onRequestAccessRights(message.chat!!.effective!!)
-
-                // TODO dont automatically accept the access rights. This should be based on user interaction.
-                //sendCommand(IdentificationUtil.CMD_ACCEPT)
             }
 
-            // TODO remove state and mode, mostly deprecated in favor of callback
             IdentificationUtil.MSG_INSERT_CARD -> {
                 callback?.onCardRecognized(message.card)
             }
             IdentificationUtil.MSG_ENTER_PIN -> {
-                this.mode = IdentMode.PIN
                 callback?.onRequestPin()
             }
             IdentificationUtil.MSG_ENTER_PUK -> {
-                this.mode = IdentMode.PUK
                 callback?.onRequestPuk()
             }
             IdentificationUtil.MSG_ENTER_CAN -> {
-                this.mode = IdentMode.CAN
                 callback?.onRequestCan()
             }
 //            IdentificationUtil.MSG_READER -> {
@@ -164,21 +157,6 @@ class IdentificationManager{
     }
 
     private var authInProgress: Boolean = false
-    private var mode: IdentMode = IdentMode.PIN
-
-    companion object {
-        const val STATE_DEFAULT = "Default"
-        const val STATE_CONNECTED = "Connected"
-        const val STATE_DISCONNECTED = "Disconnected"
-        const val STATE_INSERT = "Insert"
-        const val STATE_ACCESSRIGHTS = "AccessRights"
-        const val STATE_ENTER_PIN = "Pin"
-        const val STATE_ENTER_CAN = "Can"
-        const val STATE_ENTER_PUK = "Puk"
-        const val STATE_COMPLETE = "Completed"
-        const val STATE_BAD = "Bad"
-        const val STATE_CARD_INSERTED = "Inserted"
-    }
 
     /*
     AUSWEISAPP2 SDK Communication
