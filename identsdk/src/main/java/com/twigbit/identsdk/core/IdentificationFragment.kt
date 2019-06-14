@@ -9,14 +9,24 @@ import java.lang.Exception
 class IdentificationFragment : Fragment() {
     var identificationManager = IdentificationManager()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context?.let { identificationManager.bind(it) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        context?.let { identificationManager.unBind(it) }
+    }
+
     override fun onStart() {
         super.onStart()
-        context?.let { identificationManager.bind(it) }
+//        context?.let { identificationManager.bind(it) }
     }
 
     override fun onStop() {
         super.onStop()
-        context?.let { identificationManager.unBind(it) }
+//        context?.let { identificationManager.unBind(it) }
     }
 
     companion object {
