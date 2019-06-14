@@ -138,6 +138,10 @@ class IdentificationManager{
             IdentificationUtil.MSG_ENTER_CAN -> {
                 callback?.onRequestCan()
             }
+            IdentificationUtil.MSG_BAD_STATE -> {
+                callback?.onError(messageJson
+                )
+            }
 //            IdentificationUtil.MSG_READER -> {
 //                callback?.onCardRecognized(message.card)
 //            }
