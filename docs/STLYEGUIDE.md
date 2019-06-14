@@ -24,11 +24,14 @@ The values are all prefixed with `twigbit_ident_`.
 For a full list of identification related string resources, that can be overridden, please look at the libraries [strings.xml](../identsdk/src/main/res/values/strings.xml)
 
 If you should add translations for different common languages, feel free to open a [pull request](https://github.com/twigbit/ident-sdk/pulls) to merge your translations to the library generally. Currently, the library only supports german.
+
 ## Styling the buttons 
 
-To customize the button appearance the app, you need to override `TwigbitIdentTheme.ButtonStyle` for the default raised buttons and `TwigbitIdentTheme.ButtonStyle` for the text button with you own custom button style implementation. 
+To customize the button appearance of the UI, you need to override `TwigbitIdentTheme.ButtonStyle` for the default raised buttons and `TwigbitIdentTheme.ButtonStyle` for the text button with you own custom button style implementation. 
 It is recommended that you extend a `MaterialComponent` as a base style, such as `Widget.MaterialComponents.Button`. 
 
 ##  Displaying custom icons
 
-COMING SOON
+To customize the icons displayed in the UI, you can override the drawable files related to the SDK. 
+Aagain, all files are prefixed with `twigbit_ident_`. 
+For a full list of drawables that can be overridden, please look at the libraries [drawable folder](../identsdk/src/main/res/drawable/)
