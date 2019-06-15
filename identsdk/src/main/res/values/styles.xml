@@ -9,7 +9,7 @@
         <item name="buttonStyle">@style/TwigbitIdentTheme.ButtonStyle</item>
     </style>
 
-    <style name="TwigbitIdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
+   <style name="TwigbitIdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <!--<item name="android:textSize">30sp</item>-->
     </style>
     <style name="TwigbitIdentTheme.TextAppearanceBody" parent="TextAppearance.MaterialComponents.Body1">

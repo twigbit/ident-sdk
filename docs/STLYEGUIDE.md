@@ -15,7 +15,10 @@ To adjust the colors of specific UI components such as texts of buttons, overrid
 
 ## Styling text appearances
 
-COMING SOON
+If you want to customize the text appearances to use a custom font or custom styling, you can restyle the text appearance of the Drop-In UI. 
+There are three common text appearances that you can override in your `styles.xml` `TwigbitIdentTheme.TextAppearanceOverline`, `TwigbitIdentTheme.TextAppearanceBody`, `TwigbitIdentTheme.TextAppearanceHeadline` are used to style the respective text instances. 
+
+We recomment that you extend one of the `TextAppearance.MaterialComponents.` text appearances for overall integrity. 
 
 ## Customizing the text content
 
