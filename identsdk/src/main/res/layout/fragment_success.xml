@@ -13,8 +13,8 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@string/drop_in_success" app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceHeadline"
+            android:text="@string/twigbit_ident_drop_in_success" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/textView"/>
@@ -24,7 +24,7 @@
                                                   android:id="@+id/buttonFinish"
                                                   android:padding="8dp"
                                                   android:foregroundTint="@color/colorPrimaryDark"
-                                                  android:text="@string/drop_in_finish"
+                                                  android:text="@string/twigbit_ident_drop_in_finish"
                                                   app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

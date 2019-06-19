@@ -24,14 +24,23 @@ abstract class IdentificationActivity : NfcInterceptorActivity() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        identificationManager.bind(applicationContext)
+
+    }
     override fun onStart() {
         super.onStart()
-        identificationManager.bind(applicationContext)
+//        identificationManager.bind(applicationContext)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        identificationManager.unBind(applicationContext)
+    }
     override fun onStop() {
         super.onStop()
-        identificationManager.unBind(applicationContext)
+//        identificationManager.unBind(applicationContext)
     }
 
 }

@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:orientation="vertical" android:paddingTop="24dp"
+              android:layout_height="match_parent" android:orientation="vertical"
 >
 
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:clipToPadding="false" android:clipChildren="false"
-                      android:padding="24dp">
+                      android:padding="12dp">
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="Der Folgende Dienstanbierter möchte Ihre Identität überprüfen:"
-                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceBody"
                       android:layout_marginBottom="16dp"/>
             <android.support.v7.widget.CardView android:layout_width="match_parent"
                                                 android:layout_marginBottom="16dp"
@@ -24,17 +24,17 @@
                         <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                    android:layout_gravity="center"
                                    android:layout_marginRight="16dp"
-                                   android:src="@drawable/ic_service_provider"/>
+                                   android:src="@drawable/twigbit_ident_icon_service_provider"/>
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                       android:orientation="vertical"
                                       android:layout_weight="1">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                                       android:text="Dienstanbieter"
                                       android:textColor="@color/colorAccent"
-                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceOverline"/>
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                                       android:text="Twigbit Technologies GmbH"
-                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceBody"
                                       android:layout_marginBottom="8dp"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -44,16 +44,16 @@
                         <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
                                    android:layout_marginRight="16dp"
                                    android:layout_gravity="center"
-                                   android:src="@drawable/ic_person"/>
+                                   android:src="@drawable/twigbit_ident_icon_purpose"/>
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                       android:orientation="vertical"
                                       android:layout_weight="1">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                                       android:text="Zweck der Auskunft"
                                       android:textColor="@color/colorAccent"
-                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceOverline"/>
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceBody"
                                       android:text="Selbstauskunft"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -61,7 +61,7 @@
             </android.support.v7.widget.CardView>
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="Folgende Attribute werden ausgelesen" android:layout_marginBottom="16dp"
-                      android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"/>
+                      android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceBody"/>
             <android.support.v7.widget.CardView android:layout_width="match_parent"
                                                 android:layout_height="wrap_content">
                 <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
@@ -71,7 +71,7 @@
                               android:layout_marginLeft="12dp"
                               android:layout_marginTop="16dp"
                               android:textColor="@color/colorAccent"
-                              android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"/>
+                              android:textAppearance="@style/TwigbitIdentTheme.TextAppearanceOverline"/>
                     <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
                                                             android:id="@+id/recyclerView"
@@ -82,7 +82,7 @@
         </LinearLayout>
     </ScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:padding="16dp">
+                  android:orientation="horizontal">
         <android.support.design.button.MaterialButton android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonDeny"
@@ -90,8 +90,8 @@
                                                       android:layout_weight="1"
                                                       android:padding="8dp"
                                                       android:foregroundTint="@color/colorAccent"
-                                                      style="@style/Widget.MaterialComponents.Button.TextButton"
-                                                      android:text="@string/drop_in_deny"/>
+                                                      style="@style/TwigbitIdentTheme.ButtonStyle.TextButton"
+                                                      android:text="@string/twigbit_ident_drop_in_deny"/>
         <android.support.design.button.MaterialButton android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonAccept"
@@ -99,6 +99,7 @@
                                                       android:layout_margin="8dp"
                                                       android:layout_weight="1"
                                                       android:foregroundTint="@color/colorPrimaryDark"
-                                                      android:text="@string/drop_in_accept"/>
+                                                      style="@style/TwigbitIdentTheme.ButtonStyle"
+                                                      android:text="@string/twigbit_ident_drop_in_accept"/>
     </LinearLayout>
 </LinearLayout>

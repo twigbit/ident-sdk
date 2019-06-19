@@ -4,9 +4,9 @@ The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisA
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating AusweisIdent functionality in their apps. 
 Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
 
-[![twigbit technologies GmbH](docs/images/logo-twigbit.png)](https://www.twigbit.com)
-[![Governikus GmbH & Co. KG](docs/images/logo-governikus.png)](https://www.governikus.de/)
-[![AusweisIDent](docs/images/logo-ausweisident.png)](https://www.ausweisident.de/)
+[![twigbit technologies GmbH](images/logo-twigbit.png)](https://www.twigbit.com)
+[![Governikus GmbH & Co. KG](images/logo-governikus.png)](https://www.governikus.de/)
+[![AusweisIDent](images/logo-ausweisident.png)](https://www.ausweisident.de/)
 
 
 ## Features
@@ -264,7 +264,7 @@ val tcTokenUrl = AusweisIdentBuilder()
 identificationFragment?.identificationManager?.startIdent(tcTokenUrl);
 ```
 
-For a fully working example, see [IndependentIdentificationActivity](sample/src/main/java/com/twigbit/identsdk/sample/IndependentIdentificationActivity.kt).
+For a fully working example, see [IndependentIdentificationActivity](../sample/src/main/java/com/twigbit/identsdk/sample/IndependentIdentificationActivity.kt).
 
 
 ### Handling the result URL 

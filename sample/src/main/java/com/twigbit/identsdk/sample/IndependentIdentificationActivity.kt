@@ -40,7 +40,6 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
         get() {
             return identificationFragment?.identificationManager
         }
-
     /*
     To receive and dispatch NFC tags to the SDK, we need to initalize a forground dispatcher and attach it to the lifecycle.
     Then, we can pass Tag Intents from the `onNewIntent` to the `Identificationmanager`

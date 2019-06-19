@@ -32,13 +32,13 @@ class AuthorisationFragment : Fragment() {
 
         when(mode) {
             MODE_CAN -> {
-                v.text?.text = getText(R.string.drop_in_enter_can)
+                v.text?.text = getText(R.string.twigbit_ident_drop_in_enter_can)
             }
             MODE_PIN -> {
-                v.text?.text = getText(R.string.drop_in_enter_pin)
+                v.text?.text = getText(R.string.twigbit_ident_drop_in_enter_pin)
             }
             MODE_PUK -> {
-                v.text?.text = getText(R.string.drop_in_enter_puk)
+                v.text?.text = getText(R.string.twigbit_ident_drop_in_enter_puk)
             }
         }
         return v
@@ -82,13 +82,13 @@ class AuthorisationFragment : Fragment() {
         set(value) {
             when(value){
                 MODE_CAN -> {
-                    view?.text?.text = getText(R.string.drop_in_enter_can)
+                    view?.text?.text = getText(R.string.twigbit_ident_drop_in_enter_can)
                 }
                 MODE_PIN -> {
-                    view?.text?.text = getText(R.string.drop_in_enter_pin)
+                    view?.text?.text = getText(R.string.twigbit_ident_drop_in_enter_pin)
                 }
                 MODE_PUK -> {
-                    view?.text?.text = getText(R.string.drop_in_enter_puk)
+                    view?.text?.text = getText(R.string.twigbit_ident_drop_in_enter_puk)
                 }
             }
             field = value
