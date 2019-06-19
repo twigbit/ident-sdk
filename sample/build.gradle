@@ -5,6 +5,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        alpha {
+            storeFile file('/Users/moritzmorgenroth/Documents/alpha.jks')
+            storePassword 'bm6NJLHnFBcse5Yn9k'
+            keyPassword 'bm6NJLHnFBcse5Yn9k'
+            keyAlias = 'key0'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.twigbit.identsdk.sample"
@@ -17,6 +25,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.alpha
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
