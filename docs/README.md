@@ -16,45 +16,6 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 - Lightweight — besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
 - Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes
 
-# Roadmap 
-
-## This project is actively under development.
-
-For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
-
-| Status    | Version          |
-| --------- | ---------------- |
-| **WIP** | 0.1.1 unreleased |
-
-## Changelog/Milestones
-
-### 0.1.1
-* [ausweisident] Return Result URL directly, refactor call redirects into optional method in AusweisIdent helper.
-* [ausweisident] Configuration helper
-* [core] Refactor state into callbacks.
-* [core] Persistant abstractions for the command and message system
-* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
-* [core] Explicitly handle result URL. 
-* [dropin] Dropin UI basic implementation
-* [dropin] Dropin styling
-
-
-### Backlog 
-* [dropin] Certificate view
-* [core] Test simplified configuration procedure.
-* [ausweisident] Server implementation guide.
-* [ausweisident] Provide Util for evaluating the result URL.
-
-
-### Nice to have 
-
-* Vibrate on NFC message.
-* Capability check- check whether the users device has the required architecture and NFC capabilities
-* A custom identification app as a zero-dependency option for the integration
-* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
-
----
-
 # Documentation 
 
 All code is provided in Kotlin. The integration works in Java analogously, all samples are interchangable. 
@@ -292,6 +253,44 @@ A working implementation can be found in the `/samples` directory. Please note t
 
 - The [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/) only supports arm64-v8a architecures since version 15.03. Unfortunalety, we are bound to that limitation. 
 
+# Roadmap 
+
+## This project is actively under development.
+
+For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
+
+| Status    | Version          |
+| --------- | ---------------- |
+| **WIP** | 0.1.1 unreleased |
+
+## Changelog/Milestones
+
+### 0.1.1
+* [ausweisident] Return Result URL directly, refactor call redirects into optional method in AusweisIdent helper.
+* [ausweisident] Configuration helper
+* [core] Refactor state into callbacks.
+* [core] Persistant abstractions for the command and message system
+* [core] Review inheritance model and draft alternative livecycle-aware architecture that offers more flexibility.
+* [core] Explicitly handle result URL. 
+* [dropin] Dropin UI basic implementation
+* [dropin] Dropin styling
+
+
+### Backlog 
+* [dropin] Certificate view
+* [core] Test simplified configuration procedure.
+* [ausweisident] Server implementation guide.
+* [ausweisident] Provide Util for evaluating the result URL.
+
+
+### Nice to have 
+
+* Vibrate on NFC message.
+* Capability check- check whether the users device has the required architecture and NFC capabilities
+* A custom identification app as a zero-dependency option for the integration
+* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
+
+---
 
 ```
 (c) Copyright 2018 twigbit technologies GmbH. All rights reserved.
