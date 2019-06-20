@@ -20,16 +20,29 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 
 All code is provided in Kotlin. The integration works in Java analogously, all samples are interchangable. 
 
-## Quick start 
-Using the drop in UI, you can implement a fully functional AusweisIDent identification cycle within minutes. 
+## Adding the dependency
 
-First, add the drop in ui as a dependency to your projects `build.gradle` file. 
+First, add the jitpack maven repository to the **root** `build.gradle` file.
+
+```gradle 
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Then, add the drop in ui as a dependency to your **projects** `build.gradle` file. 
 
 ```gradle
 dependencies {
-  implementation 'com.twigbit.identsdk:drop-in:0.1.1'
+  implementation 'com.github.twigbit:ident-sdk:0.1.1'
 }
 ```
+
+## Quick start 
+Using the drop in UI, you can implement a fully functional AusweisIDent identification cycle within minutes. 
 
 To start the identification process, use the `AusweisIdentBuilder` to create the TCTokenURL with your credentials and the permitted/required scopes and pass it to the `DropInRequest`. 
 Optionally, you can give the process an identifier to match the result using the `.state(...)` argument.
@@ -87,14 +100,6 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 ## Implement your own UI 
 
 To implement your own identificication UI, you can use a custom activity and react to the IdentificationManagers callbacks.
-
-First, you need to add the ident-sdk as a dependency to your projects `build.gradle`
-
-```gradle
-dependencies {
-  implementation 'com.twigbit.identsdk:ident-sdk:0.1.1'
-}
-```
 
 Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
 For concenience, we make it available within the activity with a getter.
