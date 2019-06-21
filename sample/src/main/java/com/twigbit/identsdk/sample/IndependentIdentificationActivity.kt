@@ -18,6 +18,7 @@ import com.twigbit.identsdk.util.StringUtil
 import com.twigbit.identsdk.util.Tags
 
 class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+
     override fun startIdent() {
         val tcTokenUrl = AusweisIdentBuilder()
             .ref()
@@ -146,7 +147,12 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onError Callback")
             showFragment(errorFragment)
         }
+
     }
+    override fun showCertificate() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     fun showFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(com.twigbit.identsdk.R.id.container, fragment).commit()
     }
