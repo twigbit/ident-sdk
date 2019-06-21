@@ -24,6 +24,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     val insertCardFragment = InsertCardFragment()
     val successFragment = SuccessFragment()
     val errorFragment = ErrorFragment()
+    val certificateFragment = CertificateFragment()
 
     val identificationCallback = object: IdentificationManager.Callback{
         override fun onCompleted(resultUrl: String) {
@@ -100,10 +101,17 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     override fun showLoader() {
         showFragment(loaderFragment);
     }
+    override fun showCertificate() {
+        // TODO add to back stack instead of just showing
+        // TODO request certificate info from sdk, refactor show fragement into callback
+        Log.d(Tags.TAG_IDENT_DEBUG, "Show cert")
+        showFragment(certificateFragment)
+    }
 }
 
 interface IsIdentificationUI{
     val identificationManager: IdentificationManager?;
     fun showLoader();
     fun startIdent();
+    fun showCertificate();
 }
