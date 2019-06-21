@@ -32,7 +32,6 @@ class AccessRightsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(Tags.TAG_IDENT_DEBUG, "BuggyBuggyBugbug")
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
         v.buttonAccept.setOnClickListener {
@@ -44,9 +43,6 @@ class AccessRightsFragment : Fragment() {
         }
         v.buttonDeny.setOnClickListener {
             activity?.asIdentificationUI()?.identificationManager?.getCertificate()
-            Log.d(Tags.TAG_IDENT_DEBUG, "BuggyBuggyBugbug")
-            Log.d(Tags.TAG_IDENT_DEBUG, (activity?.asIdentificationUI() == null).toString())
-            activity?.asIdentificationUI()?.showLoader();
         }
         v.recyclerView.adapter = adapter
         return v
