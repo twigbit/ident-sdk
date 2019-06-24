@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
+import com.twigbit.identsdk.core.CertificateInfo
+import com.twigbit.identsdk.core.CertificateValidity
 import kotlinx.android.synthetic.main.activity_dropin_identification.*
 import kotlinx.android.synthetic.main.fragment_certificate.view.*
 
@@ -23,6 +25,16 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class CertificateFragment : Fragment() {
+    var certificateInfo: CertificateInfo? = null
+        set(value) {
+            field = value
+            view?.let { showCertificateData(it) }
+        }
+    var certificateValidity: CertificateValidity? = null
+        set(value) {
+            field = value
+            view?.let { showCertificateData(it) }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +42,24 @@ class CertificateFragment : Fragment() {
     ): View? {
         (activity as DropInIdentificationActivity).imageView.visibility = View.GONE
         // Inflate the layout for this fragment
-        val v =  inflater.inflate(R.layout.fragment_certificate, container, false)
+        val v = inflater.inflate(R.layout.fragment_certificate, container, false)
         v.buttonBack.setOnClickListener { activity!!.supportFragmentManager.popBackStack() }
+        showCertificateData(v)
         return v;
+    }
+
+    fun showCertificateData(v: View) {
+        if (certificateInfo != null) {
+            v.textIssuerName?.text = certificateInfo?.issuerName
+            v.textIssuerUrl?.text = certificateInfo?.issuerUrl
+            v.textServiceProviderName?.text = certificateInfo?.subjectName
+            v.textServiceProviderUrl?.text = certificateInfo?.subjectUrl
+            v.textPurpose?.text = certificateInfo?.purpose
+            v.textServiceProviderInfo?.text = certificateInfo?.termsOfUsage
+        }
+        if (certificateValidity != null) {
+            v.textValidity?.text = "${certificateValidity?.effectiveDate} - ${certificateValidity?.expirationDate}"
+        }
     }
 
 

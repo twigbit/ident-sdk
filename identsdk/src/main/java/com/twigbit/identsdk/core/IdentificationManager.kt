@@ -138,6 +138,9 @@ class IdentificationManager{
             IdentificationUtil.MSG_ENTER_CAN -> {
                 callback?.onRequestCan()
             }
+            IdentificationUtil.MSG_INSERT_CERTIFICATE -> {
+                callback?.onRequestCertificate(message.description!!, message.validity!!)
+            }
             IdentificationUtil.MSG_BAD_STATE -> {
                 callback?.onError(messageJson
                 )
@@ -157,6 +160,7 @@ class IdentificationManager{
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()
+        fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity)
         fun onError(error: String)
     }
 

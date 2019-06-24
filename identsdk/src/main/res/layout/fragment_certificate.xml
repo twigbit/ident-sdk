@@ -9,14 +9,14 @@
               android:orientation="vertical"
               tools:context=".dropinui.IntroFragment">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
-        <ImageButton android:layout_width="48dp" android:layout_height="48dp" android:background="@null" android:id="@+id/buttonBack"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_margin="12dp">
+        <ImageButton android:layout_width="48dp" android:layout_height="48dp" android:background="@null"
+                     android:id="@+id/buttonBack"
                      android:src="@drawable/twigbit_ident_icon_back"/>
     </LinearLayout>
-    <!-- TODO: Add header back button -->
-    <!-- TODO: Add card displaying certificate info -->
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:padding="12dp"
-                android:layout_weight="1">
+                android:layout_weight="1" android:clipChildren="false" android:clipToPadding="false">
 
         <android.support.v7.widget.CardView android:layout_width="match_parent"
                                             android:layout_marginBottom="16dp"
@@ -42,7 +42,7 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
-                                android:layout_marginTop="24dp">
+                              android:layout_marginTop="24dp">
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                   android:orientation="vertical"
                                   android:layout_weight="1">
@@ -63,7 +63,7 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
-                                android:layout_marginTop="24dp">
+                              android:layout_marginTop="24dp">
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                   android:orientation="vertical"
                                   android:layout_weight="1">
@@ -84,7 +84,7 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
-                                android:layout_marginTop="24dp">
+                              android:layout_marginTop="24dp">
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                   android:orientation="vertical"
                                   android:layout_weight="1">
@@ -101,7 +101,7 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
-                                android:layout_marginTop="24dp">
+                              android:layout_marginTop="24dp">
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                   android:orientation="vertical"
                                   android:layout_weight="1">
@@ -118,7 +118,7 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="horizontal"
-                                android:layout_marginTop="24dp">
+                              android:layout_marginTop="24dp">
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                                   android:orientation="vertical"
                                   android:layout_weight="1">

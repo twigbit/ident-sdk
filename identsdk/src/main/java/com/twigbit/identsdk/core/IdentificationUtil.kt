@@ -16,6 +16,7 @@ object IdentificationUtil {
     const val MSG_ENTER_PUK = "ENTER_PUK"
     const val MSG_ENTER_CAN = "ENTER_CAN"
     const val MSG_INSERT_CARD = "INSERT_CARD"
+    const val MSG_INSERT_CERTIFICATE = "CERTIFICATE"
     const val MSG_BAD_STATE = "BAD_STATE"
     const val MSG_READER = "READER"
     const val MSG_CUSTOM_URL = "URL"
@@ -59,11 +60,32 @@ class Message {
     val card: Card? = null
     val result: Result? = null
     val chat: AccessRightPayload? = null
+    val validity: CertificateValidity? = null
+    val description: CertificateInfo? = null
     // TODO add description param for certificates
     override fun toString(): String {
         return "Message(msg='$msg', name='$name', card=$card, result=$result, chat=$chat)"
     }
 
+}
+
+class CertificateInfo{
+    val issuerName: String = ""
+    val issuerUrl: String = ""
+    val purpose: String = ""
+    val subjectName: String = ""
+    val subjectUrl: String = ""
+    val termsOfUsage: String = ""
+    override fun toString(): String {
+        return "CertificateValidity(issuerName=$issuerName, purpose=$purpose, subjectName=$subjectName)"
+    }
+}
+class CertificateValidity{
+    val effectiveDate: String = ""
+    val expirationDate: String = ""
+    override fun toString(): String {
+        return "CertificateValidity(effectiveDate=$effectiveDate, expirationDate=$expirationDate)"
+    }
 }
 
 class AccessRightPayload{
