@@ -104,8 +104,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     override fun showCertificate() {
         // TODO add to back stack instead of just showing
         // TODO request certificate info from sdk, refactor show fragement into callback
-        Log.d(Tags.TAG_IDENT_DEBUG, "Show cert")
-        showFragment(certificateFragment)
+        supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment).commit()
     }
 }
 
