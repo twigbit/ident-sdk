@@ -16,6 +16,7 @@ object IdentificationUtil {
     const val MSG_ENTER_PUK = "ENTER_PUK"
     const val MSG_ENTER_CAN = "ENTER_CAN"
     const val MSG_INSERT_CARD = "INSERT_CARD"
+    const val MSG_INSERT_CERTIFICATE = "CERTIFICATE"
     const val MSG_BAD_STATE = "BAD_STATE"
     const val MSG_READER = "READER"
     const val MSG_CUSTOM_URL = "URL"
@@ -51,6 +52,7 @@ class Command {
 }
 
 // "aux":{"validityDate":"2019-05-09"},"chat":{"effective":["Address","PlaceOfBirth","DateOfBirth","DoctoralDegree","FamilyName","GivenNames"],"optional":[],"required":["Address","PlaceOfBirth","DateOfBirth","DoctoralDegree","FamilyName","GivenNames"]}
+// {"description":{"issuerName":"D-Trust GmbH","issuerUrl":"http://www.d-trust.net","purpose":"AusweisIDent - Online Ausweis Identifizierungsservice der Bundesdruckerei GmbH","subjectName":"Bundesdruckerei GmbH","subjectUrl":"https://ref-ausweisident.eid-service.de","termsOfUsage":"Name, Anschrift und E-Mail-Adresse des Diensteanbieters:\r\nBundesdruckerei GmbH\r\nOlaf Clemens\r\nKommandantenstraße 18\r\n10969 Berlin\r\nsupport@bdr.de\r\n\r\nGeschäftszweck:\r\nAusweisIDent - Online Ausweis Identifizierungsservice der Bundesdruckerei GmbH\r\n\r\nHinweis auf die für den Diensteanbieter zuständigen Stellen, die die Einhaltung der Vorschriften zum Datenschutz kontrollieren:\r\nDie Bundesbeauftragte für den Datenschutz und die Informationsfreiheit\r\nHusarenstraße 30\r\n53117 Bonn\r\n+49 (0)228 997799-0\r\npoststelle@bfdi.bund.de\r\n"},"msg":"CERTIFICATE","validity":{"effectiveDate":"2019-06-24","expirationDate":"2019-06-25"}}
 
 class Message {
     val msg: String = ""
@@ -58,10 +60,32 @@ class Message {
     val card: Card? = null
     val result: Result? = null
     val chat: AccessRightPayload? = null
+    val validity: CertificateValidity? = null
+    val description: CertificateInfo? = null
+    // TODO add description param for certificates
     override fun toString(): String {
         return "Message(msg='$msg', name='$name', card=$card, result=$result, chat=$chat)"
     }
 
+}
+
+class CertificateInfo{
+    val issuerName: String = ""
+    val issuerUrl: String = ""
+    val purpose: String = ""
+    val subjectName: String = ""
+    val subjectUrl: String = ""
+    val termsOfUsage: String = ""
+    override fun toString(): String {
+        return "CertificateValidity(issuerName=$issuerName, purpose=$purpose, subjectName=$subjectName)"
+    }
+}
+class CertificateValidity{
+    val effectiveDate: String = ""
+    val expirationDate: String = ""
+    override fun toString(): String {
+        return "CertificateValidity(effectiveDate=$effectiveDate, expirationDate=$expirationDate)"
+    }
 }
 
 class AccessRightPayload{

@@ -184,7 +184,12 @@ val identificationCallback = object: IdentificationManager.Callback{
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             TODO("not implemented") 
         }
-
+        
+        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
+            // The certificate info has beed requested and is delivered here
+             TODO("not implemented") 
+        }
+        
         override fun onCardRecognized(card: Card?) {
             // A card was attached to the NFC reader
             TODO("not implemented") 
@@ -212,6 +217,7 @@ val identificationCallback = object: IdentificationManager.Callback{
             // An error occured. Display an error/issue dialog to the user.
             TODO("not implemented") 
         }
+      
     }
 ```
 
@@ -233,6 +239,11 @@ identificationFragment?.identificationManager?.startIdent(tcTokenUrl);
 
 For a fully working example, see [IndependentIdentificationActivity](../sample/src/main/java/com/twigbit/identsdk/sample/IndependentIdentificationActivity.kt).
 
+### Displaying certificate information
+
+To display information about the service providers certificate, you can call the method `identificationManager.getCertificate()` to request the certificate information. 
+The certificate info will be delivered asynchronously in the callback via the `onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity)` method. 
+The certificate informations are mirrored from the AusweisApp2 SDK messanges and are wrapped by the classes [CertificateInfo](../identsdk/src/main/java/com/twigbit/identsdk/core/IdentificationUtil.kt) and [CertificateValidity](../identsdk/src/main/java/com/twigbit/identsdk/core/IdentificationUtil.kt) 
 
 ### Handling the result URL 
 
@@ -280,10 +291,12 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [dropin] Dropin UI basic implementation
 * [dropin] Dropin styling
 
-
-### Backlog 
+### 0.1.2
 * [dropin] Certificate view
 * [core] Test simplified configuration procedure.
+
+
+### Backlog 
 * [ausweisident] Server implementation guide.
 * [ausweisident] Provide Util for evaluating the result URL.
 
@@ -292,7 +305,6 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 * Vibrate on NFC message.
 * Capability check- check whether the users device has the required architecture and NFC capabilities
-* A custom identification app as a zero-dependency option for the integration
 * Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
 
 ---

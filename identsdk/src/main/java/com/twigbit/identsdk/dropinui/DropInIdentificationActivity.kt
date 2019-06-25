@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import com.twigbit.identsdk.R
-import com.twigbit.identsdk.core.Card
-import com.twigbit.identsdk.core.IdentificationActivity
-import com.twigbit.identsdk.core.IdentificationManager
+import com.twigbit.identsdk.core.*
 import com.twigbit.identsdk.util.*
 import kotlinx.android.synthetic.main.fragment_intro.*
 
@@ -24,8 +22,16 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     val insertCardFragment = InsertCardFragment()
     val successFragment = SuccessFragment()
     val errorFragment = ErrorFragment()
+    val certificateFragment = CertificateFragment()
 
     val identificationCallback = object: IdentificationManager.Callback{
+        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
+            // The certificate info has beed requested and is delivered here
+            certificateFragment.certificateInfo = certificateInfo;
+            certificateFragment.certificateValidity = certificateValidity;
+            supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment).commit()
+        }
+
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
@@ -100,10 +106,14 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     override fun showLoader() {
         showFragment(loaderFragment);
     }
+    override fun showCertificate() {
+        identificationManager.getCertificate()
+    }
 }
 
 interface IsIdentificationUI{
     val identificationManager: IdentificationManager?;
     fun showLoader();
     fun startIdent();
+    fun showCertificate();
 }

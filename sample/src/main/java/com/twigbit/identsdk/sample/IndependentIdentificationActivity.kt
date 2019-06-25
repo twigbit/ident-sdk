@@ -9,15 +9,14 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
 import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
-import com.twigbit.identsdk.core.Card
-import com.twigbit.identsdk.core.IdentificationFragment
-import com.twigbit.identsdk.core.IdentificationManager
+import com.twigbit.identsdk.core.*
 import com.twigbit.identsdk.dropinui.*
 import com.twigbit.identsdk.util.ForegroundDispatcher
 import com.twigbit.identsdk.util.StringUtil
 import com.twigbit.identsdk.util.Tags
 
 class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+
     override fun startIdent() {
         val tcTokenUrl = AusweisIdentBuilder()
             .ref()
@@ -90,9 +89,17 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
     val authorisationFragment = AuthorisationFragment()
     val insertCardFragment = InsertCardFragment()
     val successFragment = SuccessFragment()
+    val certificateFragment = CertificateFragment()
     val errorFragment = ErrorFragment()
 
     val identificationCallback = object: IdentificationManager.Callback{
+        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
+            // The certificate info has beed requested and is delivered here
+            certificateFragment.certificateInfo = certificateInfo;
+            certificateFragment.certificateValidity = certificateValidity;
+            supportFragmentManager.beginTransaction().addToBackStack("").replace(com.twigbit.identsdk.R.id.container, certificateFragment).commit()
+        }
+
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
@@ -146,7 +153,12 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onError Callback")
             showFragment(errorFragment)
         }
+
     }
+    override fun showCertificate() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     fun showFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(com.twigbit.identsdk.R.id.container, fragment).commit()
     }

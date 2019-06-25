@@ -136,7 +136,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_recent_actors_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_right_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -146,7 +146,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_person" />
+                            <entry key="outputName" value="twigbit_ident_icon_arrow_right" />
                             <entry key="sourceFile" value="$USER_HOME$" />
                           </map>
                         </option>

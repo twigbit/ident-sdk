@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Twigbit Ident Identifizierung</string>
 
-    <string name="twigbit_ident_drop_in_attach_card">Bitte halten Sie ihren Personalausweis jetzt für den gesamten Vorgang gegen den
+    <string name="twigbit_ident_drop_in_attach_card">Bitte halten Sie ihren Personalausweis jetzt für den gesamten
+        Vorgang gegen den
         NFC Sensor Ihres Smartphones.
     </string>
-    <string name="twigbit_ident_drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte
+    <string name="twigbit_ident_drop_in_error_button">Willkommen, wir werden Sie jetzt durch die Identifizierung
+        begleiten. Bitte
         halten Sie ihren Personalausweis gegen die Rückseite Ihres Smartphones.
     </string>
     <string name="twigbit_ident_drop_in_intro_button">Starten</string>
@@ -14,9 +16,11 @@
     <string name="twigbit_ident_drop_in_enter_can">Bitte geben sie die CAN ein:</string>
     <string name="twigbit_ident_drop_in_enter_pin">Bitte geben sie ihre PIN ein:</string>
     <string name="twigbit_ident_drop_in_enter_puk">Bitte geben sie ihre PUK ein:</string>
-    <string name="twigbit_ident_drop_in_success">Ihre Daten wurden erfolgreich an den Dienstanbieter übermittelt.</string>
+    <string name="twigbit_ident_drop_in_success">Ihre Daten wurden erfolgreich an den Dienstanbieter übermittelt.
+    </string>
     <string name="twigbit_ident_drop_in_error">Ein Fehler ist aufgetreten.</string>
-    <string name="twigbit_ident_drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten. Bitte halten Sie
+    <string name="twigbit_ident_drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten.
+        Bitte halten Sie
         ihren Personalausweis während des gesamten Vorgangs gegen die Rückseite Ihres Smartphones.
     </string>
     <string name="twigbit_ident_drop_in_continue">Weiter</string>
@@ -40,4 +44,13 @@
     <string name="twigbit_ident_access_right_address_verification">Wohnortverifikation</string>
     <string name="twigbit_ident_access_right_age_verification">Altersverifikation</string>
     <string name="twigbit_ident_access_right_unknown_value">Unbekannter Wert</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="twigbit_ident_certificate_service_provider_info">Anbieterinformationen</string>
+    <string name="twigbit_ident_certificate_service_provider">Dienstanbieter</string>
+    <string name="twigbit_ident_certificate_issuer">Aussteller des Berechtigungszertifikats</string>
+    <string name="twigbit_ident_certificate_purpose">Zweck</string>
+    <string name="twigbit_ident_certificate_validity">Gültigkeit</string>
+    <string name="twigbit_ident_certificate_information">Angaben zum Dienstanbieter</string>
 </resources>
