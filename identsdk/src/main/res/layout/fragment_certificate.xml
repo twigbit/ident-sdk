@@ -41,7 +41,7 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="horizontal"
+                              android:orientation="vertical"
                               android:layout_marginTop="24dp">
 
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="horizontal"
+                              android:orientation="vertical"
                               android:layout_marginTop="24dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:text="@string/twigbit_ident_certificate_issuer"
@@ -76,7 +76,7 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="horizontal"
+                              android:orientation="vertical"
                               android:layout_marginTop="24dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:text="@string/twigbit_ident_certificate_purpose"
@@ -89,7 +89,7 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="horizontal"
+                              android:orientation="vertical"
                               android:layout_marginTop="24dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:text="@string/twigbit_ident_certificate_validity"
@@ -102,7 +102,7 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:orientation="horizontal"
+                              android:orientation="vertical"
                               android:layout_marginTop="24dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:text="@string/twigbit_ident_certificate_information"
