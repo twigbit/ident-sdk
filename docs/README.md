@@ -291,10 +291,12 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [dropin] Dropin UI basic implementation
 * [dropin] Dropin styling
 
-
-### Backlog 
+### 0.1.2
 * [dropin] Certificate view
 * [core] Test simplified configuration procedure.
+
+
+### Backlog 
 * [ausweisident] Server implementation guide.
 * [ausweisident] Provide Util for evaluating the result URL.
 
@@ -303,7 +305,6 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 * Vibrate on NFC message.
 * Capability check- check whether the users device has the required architecture and NFC capabilities
-* A custom identification app as a zero-dependency option for the integration
 * Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
 
 ---
