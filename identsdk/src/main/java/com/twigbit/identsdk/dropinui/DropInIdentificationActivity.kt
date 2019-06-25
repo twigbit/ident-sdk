@@ -106,7 +106,6 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     override fun showLoader() {
         showFragment(loaderFragment);
     }
-    // TODO document
     override fun showCertificate() {
         identificationManager.getCertificate()
     }
