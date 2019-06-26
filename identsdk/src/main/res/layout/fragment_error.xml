@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/textView"/>
 
-    <android.support.design.button.MaterialButton android:layout_width="match_parent"
+    <aButton android:layout_width="match_parent"
                                                   android:layout_height="wrap_content"
                                                   android:id="@+id/buttonFinish"
                                                   android:padding="8dp"
