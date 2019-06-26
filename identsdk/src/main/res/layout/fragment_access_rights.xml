@@ -87,7 +87,7 @@
     </ScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal">
-        <aButton android:layout_width="match_parent"
+        <Button android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonDeny"
                                                       android:layout_margin="8dp"
@@ -96,7 +96,7 @@
                                                       android:foregroundTint="@color/colorAccent"
                                                       style="@style/TwigbitIdentTheme.ButtonStyle.TextButton"
                                                       android:text="@string/twigbit_ident_drop_in_deny"/>
-        <aButton android:layout_width="match_parent"
+        <Button android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonAccept"
                                                       android:padding="8dp"
