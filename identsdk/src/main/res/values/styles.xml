@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="TwigbitIdentTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="buttonStyle">@style/TwigbitIdentTheme.ButtonStyle</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-    </style>
-
    <style name="TwigbitIdentTheme.TextAppearanceOverline" parent="TextAppearance.MaterialComponents.Overline">
         <!--<item name="android:textSize">30sp</item>-->
     </style>
