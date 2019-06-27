@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/buttonContinue"/>
 
-    <android.support.design.button.MaterialButton android:layout_width="match_parent"
+    <Button android:layout_width="match_parent"
                                                   android:layout_height="wrap_content"
                                                   android:id="@+id/buttonContinue"
                                                   android:padding="8dp"

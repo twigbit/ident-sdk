@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.twigbit.identsdk">
-    <application android:theme="@style/TwigbitIdentTheme">
-        <activity android:name=".dropinui.DropInIdentificationActivity">
+    <application>
+        <activity android:name=".dropinui.DropInIdentificationActivity" android:label="Identifizierung"
+                  android:theme="@style/TwigbitIdentTheme">
         </activity>
     </application>
 </manifest>

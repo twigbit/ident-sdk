@@ -10,7 +10,7 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="Ident SDK Sample App"
+              android:text="Ident SDK Sample"
               android:textSize="22sp"
               android:gravity="center"
               android:fontFamily="@font/nexa_bold"
@@ -29,12 +29,12 @@
                   android:layout_marginTop="72dp"
                   android:clipToPadding="false"
                   android:id="@+id/linearLayout">
-        <android.support.design.button.MaterialButton android:layout_width="match_parent"
+        <Button android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonDropIn"
                                                       android:backgroundTint="@color/colorPrimaryDark"
                                                       android:text="Test Drop-In UI"/>
-        <android.support.design.button.MaterialButton android:layout_width="match_parent"
+        <Button android:layout_width="match_parent"
                                                       android:layout_height="wrap_content"
                                                       android:id="@+id/buttonCustomAuth"
                                                       android:backgroundTint="@color/colorPrimaryDark"
