@@ -80,7 +80,8 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
                 // Success. Update the UI to reflect the successful identification
                 // and fetch the user data from the server where they were delivered.
                 
-                val resultUrl = data.getParcelableExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
+                val resultUrl = data!!.getStringExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
+                Log.d(Tags.TAG_IDENT_DEBUG, resultUrl);
                 // to deliver the data to the server, call this URL and follow the redirect chain
                                 
             } else if (resultCode == Activity.RESULT_CANCELED) {

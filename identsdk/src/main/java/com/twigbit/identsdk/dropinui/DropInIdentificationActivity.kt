@@ -1,6 +1,7 @@
 package com.twigbit.identsdk.dropinui
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -35,7 +36,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
-            showFragment(successFragment)
+            //showFragment(successFragment)
+            returnResult(resultUrl)
         }
 
         override fun onRequestAccessRights(accessRights: List<String>) {
@@ -108,6 +110,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     }
     override fun showCertificate() {
         identificationManager.getCertificate()
+    }
+    fun returnResult(resultUrl: String) {
+        val data = Intent()
+        data.putExtra(IdentificationManager.EXTRA_DROPIN_RESULT, resultUrl);
+        setResult(RESULT_OK, data);
+        finish();
     }
 }
 

@@ -21,6 +21,10 @@ import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
 import com.twigbit.identsdk.util.*
 
 class IdentificationManager{
+
+    companion object {
+        final val EXTRA_DROPIN_RESULT = "extra-identification-result"
+    }
     // TODO refactor into callback array or else replace by setter
     var callback : Callback? = null
     fun addCallback(callback: Callback){
