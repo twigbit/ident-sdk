@@ -101,7 +101,23 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 
 > _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
 
-> _**Note:** We are working on implementing helper methods to simplify this process._
+If you are using the same server side architecture as the sample, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
+
+```kotlin
+val resultHandler: AusweisIdentResultHandler =
+        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
+            override fun onError(message: String) {
+                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
+            }
+
+            override fun onComplete(userInfo: UserInfo) {
+                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+            }
+        })
+       
+resultHandler.fetchResult(resultUrl);
+
+```
 
 
 ## Implement your own UI 
