@@ -162,4 +162,5 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
     fun showFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(com.twigbit.identsdk.R.id.container, fragment).commit()
     }
+
 }

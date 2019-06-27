@@ -34,10 +34,16 @@ allprojects {
 ```
 
 Then, add the drop in ui as a dependency to your **projects** `build.gradle` file. 
+Also make sure, that your projects `minSdkVersion` is set to at least version 21. 
 
 ```gradle
+android {
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.1'
+  implementation 'com.github.twigbit:ident-sdk:0.1.4'
 }
 ```
 
@@ -74,7 +80,8 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
                 // Success. Update the UI to reflect the successful identification
                 // and fetch the user data from the server where they were delivered.
                 
-                val resultUrl = data.getParcelableExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
+                val resultUrl = data!!.getStringExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
+                Log.d(Tags.TAG_IDENT_DEBUG, resultUrl);
                 // to deliver the data to the server, call this URL and follow the redirect chain
                                 
             } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -94,8 +101,26 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 
 > _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
 
-> _**Note:** We are working on implementing helper methods to simplify this process._
+If you are using the same server side architecture as the sample, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
 
+```kotlin
+val resultHandler: AusweisIdentResultHandler =
+        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
+            override fun onError(message: String) {
+                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
+            }
+
+            override fun onComplete(userInfo: UserInfo) {
+                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+            }
+        })
+       
+resultHandler.fetchResult(resultUrl);
+
+```
+
+### Styling the Drop-In UI
+To change the appearance of the drop in UI, please read the [styleguide](STYLEGUIDE.md).
 
 ## Implement your own UI 
 
