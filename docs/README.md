@@ -34,10 +34,16 @@ allprojects {
 ```
 
 Then, add the drop in ui as a dependency to your **projects** `build.gradle` file. 
+Also make sure, that your projects `minSdkVersion` is set to at least version 21. 
 
 ```gradle
+android {
+    defaultConfig {
+        minSdkVersion 21
+    }
+}
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.1'
+  implementation 'com.github.twigbit:ident-sdk:0.1.4'
 }
 ```
 
