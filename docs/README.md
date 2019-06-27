@@ -18,7 +18,7 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 
 # Documentation 
 
-All code is provided in Kotlin. The integration works in Java analogously, all samples are interchangable. 
+All code is provided in Kotlin. The integration works in Java analogously, all examples are interchangable. 
 
 ## Adding the dependency
 
@@ -101,7 +101,7 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 
 > _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
 
-If you are using the same server side architecture as the sample, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
+If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
 
 ```kotlin
 val resultHandler: AusweisIdentResultHandler =
@@ -262,7 +262,7 @@ val tcTokenUrl = AusweisIdentBuilder()
 identificationFragment?.identificationManager?.startIdent(tcTokenUrl);
 ```
 
-For a fully working example, see [IndependentIdentificationActivity](../sample/src/main/java/com/twigbit/identsdk/sample/IndependentIdentificationActivity.kt).
+For a fully working example, see [IndependentIdentificationActivity](../example/src/main/java/com/twigbit/identsdk/example/IndependentIdentificationActivity.kt).
 
 ### Displaying certificate information
 
@@ -280,13 +280,13 @@ COMING SOON
 1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
 2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
-Please see the AusweisIdent documentation for further details or check out our [server sample](#) (coming soon).
-<!-- TODO: server sample link -->
+Please see the AusweisIdent documentation for further details or check out our [server example](#) (coming soon).
+<!-- TODO: server example link -->
 
 
-### Sample
+### Example
 
-A working implementation can be found in the `/samples` directory. Please note that you need a test PA to test the identification flow in the reference system.
+A working implementation can be found in the `/example` directory. Please note that you need a test PA to test the identification flow in the reference system.
 
 ### Copyright
 
