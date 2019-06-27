@@ -119,6 +119,8 @@ resultHandler.fetchResult(resultUrl);
 
 ```
 
+### Styling the Drop-In UI
+To change the appearance of the drop in UI, please read the [styleguide](STYLEGUIDE.md).
 
 ## Implement your own UI 
 
