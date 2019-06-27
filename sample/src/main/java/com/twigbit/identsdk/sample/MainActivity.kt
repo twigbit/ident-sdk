@@ -7,7 +7,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
+import com.twigbit.identsdk.ausweisident.AusweisIdentResultHandler
 import com.twigbit.identsdk.ausweisident.AusweisIdentScopes
+import com.twigbit.identsdk.ausweisident.UserInfo
 import com.twigbit.identsdk.core.IdentificationManager
 import com.twigbit.identsdk.util.Tags
 import kotlinx.android.synthetic.main.activity_main.*
@@ -48,6 +50,17 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE_IDENTIFICATION)
     }
 
+    val resultHandler: AusweisIdentResultHandler =
+        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
+            override fun onError(message: String) {
+                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
+            }
+
+            override fun onComplete(userInfo: UserInfo) {
+                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+            }
+        })
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_IDENTIFICATION) {
             if (resultCode == Activity.RESULT_OK) {
@@ -56,6 +69,8 @@ class MainActivity : AppCompatActivity() {
 
                 val resultUrl = data!!.getStringExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
                 Log.d(Tags.TAG_IDENT_DEBUG, resultUrl);
+
+                resultHandler.fetchResult(resultUrl);
                 // to deliver the data to the server, call this URL and follow the redirect chain
 
             } else if (resultCode == Activity.RESULT_CANCELED) {
