@@ -16,7 +16,7 @@
     <string name="twigbit_ident_drop_in_enter_can">Bitte geben sie die CAN ein:</string>
     <string name="twigbit_ident_drop_in_enter_pin">Bitte geben sie ihre PIN ein:</string>
     <string name="twigbit_ident_drop_in_enter_puk">Bitte geben sie ihre PUK ein:</string>
-    <string name="twigbit_ident_drop_in_success">Ihre Daten wurden erfolgreich an den Dienstanbieter übermittelt.
+    <string name="twigbit_ident_drop_in_success">Ihre Daten wurden erfolgreich ausgelesen.
     </string>
     <string name="twigbit_ident_drop_in_error">Ein Fehler ist aufgetreten.</string>
     <string name="twigbit_ident_drop_in_intro">Willkommen, wir werden Sie jetzt durch die Identifizierung begleiten.
