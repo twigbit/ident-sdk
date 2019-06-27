@@ -36,7 +36,7 @@ class IdentificationManager{
         bindIdIdentificationService(context)
     }
     fun unBind(context: Context){
-        context.unbindService(sdkConnection)
+        sdkConnection?.apply {context.unbindService(this) }
     }
     fun startIdent(tokenURL: String) {
         send(
@@ -226,7 +226,7 @@ class IdentificationManager{
         val name = "com.governikus.ausweisapp2.START_SERVICE"
         val serviceIntent = Intent(name)
         serviceIntent.setPackage(context.packageName)
-        context.bindService(serviceIntent, sdkConnection, Context.BIND_AUTO_CREATE)
+        context.bindService(serviceIntent, sdkConnection!!, Context.BIND_AUTO_CREATE)
     }
 
     private fun connectSDK() {
