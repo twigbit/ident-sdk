@@ -1,7 +1,6 @@
-![twigbit IdentSDK](images/header.png)
+# ![twigbit IdentSDK](images/header.png)
 
-
-The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
+The twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating AusweisIdent functionality in their apps. 
 Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
 
@@ -13,6 +12,8 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 - Replace the JSON based messaging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
 - Lightweight — besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
 - Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes
+
+**Looking for some backend examples?** See our AusweisIDent backend examples repository at [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples).
 
 # Documentation 
 
