@@ -1,13 +1,11 @@
-# Twigbit Ident SDK
+![twigbit IdentSDK](images/header.png)
+
 
 The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating AusweisIdent functionality in their apps. 
 Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
 
-[![twigbit technologies GmbH](images/logo-twigbit.png)](https://www.twigbit.com)
-[![Governikus GmbH & Co. KG](images/logo-governikus.png)](https://www.governikus.de/)
-[![AusweisIDent](images/logo-ausweisident.png)](https://www.ausweisident.de/)
-
+![twigbit technologies GmbH, Governikus GmbH & Co. KG, AusweisIDent](images/logos.png)
 
 ## Features
 
