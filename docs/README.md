@@ -101,6 +101,8 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 
 > _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
 
+> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
+
 If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
 
 ```kotlin
@@ -280,8 +282,7 @@ COMING SOON
 1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
 2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
-Please see the AusweisIdent documentation for further details or check out our [server example](#) (coming soon).
-<!-- TODO: server example link -->
+Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
 
 ### Example
