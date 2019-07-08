@@ -1,1 +1,1 @@
-include ':sample', ':identsdk'
+include ':example', ':identsdk'

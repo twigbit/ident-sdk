@@ -1,4 +1,4 @@
-package com.twigbit.identsdk.sample
+package com.twigbit.identsdk.example
 
 import android.content.Intent
 import android.nfc.NfcAdapter

@@ -1,16 +1,17 @@
-*.iml
-.gradle
-/local.properties
+# Android Studio Settings
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
-.DS_Store
+\.idea/markdown-exported-files\.xml
+
+*.iml
+.gradle
+/local.properties
+
 /build
 /captures
 .externalNativeBuild
-identsdk/src/main/java/com/twigbit/identsdk/util/Secrets\.kt
 
-sample/src/main/java/com/twigbit/identsdk/sample/Secrets\.kt
-
-\.idea/markdown-exported-files\.xml
+# other
+.DS_Store
