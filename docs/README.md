@@ -1,13 +1,10 @@
-# Twigbit Ident SDK
+# ![twigbit IdentSDK](images/header.png)
 
-The Twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
+The twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
 We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating AusweisIdent functionality in their apps. 
 Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
 
-[![twigbit technologies GmbH](images/logo-twigbit.png)](https://www.twigbit.com)
-[![Governikus GmbH & Co. KG](images/logo-governikus.png)](https://www.governikus.de/)
-[![AusweisIDent](images/logo-ausweisident.png)](https://www.ausweisident.de/)
-
+![twigbit technologies GmbH, Governikus GmbH & Co. KG, AusweisIDent](images/logos.png)
 
 ## Features
 
@@ -15,6 +12,8 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 - Replace the JSON based messaging system by convenient wrapper methods, giving developers to must-have convenience such as code completion
 - Lightweight — besides the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/sdk/), the only other dependency is [Google GSON](https://github.com/google/gson) for JSON parsing
 - Drop-in UI — Provide a simple, customizable drop in UI as a quick integration with identification processes
+
+**Looking for some backend examples?** See our AusweisIDent backend examples repository at [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples).
 
 # Documentation 
 
@@ -100,6 +99,8 @@ https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWj
 ```
 
 > _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
+
+> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
 
 If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
 
@@ -280,8 +281,7 @@ COMING SOON
 1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
 2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
-Please see the AusweisIdent documentation for further details or check out our [server example](#) (coming soon).
-<!-- TODO: server example link -->
+Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
 
 ### Example
