@@ -92,33 +92,8 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 ```
 
-You will get the result urlas described above. Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info. 
+You will get the `resultUrl` as described above. To evalutate the resultUrl and deliver the result to you backend, read the section on [Handling the result URL](#handling-the-result-url)
 
-```
-https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWjA6ar5gahrGSI823sFa4&state=123456
-```
-
-> _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
-
-> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
-
-If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
-
-```kotlin
-val resultHandler: AusweisIdentResultHandler =
-        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
-            override fun onError(message: String) {
-                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
-            }
-
-            override fun onComplete(userInfo: UserInfo) {
-                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
-            }
-        })
-       
-resultHandler.fetchResult(resultUrl);
-
-```
 
 ### Styling the Drop-In UI
 To change the appearance of the drop in UI, please read the [styleguide](STYLEGUIDE.md).
@@ -273,7 +248,35 @@ The certificate informations are mirrored from the AusweisApp2 SDK messanges and
 
 ### Handling the result URL 
 
-COMING SOON
+TODO: Cleanup/ refactor 
+
+Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info.
+
+```
+https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWjA6ar5gahrGSI823sFa4&state=123456
+```
+
+> _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
+
+> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
+
+If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
+
+```kotlin
+val resultHandler: AusweisIdentResultHandler =
+        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
+            override fun onError(message: String) {
+                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
+            }
+
+            override fun onComplete(userInfo: UserInfo) {
+                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+            }
+        })
+       
+resultHandler.fetchResult(resultUrl);
+
+```
 
 
 #### Server side implementation
