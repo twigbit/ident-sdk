@@ -279,19 +279,19 @@ resultHandler.fetchResult(resultUrl);
 ```
 
 
-#### Server side implementation
+### Server side implementation
 
+TODO remove general info. Stronger pointer to server side sample repo. 
 1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
 2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
+TODO rephrase
 Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
 
 ### Example
 
 A working implementation can be found in the `/example` directory. Please note that you need a test PA to test the identification flow in the reference system.
-
-### Copyright
 
 ### Limitations
 
@@ -336,6 +336,8 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
 
 ---
+
+### Copyright
 
 ```
 (c) Copyright 2018 twigbit technologies GmbH. All rights reserved.
