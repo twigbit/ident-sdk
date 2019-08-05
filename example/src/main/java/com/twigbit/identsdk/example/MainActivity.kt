@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
@@ -26,6 +27,13 @@ class MainActivity : AppCompatActivity() {
         }
         buttonCustomAuth.setOnClickListener {
             startIdentificationActivity()
+        }
+        referenceTwigbit.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+            intent.data = Uri.parse("https://twigbit.com")
+            startActivity(intent)
         }
     }
 
