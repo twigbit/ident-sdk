@@ -42,7 +42,7 @@ android {
     }
 }
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.4'
+  implementation 'com.github.twigbit:ident-sdk:0.1.2'
 }
 ```
 
@@ -305,7 +305,7 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 | Status    | Version          |
 | --------- | ---------------- |
-| **WIP** | 0.1.1 unreleased |
+| released | 0.1.2 unreleased |
 
 ## Changelog/Milestones
 
@@ -333,7 +333,7 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 * Vibrate on NFC message.
 * Capability check- check whether the users device has the required architecture and NFC capabilities
-* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
+* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section `Limitations`)
 
 ---
 
