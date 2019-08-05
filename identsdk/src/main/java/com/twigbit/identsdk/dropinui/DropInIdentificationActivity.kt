@@ -26,11 +26,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     val certificateFragment = CertificateFragment()
 
     val identificationCallback = object: IdentificationManager.Callback{
+
         override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
             // The certificate info has beed requested and is delivered here
+            accessRightsFragment.certificateInfo = certificateInfo;
             certificateFragment.certificateInfo = certificateInfo;
             certificateFragment.certificateValidity = certificateValidity;
-            supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment).commit()
         }
 
         override fun onCompleted(resultUrl: String) {
@@ -43,6 +44,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         override fun onRequestAccessRights(accessRights: List<String>) {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
+
+            identificationManager.getCertificate()
 
             accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it)})
             // for the moment just accept them
@@ -109,7 +112,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         showFragment(loaderFragment);
     }
     override fun showCertificate() {
-        identificationManager.getCertificate()
+        supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment).commit()
     }
     fun returnResult(resultUrl: String) {
         val data = Intent()

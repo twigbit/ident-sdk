@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             .scope(AusweisIdentScopes.FAMILY_NAMES)
             .scope(AusweisIdentScopes.GIVEN_NAMES)
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
+            .scope(AusweisIdentScopes.ACADEMIC_TITLE)
+            .scope(AusweisIdentScopes.ARTISTIC_NAME)
+            .scope(AusweisIdentScopes.DATE_OF_EXPIRY)
+            .scope(AusweisIdentScopes.DOCUMENT_TYPE)
+            .scope(AusweisIdentScopes.RESTRICTED_ID)
             .state("123456")
             .build()
 

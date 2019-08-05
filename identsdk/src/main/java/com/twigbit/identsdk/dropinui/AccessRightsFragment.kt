@@ -9,9 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.twigbit.identsdk.R
+import com.twigbit.identsdk.core.CertificateInfo
 import com.twigbit.identsdk.util.Tags
 import kotlinx.android.synthetic.main.activity_dropin_identification.*
 import kotlinx.android.synthetic.main.fragment_access_rights.view.*
+import kotlinx.android.synthetic.main.fragment_access_rights.view.textPurpose
+import kotlinx.android.synthetic.main.fragment_access_rights.view.textServiceProvider
 import kotlinx.android.synthetic.main.holder_access_right.view.*
 
 /**
@@ -19,6 +22,13 @@ import kotlinx.android.synthetic.main.holder_access_right.view.*
  *
  */
 class AccessRightsFragment : Fragment() {
+
+    var certificateInfo: CertificateInfo? = null
+        set(value) {
+            field = value
+            view?.let { it.textServiceProvider.text = value?.subjectName; it.textPurpose.text = value?.purpose }
+        }
+
 
     var accessRights: ArrayList<String> = arrayListOf()
         set(value) {
@@ -47,6 +57,10 @@ class AccessRightsFragment : Fragment() {
             activity?.asIdentificationUI()?.identificationManager?.getCertificate()
         }
         v.recyclerView.adapter = adapter
+        if (certificateInfo != null) {
+            v.textServiceProvider?.text = certificateInfo?.subjectName
+            v.textPurpose?.text = certificateInfo?.purpose
+        }
         return v
     }
 }

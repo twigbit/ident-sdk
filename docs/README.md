@@ -100,7 +100,7 @@ To change the appearance of the drop in UI, please read the [styleguide](STYLEGU
 
 ## Implement your own UI 
 
-To implement your own identificication UI, you can use a custom activity and react to the IdentificationManagers callbacks.
+To implement your own identification UI, you can use a custom activity and react to the IdentificationManagers callbacks.
 
 Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
 For concenience, we make it available within the activity with a getter.

@@ -53,4 +53,12 @@
     <string name="twigbit_ident_certificate_purpose">Zweck</string>
     <string name="twigbit_ident_certificate_validity">Gültigkeit</string>
     <string name="twigbit_ident_certificate_information">Angaben zum Dienstanbieter</string>
+
+    <string name="twigbit_ident_drop_in_access_rights_header">Der Folgende Dienstanbierter möchte Ihre Identität
+        überprüfen:
+    </string>
+    <string name="twigbit_ident_drop_in_service_provider">Dienstanbieter</string>
+    <string name="twigbit_ident_drop_in_access_rights_purpose">Zweck der Auskunft</string>
+    <string name="twigbit_ident_drop_in_attribute_header">Folgende Attribute werden ausgelesen</string>
+    <string name="twigbit_ident_drop_in_attributes">Attribute</string>
 </resources>
