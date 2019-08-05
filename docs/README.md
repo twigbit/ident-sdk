@@ -92,33 +92,8 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
     }
 ```
 
-You will get the result urlas described above. Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info. 
+You will get the `resultUrl` as described above. To evalutate the resultUrl and deliver the result to you backend, read the section on [Handling the result URL](#handling-the-result-url)
 
-```
-https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWjA6ar5gahrGSI823sFa4&state=123456
-```
-
-> _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
-
-> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
-
-If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
-
-```kotlin
-val resultHandler: AusweisIdentResultHandler =
-        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
-            override fun onError(message: String) {
-                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
-            }
-
-            override fun onComplete(userInfo: UserInfo) {
-                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
-            }
-        })
-       
-resultHandler.fetchResult(resultUrl);
-
-```
 
 ### Styling the Drop-In UI
 To change the appearance of the drop in UI, please read the [styleguide](STYLEGUIDE.md).
@@ -273,22 +248,50 @@ The certificate informations are mirrored from the AusweisApp2 SDK messanges and
 
 ### Handling the result URL 
 
-COMING SOON
+TODO: Cleanup/ refactor 
+
+Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info.
+
+```
+https://localhost:10443/demo/login/authcode?code=S6GKv5dJNwy6SXlRrllay6fcaoWeUWjA6ar5gahrGSI823sFa4&state=123456
+```
+
+> _**Warning:** If you decide to call the url on your own (and not pass it to a browser) you need to make sure to store and send cookies between the redirects._
+
+> **AusweisIdent Backend Examples:** Our [twigbit/ausweisident-backend-examples](https://github.com/twigbit/ausweisident-backend-examples) repository contains example implementations (currently for NodeJS only, Go and other languages coming soon) to receive the user info on the server side.
+
+If you are using the same server side architecture as the example, you can use the `AusweisIdentResultHanlder` to take care of handline the result for you. 
+
+```kotlin
+val resultHandler: AusweisIdentResultHandler =
+        AusweisIdentResultHandler(object : AusweisIdentResultHandler.Callback {
+            override fun onError(message: String) {
+                Log.d(Tags.TAG_IDENT_DEBUG, "An error occured")
+            }
+
+            override fun onComplete(userInfo: UserInfo) {
+                Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+            }
+        })
+       
+resultHandler.fetchResult(resultUrl);
+
+```
 
 
-#### Server side implementation
+### Server side implementation
 
+TODO remove general info. Stronger pointer to server side sample repo. 
 1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
 2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
 
+TODO rephrase
 Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
 
 ### Example
 
 A working implementation can be found in the `/example` directory. Please note that you need a test PA to test the identification flow in the reference system.
-
-### Copyright
 
 ### Limitations
 
@@ -302,7 +305,7 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 | Status    | Version          |
 | --------- | ---------------- |
-| **WIP** | 0.1.1 unreleased |
+| released | 0.1.2 unreleased |
 
 ## Changelog/Milestones
 
@@ -320,6 +323,14 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [dropin] Certificate view
 * [core] Test simplified configuration procedure.
 
+### 0.1.3
+* [core] Usability improvements
+* [documentation] Improve docs
+
+### 0.1.4
+* [core] Small usability improvements
+* [core] Result URL resolution example
+* [documentation] Improve docs
 
 ### Backlog 
 * [ausweisident] Server implementation guide.
@@ -330,9 +341,11 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 * Vibrate on NFC message.
 * Capability check- check whether the users device has the required architecture and NFC capabilities
-* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section ``Limitations`)
+* Provides a fallback to prompt the user to install the official [AusweisApp2] (https://www.ausweisapp.bund.de/) in case of unsupported architecture (see section `Limitations`)
 
 ---
+
+### Copyright
 
 ```
 (c) Copyright 2018 twigbit technologies GmbH. All rights reserved.
