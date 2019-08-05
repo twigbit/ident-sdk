@@ -60,7 +60,7 @@ private fun startDropInIdentification(){
             .clientId("your-client-id")
             .redirectUrl("your-redirect-url")
             .state("your-persistant-id")
-            .scope(AusweisIdentScopes.FAMILY_NAME)
+            .scope(AusweisIdentScopes.FAMILY_NAMES)
             .scope(AusweisIdentScopes.GIVEN_NAMES)
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
             .build()
