@@ -37,7 +37,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         override fun onCompleted(resultUrl: String) {
             // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onComplete Callback")
-            //showFragment(successFragment)
+//            showFragment(successFragment)
             returnResult(resultUrl)
         }
 
