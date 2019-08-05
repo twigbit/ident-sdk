@@ -65,7 +65,7 @@ data class UserInfo(
 
     override fun toString(): String {
         return "UserInfo(givenName=$givenName, familyName=$familyName, name=$name, birthdate=$birthdate, " +
-//                "addressType=$addressType, address=$address, artisticName=$artisticName, birthname=$birthname, nationality=$nationality, academicTitle='$academicTitle', issuingState='$issuingState', restrictedId='$restrictedId', placeOfBirthType=$placeOfBirthType, placeOfBirth=$placeOfBirth, documentType=$documentType, residencePermitI=$residencePermitI, iss=$iss, sub=$sub, aud=$aud, iat=$iat, jti=$jti" +
+                "addressType=$addressType, address=$address, artisticName=$artisticName, birthname=$birthname, nationality=$nationality, academicTitle='$academicTitle', issuingState='$issuingState', restrictedId='$restrictedId', placeOfBirthType=$placeOfBirthType, placeOfBirth=$placeOfBirth, documentType=$documentType, residencePermitI=$residencePermitI, iss=$iss, sub=$sub, aud=$aud, iat=$iat, jti=$jti" +
                 ")"
     }
 }

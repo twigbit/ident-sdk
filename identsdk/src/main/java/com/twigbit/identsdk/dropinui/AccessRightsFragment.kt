@@ -44,7 +44,6 @@ class AccessRightsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        (activity as DropInIdentificationActivity).imageView.visibility = View.VISIBLE
         val v = inflater.inflate(R.layout.fragment_access_rights, container, false)
         v.buttonAccept.setOnClickListener {
             activity?.asIdentificationUI()?.identificationManager?.acceptAccessRights()
@@ -54,7 +53,8 @@ class AccessRightsFragment : Fragment() {
             activity?.asIdentificationUI()?.showCertificate()
         }
         v.buttonDeny.setOnClickListener {
-            activity?.asIdentificationUI()?.identificationManager?.getCertificate()
+            activity?.asIdentificationUI()?.identificationManager?.cancel()
+            activity?.finish()
         }
         v.recyclerView.adapter = adapter
         if (certificateInfo != null) {
