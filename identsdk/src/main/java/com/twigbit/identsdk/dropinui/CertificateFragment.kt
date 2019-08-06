@@ -40,7 +40,7 @@ class CertificateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as DropInIdentificationActivity).imageView.visibility = View.GONE
+        if(activity is DropInIdentificationActivity)(activity as DropInIdentificationActivity).imageView.visibility = View.GONE
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_certificate, container, false)
         v.buttonBack.setOnClickListener { activity!!.supportFragmentManager.popBackStack() }

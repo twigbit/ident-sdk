@@ -97,7 +97,7 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
             // The certificate info has beed requested and is delivered here
             certificateFragment.certificateInfo = certificateInfo;
             certificateFragment.certificateValidity = certificateValidity;
-            supportFragmentManager.beginTransaction().addToBackStack("").replace(com.twigbit.identsdk.R.id.container, certificateFragment).commit()
+            accessRightsFragment.certificateInfo = certificateInfo;
         }
 
         override fun onCompleted(resultUrl: String) {
@@ -109,6 +109,8 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
         override fun onRequestAccessRights(accessRights: List<String>) {
             // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestAccessRights Callback")
+
+            identificationManager?.getCertificate();
 
             accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@IndependentIdentificationActivity, it)})
             // for the moment just accept them
@@ -156,7 +158,7 @@ class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationU
 
     }
     override fun showCertificate() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        supportFragmentManager.beginTransaction().addToBackStack("").replace(com.twigbit.identsdk.R.id.container, certificateFragment).commit()
     }
 
     fun showFragment(fragment: Fragment){

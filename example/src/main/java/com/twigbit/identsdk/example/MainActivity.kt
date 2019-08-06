@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.twigbit.identsdk.dropinui.DropInRequest
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.twigbit.identsdk.ausweisident.AusweisIdentBuilder
@@ -27,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         buttonCustomAuth.setOnClickListener {
             startIdentificationActivity()
         }
+        referenceTwigbit.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+            intent.data = Uri.parse("https://twigbit.com")
+            startActivity(intent)
+        }
     }
 
     private fun startIdentificationActivity() {
@@ -43,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             .scope(AusweisIdentScopes.FAMILY_NAMES)
             .scope(AusweisIdentScopes.GIVEN_NAMES)
             .scope(AusweisIdentScopes.DATE_OF_BIRTH)
+            .scope(AusweisIdentScopes.ACADEMIC_TITLE)
+            .scope(AusweisIdentScopes.ARTISTIC_NAME)
+            .scope(AusweisIdentScopes.DATE_OF_EXPIRY)
+            .scope(AusweisIdentScopes.DOCUMENT_TYPE)
+            .scope(AusweisIdentScopes.RESTRICTED_ID)
             .state("123456")
             .build()
 
