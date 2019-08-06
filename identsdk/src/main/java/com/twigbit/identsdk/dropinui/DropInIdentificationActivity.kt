@@ -10,8 +10,8 @@ import com.twigbit.identsdk.core.*
 import com.twigbit.identsdk.util.*
 import kotlinx.android.synthetic.main.fragment_intro.*
 
-fun Activity.asIdentificationUI(): IsIdentificationUI?{
-    if(this is IsIdentificationUI) return this else return null
+fun Activity.asIdentificationUI(): IsIdentificationUI? {
+    if (this is IsIdentificationUI) return this else return null
 }
 
 class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationUI {
@@ -25,7 +25,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     val errorFragment = ErrorFragment()
     val certificateFragment = CertificateFragment()
 
-    val identificationCallback = object: IdentificationManager.Callback{
+    val identificationCallback = object : IdentificationManager.Callback {
 
         override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
             // The certificate info has beed requested and is delivered here
@@ -47,7 +47,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
 
             identificationManager.getCertificate()
 
-            accessRightsFragment.accessRights = ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it)})
+            accessRightsFragment.accessRights =
+                ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it) })
             // for the moment just accept them
             showFragment(accessRightsFragment)
         }
@@ -63,7 +64,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             // To continue the identification process, call identificationManager.setPin(pin: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPin Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PIN
-            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PIN) }
+            authorisationFragment.arguments =
+                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PIN) }
             showFragment(authorisationFragment)
         }
 
@@ -72,7 +74,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             // To continue the identification process, call identificationManager.setPuk(puk: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPuk Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PUK
-            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PUK) }
+            authorisationFragment.arguments =
+                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PUK) }
             showFragment(authorisationFragment)
         }
 
@@ -81,7 +84,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             // To continue the identification process, call identificationManager.setCan(can: String)
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestCan Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_CAN
-            authorisationFragment.arguments = Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_CAN) }
+            authorisationFragment.arguments =
+                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_CAN) }
             showFragment(authorisationFragment)
         }
 
@@ -91,7 +95,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             showFragment(errorFragment)
         }
     }
-    fun showFragment(fragment: Fragment){
+
+    fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
     }
 
@@ -103,7 +108,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         showFragment(introFragment)
     }
 
-    override fun startIdent(){
+    override fun startIdent() {
         identificationManager.startIdent(intent.getStringExtra(DropInRequest.EXTRA_TC_TOKEN_URL))
     }
 
@@ -111,9 +116,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     override fun showLoader() {
         showFragment(loaderFragment);
     }
+
     override fun showCertificate() {
-        supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment).commit()
+        supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment)
+            .commit()
     }
+
     fun returnResult(resultUrl: String) {
         val data = Intent()
         data.putExtra(IdentificationManager.EXTRA_DROPIN_RESULT, resultUrl);
@@ -122,8 +130,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     }
 }
 
-interface IsIdentificationUI{
-    val identificationManager: IdentificationManager?;
+interface IsIdentificationUI : IdentificationManagerProvider {
     fun showLoader();
     fun startIdent();
     fun showCertificate();
