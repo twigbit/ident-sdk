@@ -102,8 +102,67 @@ To change the appearance of the drop in UI, please read the [styleguide](STYLEGU
 
 To implement your own identification UI, you can use a custom activity and react to the IdentificationManagers callbacks.
 
+### Implementing the callback
+
+First, create the `IdentificationManager.Callback` in your activity to listen and react to identification events.  
+
+```kotlin
+
+val identificationCallback = object: IdentificationManager.Callback{
+        override fun onCompleted(resultUrl: String) {
+            // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
+            TODO("not implemented") 
+        }
+
+        override fun onRequestAccessRights(accessRights: List<String>) {
+            // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
+            TODO("not implemented") 
+        }
+        
+        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
+            // The certificate info has beed requested and is delivered here
+             TODO("not implemented") 
+        }
+        
+        override fun onCardRecognized(card: Card?) {
+            // A card was attached to the NFC reader
+            TODO("not implemented") 
+        }
+
+        override fun onRequestPin() {
+            // The id cards PIN was requested. Display a PIN dialog to the user.
+            // To continue the identification process, call identificationManager.setPin(pin: String)
+            TODO("not implemented") 
+        }
+
+        override fun onRequestPuk() {
+            // The id cards PUK was requested. Display a PUK diaphlog to the user.
+            // To continue the identification process, call identificationManager.setPuk(puk: String)
+            TODO("not implemented") 
+        }
+
+        override fun onRequestCan() {
+            // The id cards CAN was requested. Display a CAN dialog to the user.
+            // To continue the identification process, call identificationManager.setCan(can: String)
+            TODO("not implemented") 
+        }
+
+        override fun onError(error: String) {
+            // An error occured. Display an error/issue dialog to the user.
+            TODO("not implemented") 
+        }
+      
+    }
+```
+
+## Binding the IdentificationManager to your activities lifecycle
+
 Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
-For concenience, we make it available within the activity with a getter.
+For concenience, we make it available within the activity with a getter. 
+
+To access the `identificationManager` to communicate with the SDK, implement the `IsIdentificationUI` interface. 
+
+TODO: Remove overhead on the interface
 
 ```kotlin
 class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
@@ -165,60 +224,6 @@ Add this code to your activity to receive and pass the NFC intents:
         if (tag != null) {
             identificationManager?.dispatchNfcTag(tag)
         }
-    }
-```
-
-
-### Implementing the callback
-
-Finally, implement the `IdentificationManager.Callback` to listen and react to identification events.  
-
-```kotlin
-
-val identificationCallback = object: IdentificationManager.Callback{
-        override fun onCompleted(resultUrl: String) {
-            // The identification was complete, display a success message to the user and fetch the identification result from the server using the resultUrl
-            TODO("not implemented") 
-        }
-
-        override fun onRequestAccessRights(accessRights: List<String>) {
-            // A list of the fields that the sdk is trying to access has arrived. Display them to the user and await his confirmation.
-            TODO("not implemented") 
-        }
-        
-        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
-            // The certificate info has beed requested and is delivered here
-             TODO("not implemented") 
-        }
-        
-        override fun onCardRecognized(card: Card?) {
-            // A card was attached to the NFC reader
-            TODO("not implemented") 
-        }
-
-        override fun onRequestPin() {
-            // The id cards PIN was requested. Display a PIN dialog to the user.
-            // To continue the identification process, call identificationManager.setPin(pin: String)
-            TODO("not implemented") 
-        }
-
-        override fun onRequestPuk() {
-            // The id cards PUK was requested. Display a PUK diaphlog to the user.
-            // To continue the identification process, call identificationManager.setPuk(puk: String)
-            TODO("not implemented") 
-        }
-
-        override fun onRequestCan() {
-            // The id cards CAN was requested. Display a CAN dialog to the user.
-            // To continue the identification process, call identificationManager.setCan(can: String)
-            TODO("not implemented") 
-        }
-
-        override fun onError(error: String) {
-            // An error occured. Display an error/issue dialog to the user.
-            TODO("not implemented") 
-        }
-      
     }
 ```
 
