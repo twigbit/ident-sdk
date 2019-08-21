@@ -90,6 +90,7 @@ class IdentificationManager{
     private fun handleMessage(messageJson: String) {
         // Workaround for extracting the url from the messageJson.
 
+        Log.d(Tags.TAG_IDENT_DEBUG, messageJson);
         // TODO refactor for production
         if (messageJson.indexOf("url") != -1) {
             // it contains the response
