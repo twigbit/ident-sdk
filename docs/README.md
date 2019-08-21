@@ -106,6 +106,8 @@ To implement your own identification UI, you can use a custom activity and react
 
 First, create the `IdentificationManager.Callback` in your activity to listen and react to identification events.  
 
+**Warning:** Please note that these events will be called from a service thread, so please make sure you run all UI related logic on the UI thread explicitly with `runOnUiThread`. 
+
 ```kotlin
 
 val identificationCallback = object: IdentificationManager.Callback{
@@ -160,12 +162,12 @@ val identificationCallback = object: IdentificationManager.Callback{
 Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
 For concenience, we make it available within the activity with a getter. 
 
-To access the `identificationManager` to communicate with the SDK, implement the `IsIdentificationUI` interface. 
+To access the `identificationManager` to communicate with the SDK, implement the `IdentificationManagerProvider` interface. 
 
 TODO: Remove overhead on the interface
 
 ```kotlin
-class IndependentIdentificationActivity : AppCompatActivity(), IsIdentificationUI {
+class IndependentIdentificationActivity : AppCompatActivity(), IdentificationManagerProvider {
 
     var identificationFragment: IdentificationFragment? = null
     // convenience getter

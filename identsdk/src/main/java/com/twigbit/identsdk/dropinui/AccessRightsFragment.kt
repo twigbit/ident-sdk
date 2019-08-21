@@ -29,7 +29,6 @@ class AccessRightsFragment : Fragment() {
             view?.let { it.textServiceProvider.text = value?.subjectName; it.textPurpose.text = value?.purpose }
         }
 
-
     var accessRights: ArrayList<String> = arrayListOf()
         set(value) {
             field = value
