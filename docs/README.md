@@ -42,7 +42,7 @@ android {
     }
 }
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.4'
+  implementation 'com.github.twigbit:ident-sdk:0.1.5'
 }
 ```
 
