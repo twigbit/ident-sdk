@@ -42,7 +42,7 @@ android {
     }
 }
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.5x'
+  implementation 'com.github.twigbit:ident-sdk:0.1.6'
 }
 ```
 
@@ -329,6 +329,11 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [core] Small usability improvements
 * [core] Result URL resolution example
 * [documentation] Improve docs
+
+### 0.1.6
+* [core] Fix typos
+* [core] Improve docs
+
 
 ### Backlog 
 * [ausweisident] Server implementation guide.
