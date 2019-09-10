@@ -42,7 +42,7 @@ android {
     }
 }
 dependencies {
-  implementation 'com.github.twigbit:ident-sdk:0.1.4'
+  implementation 'com.github.twigbit:ident-sdk:0.1.6'
 }
 ```
 
@@ -164,8 +164,6 @@ For concenience, we make it available within the activity with a getter.
 
 To access the `identificationManager` to communicate with the SDK, implement the `IdentificationManagerProvider` interface. 
 
-TODO: Remove overhead on the interface
-
 ```kotlin
 class IndependentIdentificationActivity : AppCompatActivity(), IdentificationManagerProvider {
 
@@ -255,8 +253,6 @@ The certificate informations are mirrored from the AusweisApp2 SDK messanges and
 
 ### Handling the result URL 
 
-TODO: Cleanup/ refactor 
-
 Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info.
 
 ```
@@ -288,11 +284,6 @@ resultHandler.fetchResult(resultUrl);
 
 ### Server side implementation
 
-TODO remove general info. Stronger pointer to server side sample repo. 
-1. Use the _code_ to obtain an _access token_ from the AusweisIdent OAuth2 Token Endpoint.
-2. Use the _access token_ to get an _user info token_ via the OAuth2 User Info Endpoint containing the personal data from the identification document.
-
-TODO rephrase
 Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
 
@@ -339,8 +330,17 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [core] Result URL resolution example
 * [documentation] Improve docs
 
+### 0.1.5 
+* [ausweisident] Server implementation guide
+* [core] Improve docs
+* [core] Bugfixes
+
+### 0.1.6
+* [core] Fix typos
+* [core] Improve docs
+
+
 ### Backlog 
-* [ausweisident] Server implementation guide.
 * [ausweisident] Provide Util for evaluating the result URL.
 
 
