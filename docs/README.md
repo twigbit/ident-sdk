@@ -330,13 +330,17 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [core] Result URL resolution example
 * [documentation] Improve docs
 
+### 0.1.5 
+* [ausweisident] Server implementation guide
+* [core] Improve docs
+* [core] Bugfixes
+
 ### 0.1.6
 * [core] Fix typos
 * [core] Improve docs
 
 
 ### Backlog 
-* [ausweisident] Server implementation guide.
 * [ausweisident] Provide Util for evaluating the result URL.
 
 
