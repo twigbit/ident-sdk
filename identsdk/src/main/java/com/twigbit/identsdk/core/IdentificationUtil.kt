@@ -77,7 +77,7 @@ class CertificateInfo{
     val subjectUrl: String = ""
     val termsOfUsage: String = ""
     override fun toString(): String {
-        return "CertificateValidity(issuerName=$issuerName, purpose=$purpose, subjectName=$subjectName)"
+        return "CertificateInfo(issuerName=$issuerName, purpose=$purpose, subjectName=$subjectName)"
     }
 }
 class CertificateValidity{

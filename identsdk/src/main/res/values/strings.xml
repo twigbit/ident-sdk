@@ -25,12 +25,12 @@
     </string>
     <string name="twigbit_ident_drop_in_continue">Weiter</string>
 
-    <string name="twigbit_ident_access_right_address">Wohnort</string>
+    <string name="twigbit_ident_access_right_address">Anschrift</string>
     <string name="twigbit_ident_access_right_birth_name">Geburtsname</string>
     <string name="twigbit_ident_access_right_family_name">Familienname</string>
-    <string name="twigbit_ident_access_right_given_names">Rufname</string>
-    <string name="twigbit_ident_access_right_place_of_birth">Geburtsort</string>
-    <string name="twigbit_ident_access_right_date_of_birth">Geburtsdatum</string>
+    <string name="twigbit_ident_access_right_given_names">Vornamen</string>
+    <string name="twigbit_ident_access_right_place_of_birth">Ort der Geburt</string>
+    <string name="twigbit_ident_access_right_date_of_birth">Tag der Geburt</string>
     <string name="twigbit_ident_access_right_doctoral_degree">Akademisches Grad</string>
     <string name="twigbit_ident_access_right_artistic_name">Ordens- / Künstlername</string>
     <string name="twigbit_ident_access_right_pseudonym">Pseudonym</string>
@@ -54,7 +54,7 @@
     <string name="twigbit_ident_certificate_validity">Gültigkeit</string>
     <string name="twigbit_ident_certificate_information">Angaben zum Diensteanbieter</string>
 
-    <string name="twigbit_ident_drop_in_access_rights_header">Der folgende Diensteanbierter möchte Ihre Identität
+    <string name="twigbit_ident_drop_in_access_rights_header">Der folgende Diensteanbieter möchte Ihre Identität
         überprüfen:
     </string>
     <string name="twigbit_ident_drop_in_service_provider">Diensteanbieter</string>
