@@ -66,7 +66,7 @@ class AccessRightsFragment : Fragment() {
 
 // TODO display the certificate information
 
-class MyAdapter(var data: ArrayList<String>) :
+class MyAdapter(var data: List<String>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
