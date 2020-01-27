@@ -17,6 +17,7 @@ Moreover, we are providing convenience tooling for the [AusweisIdent mobile iden
 
 # Documentation 
 
+
 All code is provided in Kotlin. The integration works in Java analogously, all examples are interchangable. 
 
 ## Adding the dependency
@@ -307,6 +308,28 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 
 ## Changelog/Milestones
 
+### 0.1.6
+* [core] Fix typos
+* [core] Improve docs
+
+### 0.1.5 
+* [ausweisident] Server implementation guide
+* [core] Improve docs
+* [core] Bugfixes
+
+### 0.1.4
+* [core] Small usability improvements
+* [core] Result URL resolution example
+* [documentation] Improve docs
+
+### 0.1.3
+* [core] Usability improvements
+* [documentation] Improve docs
+
+### 0.1.2
+* [dropin] Certificate view
+* [core] Test simplified configuration procedure.
+
 ### 0.1.1
 * [ausweisident] Return Result URL directly, refactor call redirects into optional method in AusweisIdent helper.
 * [ausweisident] Configuration helper
@@ -317,31 +340,10 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 * [dropin] Dropin UI basic implementation
 * [dropin] Dropin styling
 
-### 0.1.2
-* [dropin] Certificate view
-* [core] Test simplified configuration procedure.
-
-### 0.1.3
-* [core] Usability improvements
-* [documentation] Improve docs
-
-### 0.1.4
-* [core] Small usability improvements
-* [core] Result URL resolution example
-* [documentation] Improve docs
-
-### 0.1.5 
-* [ausweisident] Server implementation guide
-* [core] Improve docs
-* [core] Bugfixes
-
-### 0.1.6
-* [core] Fix typos
-* [core] Improve docs
-
 
 ### Backlog 
 * [ausweisident] Provide Util for evaluating the result URL.
+* [UI] Add manual for fixing activity orientation
 
 
 ### Nice to have 
