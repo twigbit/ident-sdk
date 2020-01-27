@@ -2,7 +2,7 @@ package com.twigbit.identsdk.dropinui
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_certificate.view.*
  * A simple [Fragment] subclass.
  *
  */
-class CertificateFragment : Fragment() {
+class CertificateFragment : androidx.fragment.app.Fragment() {
     var certificateInfo: CertificateInfo? = null
         set(value) {
             field = value

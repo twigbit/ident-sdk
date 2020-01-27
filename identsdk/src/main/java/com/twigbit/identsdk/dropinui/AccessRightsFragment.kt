@@ -1,8 +1,8 @@
 package com.twigbit.identsdk.dropinui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.holder_access_right.view.*
  * A simple [Fragment] subclass.
  *
  */
-class AccessRightsFragment : Fragment() {
+class AccessRightsFragment : androidx.fragment.app.Fragment() {
 
     var certificateInfo: CertificateInfo? = null
         set(value) {
@@ -67,9 +67,9 @@ class AccessRightsFragment : Fragment() {
 // TODO display the certificate information
 
 class MyAdapter(var data: List<String>) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class MyViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 
 
     // Create new views (invoked by the layout manager)
