@@ -35,10 +35,15 @@ class CertificateFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if(activity is DropInIdentificationActivity)(activity as DropInIdentificationActivity).imageView.visibility = View.GONE
+        if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+            View.GONE
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_certificate, container, false)
-        v.buttonBack.setOnClickListener { activity!!.supportFragmentManager.popBackStack() }
+        v.buttonBack.setOnClickListener {
+            activity!!.supportFragmentManager.popBackStack()
+            if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+                View.VISIBLE
+        }
         showCertificateData(v)
         return v;
     }
@@ -53,7 +58,8 @@ class CertificateFragment : androidx.fragment.app.Fragment() {
             v.textServiceProviderInfo?.text = certificateInfo?.termsOfUsage
         }
         if (certificateValidity != null) {
-            v.textValidity?.text = "${certificateValidity?.effectiveDate} - ${certificateValidity?.expirationDate}"
+            v.textValidity?.text =
+                "${certificateValidity?.effectiveDate} - ${certificateValidity?.expirationDate}"
         }
     }
 

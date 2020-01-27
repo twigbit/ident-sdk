@@ -65,6 +65,8 @@ class AccessRightsFragment : androidx.fragment.app.Fragment() {
             v.textServiceProvider?.text = certificateInfo?.subjectName
             v.textPurpose?.text = certificateInfo?.purpose
         }
+        if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+            View.VISIBLE
         return v
     }
 }
