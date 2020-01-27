@@ -1,8 +1,8 @@
 # ![twigbit IdentSDK](images/header.png)
 
 The twigbit Ident SDK is a lightweight convenience layer on top of the [AusweisApp2 SDK](https://www.ausweisapp.bund.de/fuer-diensteanbieter/software-development-kit-sdk/) written in Kotlin.
-We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating AusweisIdent functionality in their apps. 
-Moreover, we are providing convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG. 
+We are aiming to extract and eliminate the recurring code and configuration that every developer faces integrating eid services functionality in their apps. 
+Moreover, we are providing optional convenience tooling for the [AusweisIdent mobile identification service](https://www.ausweisident.de/) provided by Bundesdruckerei GmbH and Governikus KG.
 
 ![twigbit technologies GmbH, Governikus GmbH & Co. KG, AusweisIDent](images/logos.png)
 
@@ -158,7 +158,7 @@ val identificationCallback = object: IdentificationManager.Callback{
     }
 ```
 
-## Binding the IdentificationManager to your activities lifecycle
+### Binding the IdentificationManager to your activities lifecycle
 
 Then, initialize an `IdentificationFragment` in your activites `onCreate` method to bind to the activity livecycle. 
 For concenience, we make it available within the activity with a getter. 
@@ -252,7 +252,23 @@ To display information about the service providers certificate, you can call the
 The certificate info will be delivered asynchronously in the callback via the `onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity)` method. 
 The certificate informations are mirrored from the AusweisApp2 SDK messanges and are wrapped by the classes [CertificateInfo](../identsdk/src/main/java/com/twigbit/identsdk/core/IdentificationUtil.kt) and [CertificateValidity](../identsdk/src/main/java/com/twigbit/identsdk/core/IdentificationUtil.kt) 
 
-### Handling the result URL 
+## Handling the result URL 
+
+### Opening the result in the browser
+
+To finish the data transmission, simply open the `resultUrl` in the browser. This will redirect you to the final redirect page provided by the server.
+
+```kotlin
+val resultUrl = data!!.getStringExtra(IdentificationManager.EXTRA_DROPIN_RESULT)
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(resultUrl)
+                startActivity(i)
+```
+
+
+### Retreiving the data locally with the AusweisIDent server side sample 
+
+If you are using a setup similar to our [serverside reference implementation](https://github.com/twigbit/ausweisident-backend-examples), you cant alternatively directly evaluate the redirect chain locally and retreive the data from the redirect response for showcasing purposes. For most use cases, it is probably not desired to return the data directly to the device. 
 
 Calling this url will result in several redirects with the last redirect pointing to your redirectUrl with the `code` query parameter after a successful identification or an `error` and `error_description` parameter in case of an error. Your server needs this `code` to receive the user info.
 
@@ -283,7 +299,7 @@ resultHandler.fetchResult(resultUrl);
 ```
 
 
-### Server side implementation
+## Server side implementation
 
 Please see the AusweisIdent documentation for further details or check out our [server example](https://github.com/twigbit/ausweisident-backend-examples).
 
@@ -344,6 +360,8 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 ### Backlog 
 * [ausweisident] Provide Util for evaluating the result URL.
 * [UI] Add manual for fixing activity orientation
+* [core] Add support for optional attribute selection 
+* [core] Investigate card recognition behavior before intialisation
 
 
 ### Nice to have 

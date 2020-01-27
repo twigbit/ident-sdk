@@ -61,4 +61,5 @@
     <string name="twigbit_ident_drop_in_access_rights_purpose">Zweck der Auskunft</string>
     <string name="twigbit_ident_drop_in_attribute_header">Folgende Attribute werden ausgelesen</string>
     <string name="twigbit_ident_drop_in_attributes">Attribute</string>
+    <string name="twigbit_ident_drop_in_logo_content_description">Logo des Diensteanbieters</string>
 </resources>

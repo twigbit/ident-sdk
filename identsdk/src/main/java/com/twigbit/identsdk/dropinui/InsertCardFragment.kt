@@ -3,7 +3,7 @@ package com.twigbit.identsdk.dropinui
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import com.twigbit.identsdk.R
  * create an instance of this fragment.
  *
  */
-class InsertCardFragment : Fragment() {
+class InsertCardFragment : androidx.fragment.app.Fragment() {
     // TODO: Rename and change types of parameters
 
     override fun onCreate(savedInstanceState: Bundle?) {

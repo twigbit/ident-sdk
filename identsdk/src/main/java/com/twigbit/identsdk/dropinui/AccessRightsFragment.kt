@@ -1,12 +1,13 @@
 package com.twigbit.identsdk.dropinui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.twigbit.identsdk.R
 import com.twigbit.identsdk.core.CertificateInfo
@@ -21,12 +22,15 @@ import kotlinx.android.synthetic.main.holder_access_right.view.*
  * A simple [Fragment] subclass.
  *
  */
-class AccessRightsFragment : Fragment() {
+class AccessRightsFragment : androidx.fragment.app.Fragment() {
 
     var certificateInfo: CertificateInfo? = null
         set(value) {
             field = value
-            view?.let { it.textServiceProvider.text = value?.subjectName; it.textPurpose.text = value?.purpose }
+            view?.let {
+                it.textServiceProvider.text = value?.subjectName; it.textPurpose.text =
+                value?.purpose
+            }
         }
 
     var accessRights: ArrayList<String> = arrayListOf()
@@ -55,11 +59,14 @@ class AccessRightsFragment : Fragment() {
             activity?.asIdentificationUI()?.identificationManager?.cancel()
             activity?.finish()
         }
+
         v.recyclerView.adapter = adapter
         if (certificateInfo != null) {
             v.textServiceProvider?.text = certificateInfo?.subjectName
             v.textPurpose?.text = certificateInfo?.purpose
         }
+        if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+            View.VISIBLE
         return v
     }
 }
@@ -76,7 +83,7 @@ class MyAdapter(var data: List<String>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MyAdapter.MyViewHolder {
+    ): MyViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.holder_access_right, parent, false)
         return MyViewHolder(v)

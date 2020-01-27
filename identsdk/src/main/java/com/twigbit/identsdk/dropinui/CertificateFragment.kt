@@ -2,7 +2,7 @@ package com.twigbit.identsdk.dropinui
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_certificate.view.*
  * A simple [Fragment] subclass.
  *
  */
-class CertificateFragment : Fragment() {
+class CertificateFragment : androidx.fragment.app.Fragment() {
     var certificateInfo: CertificateInfo? = null
         set(value) {
             field = value
@@ -35,10 +35,15 @@ class CertificateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if(activity is DropInIdentificationActivity)(activity as DropInIdentificationActivity).imageView.visibility = View.GONE
+        if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+            View.GONE
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_certificate, container, false)
-        v.buttonBack.setOnClickListener { activity!!.supportFragmentManager.popBackStack() }
+        v.buttonBack.setOnClickListener {
+            activity!!.supportFragmentManager.popBackStack()
+            if (activity is DropInIdentificationActivity) (activity as DropInIdentificationActivity).imageView.visibility =
+                View.VISIBLE
+        }
         showCertificateData(v)
         return v;
     }
@@ -53,7 +58,8 @@ class CertificateFragment : Fragment() {
             v.textServiceProviderInfo?.text = certificateInfo?.termsOfUsage
         }
         if (certificateValidity != null) {
-            v.textValidity?.text = "${certificateValidity?.effectiveDate} - ${certificateValidity?.expirationDate}"
+            v.textValidity?.text =
+                "${certificateValidity?.effectiveDate} - ${certificateValidity?.expirationDate}"
         }
     }
 
