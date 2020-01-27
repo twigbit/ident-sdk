@@ -344,6 +344,8 @@ For informations, contact [post@twigbit.com](mailto:post@twigbit.com) .
 ### Backlog 
 * [ausweisident] Provide Util for evaluating the result URL.
 * [UI] Add manual for fixing activity orientation
+* [core] Add support for optional attribute selection 
+* [core] Investigate card recognition behavior before intialisation
 
 
 ### Nice to have 
