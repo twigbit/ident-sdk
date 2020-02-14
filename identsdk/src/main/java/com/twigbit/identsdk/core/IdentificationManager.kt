@@ -20,60 +20,83 @@ import com.governikus.ausweisapp2.IAusweisApp2Sdk
 import com.governikus.ausweisapp2.IAusweisApp2SdkCallback
 import com.twigbit.identsdk.util.*
 
-class IdentificationManager{
+class IdentificationManager {
 
     companion object {
-        @JvmField val EXTRA_DROPIN_RESULT = "extra-identification-result"
+        @JvmField
+        val EXTRA_DROPIN_RESULT = "extra-identification-result"
     }
+
     // TODO refactor into callback array or else replace by setter
-    var callback : Callback? = null
-    fun addCallback(callback: Callback){
+    var callback: Callback? = null
+
+    fun addCallback(callback: Callback) {
         this.callback = callback
     }
 
     // Initialize the auth Process via this function
-    fun bind(context: Context){
+    fun bind(context: Context) {
         bindIdIdentificationService(context)
     }
-    fun unBind(context: Context){
+
+    fun unBind(context: Context) {
         context.unbindService(sdkConnection)
     }
+
     fun startIdent(tokenURL: String) {
         send(
             IdentificationUtil.buildCmdString(
                 IdentificationUtil.CMD_RUN_AUTH, Pair(
-                    IdentificationUtil.PARAM_TCTOKEN, tokenURL)))
+                    IdentificationUtil.PARAM_TCTOKEN, tokenURL
+                )
+            )
+        )
     }
-    fun setPin(pin: String){
+
+    fun setPin(pin: String) {
         send(
             IdentificationUtil.buildCmdString(
                 IdentificationUtil.CMD_SET_PIN, Pair(
-                    IdentificationUtil.PARAM_VALUE, pin)))
+                    IdentificationUtil.PARAM_VALUE, pin
+                )
+            )
+        )
     }
-    fun setPuk(puk: String){
+
+    fun setPuk(puk: String) {
         send(
             IdentificationUtil.buildCmdString(
                 IdentificationUtil.CMD_SET_PUK, Pair(
-                    IdentificationUtil.PARAM_VALUE, puk)))
+                    IdentificationUtil.PARAM_VALUE, puk
+                )
+            )
+        )
     }
-    fun setCan(can: String){
+
+    fun setCan(can: String) {
         send(
             IdentificationUtil.buildCmdString(
                 IdentificationUtil.CMD_SET_CAN, Pair(
-                    IdentificationUtil.PARAM_VALUE, can)))
+                    IdentificationUtil.PARAM_VALUE, can
+                )
+            )
+        )
     }
-    fun acceptAccessRights(){
+
+    fun acceptAccessRights() {
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_ACCEPT))
     }
-    fun cancel(){
+
+    fun cancel() {
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_CANCEL))
     }
-    fun getCertificate(){
+
+    fun getCertificate() {
         send(IdentificationUtil.buildCmdString(IdentificationUtil.CMD_GET_CERTIFICATE))
     }
 
     private fun send(cmd: String) {
-        Log.d(Tags.TAG_IDENT_DEBUG,  "Sending command: " + cmd)
+        Log.d(Tags.TAG_IDENT_DEBUG, "Sending command: " + cmd)
         try {
             if (!sdk!!.send(sdkCallback.mSessionID, cmd)) {
                 // TODO error
@@ -81,7 +104,7 @@ class IdentificationManager{
             }
         } catch (e: Exception) {
             // TODO error
-            // FIXME 20190509 This sometimes gets called without an error message. Possibly due to improperly terminated background service. 
+            // FIXME 20190509 This sometimes gets called without an error message. Possibly due to improperly terminated background service.
             Log.e(Tags.TAG_IDENT_DEBUG, "Could not sendRaw command to SDK")
             //Log.e(Tags.TAG_IDENT_DEBUG, e.message)
         }
@@ -94,7 +117,7 @@ class IdentificationManager{
         // TODO refactor for production
         if (messageJson.indexOf("url") != -1) {
             // it contains the response
-            val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
+            val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length - 2);
             callback?.onCompleted(s)
         }
 
@@ -108,27 +131,51 @@ class IdentificationManager{
             return
         }
 
+
         // Pass raw sdk messageJson to callback for debugging/migration
         //callback.onMessage(message)
 
-        when(message.msg) {
+        when (message.msg) {
             IdentificationUtil.MSG_AUTH -> {
-                if(!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error"){
+                if (!message.result?.description.isNullOrEmpty() || message.result?.major == "http://www.bsi.bund.de/ecard/api/1.1/resultmajor#error") {
                     // An error occured
                     callback?.onError(message.result!!.description)
                     authInProgress = false
                     return
-                }
-                else if(messageJson.indexOf("url") != -1){
-                    val s = messageJson.substring(messageJson.indexOf("url") + 6, messageJson.length-2);
+                } else if (messageJson.indexOf("url") != -1) {
+                    val s = messageJson.substring(
+                        messageJson.indexOf("url") + 6,
+                        messageJson.length - 2
+                    );
                     //callback.onComplete(s)
-                }
-                else{
+                } else {
                     authInProgress = true
                 }
             };
             IdentificationUtil.MSG_ACCESS_RIGHTS -> {
-                callback?.onRequestAccessRights(message.chat!!.effective!!)
+                Log.d(Tags.TAG_IDENT_DEBUG, "Access rights")
+                Log.d(Tags.TAG_IDENT_DEBUG, message.chat!!.effective!!.toString())
+                val orderedParameters = arrayListOf(
+                    "FamilyName",
+                    "BirthName",
+                    "GivenNames",
+                    "DoctoralDegree",
+                    "DateOfBirth",
+                    "PlaceOfBirth",
+                    "Address",
+                    "Nationality",
+                    "DocumentType",
+                    "ValidUntil",
+                    "IssuingCountry",
+                    "ArtisticName",
+                    "Pseudonym",
+                    "ResidencePermitI"
+                );
+                callback?.onRequestAccessRights(message.chat!!.effective!!.sortedWith(compareBy({
+                    orderedParameters.indexOf(
+                        it
+                    )
+                })))
             }
 
             IdentificationUtil.MSG_INSERT_CARD -> {
@@ -147,7 +194,8 @@ class IdentificationManager{
                 callback?.onRequestCertificate(message.description!!, message.validity!!)
             }
             IdentificationUtil.MSG_BAD_STATE -> {
-                callback?.onError(messageJson
+                callback?.onError(
+                    messageJson
                 )
             }
 //            IdentificationUtil.MSG_READER -> {
@@ -165,7 +213,11 @@ class IdentificationManager{
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()
-        fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity)
+        fun onRequestCertificate(
+            certificateInfo: CertificateInfo,
+            certificateValidity: CertificateValidity
+        )
+
         fun onError(error: String)
     }
 
@@ -187,7 +239,8 @@ class IdentificationManager{
 
         @Throws(RemoteException::class)
         override fun sessionIdGenerated(
-                pSessionId: String, pIsSecureSessionId: Boolean) {
+            pSessionId: String, pIsSecureSessionId: Boolean
+        ) {
             mSessionID = pSessionId
         }
 
@@ -246,7 +299,7 @@ class IdentificationManager{
         }
     }
 
-    fun dispatchNfcTag(tag: Tag){
+    fun dispatchNfcTag(tag: Tag) {
         try {
             sdk?.updateNfcTag(sdkCallback.mSessionID, tag)
         } catch (e: Exception) {
