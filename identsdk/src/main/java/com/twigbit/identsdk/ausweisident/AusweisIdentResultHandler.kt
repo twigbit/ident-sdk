@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.twigbit.identsdk.util.Tags
 import okhttp3.*
 import java.io.IOException
 import java.net.CookieManager
@@ -51,6 +52,9 @@ class AusweisIdentResultHandler(val callback: AusweisIdentResultHandler.Callback
                     val body = response.body() ?: throw IOException("Unexpected empty body")
 
                     val userInfo = gson.fromJson(body.charStream(), UserInfo::class.java)
+
+                    Log.d(Tags.TAG_IDENT_DEBUG, userInfo.toString())
+
                     callback.onComplete(userInfo)
                 } catch (ex: IOException) {
                     Log.e(TAG, ex.toString())

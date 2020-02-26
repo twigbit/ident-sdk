@@ -30,7 +30,7 @@ If you should add translations for different common languages, feel free to open
 
 ## Styling the buttons 
 
-To customize the button appearance of the UI, you need to override `TwigbitIdentTheme.ButtonStyle` for the default raised buttons and `TwigbitIdentTheme.ButtonStyle` for the text button with you own custom button style implementation. 
+To customize the button appearance of the UI, you need to override `TwigbitIdentTheme.ButtonStyle` for the default raised buttons and `TwigbitIdentTheme.ButtonStyle.TextButton` for the text button with you own custom button style implementation.
 It is recommended that you extend a `MaterialComponent` as a base style, such as `Widget.MaterialComponents.Button`. 
 
 ##  Displaying custom icons
