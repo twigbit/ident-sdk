@@ -90,7 +90,6 @@ class MyAdapter(var data: List<String>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if (position == data.size - 1) holder.view.divider.visibility = View.GONE
         holder.view.text.text = data.get(position)
     }
 

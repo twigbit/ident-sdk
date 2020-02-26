@@ -22,5 +22,7 @@
     </style>
     <style name="TwigbitIdentTheme.ButtonStyle.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
     </style>
+    <style name="TwigbitIdentTheme.CardStyle" parent="Widget.MaterialComponents.CardView">
+    </style>
 
 </resources>

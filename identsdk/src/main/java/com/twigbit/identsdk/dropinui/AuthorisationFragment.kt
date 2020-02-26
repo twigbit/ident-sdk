@@ -23,7 +23,7 @@ class AuthorisationFragment : androidx.fragment.app.Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_authorisation, container, false)
-        v.buttonContinue.setOnClickListener { onEntered(v.editPin.text.toString()) }
+        v.buttonContinue.setOnClickListener { if(v.editPin.text.length != 6) {v.editPin.setError("Die PIN hat 6 Stellen")} else  onEntered(v.editPin.text.toString()) }
         v.editPin.setOnEditorActionListener { v, actionId, event ->
             onEntered(v.text.toString())
             false
