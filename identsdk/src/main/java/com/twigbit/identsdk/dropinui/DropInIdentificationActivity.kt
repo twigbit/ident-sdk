@@ -27,7 +27,10 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
 
     val identificationCallback = object : IdentificationManager.Callback {
 
-        override fun onRequestCertificate(certificateInfo: CertificateInfo, certificateValidity: CertificateValidity) {
+        override fun onRequestCertificate(
+            certificateInfo: CertificateInfo,
+            certificateValidity: CertificateValidity
+        ) {
             // The certificate info has beed requested and is delivered here
             accessRightsFragment.certificateInfo = certificateInfo;
             certificateFragment.certificateInfo = certificateInfo;
@@ -48,7 +51,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             identificationManager.getCertificate()
 
             accessRightsFragment.accessRights =
-                ArrayList(accessRights.map { StringUtil.translate(this@DropInIdentificationActivity, it) })
+                ArrayList(accessRights.map {
+                    StringUtil.translate(
+                        this@DropInIdentificationActivity,
+                        it
+                    )
+                })
             // for the moment just accept them
             showFragment(accessRightsFragment)
         }
@@ -65,7 +73,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPin Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PIN
             authorisationFragment.arguments =
-                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PIN) }
+                Bundle().apply {
+                    putInt(
+                        AuthorisationFragment.KEY_MODE,
+                        AuthorisationFragment.MODE_PIN
+                    )
+                }
             showFragment(authorisationFragment)
         }
 
@@ -75,7 +88,12 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestPuk Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_PUK
             authorisationFragment.arguments =
-                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_PUK) }
+                Bundle().apply {
+                    putInt(
+                        AuthorisationFragment.KEY_MODE,
+                        AuthorisationFragment.MODE_PUK
+                    )
+                }
             showFragment(authorisationFragment)
         }
 
@@ -85,8 +103,17 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
             Log.d(Tags.TAG_IDENT_DEBUG, "Got onRequestCan Callback")
             authorisationFragment.mode = AuthorisationFragment.MODE_CAN
             authorisationFragment.arguments =
-                Bundle().apply { putInt(AuthorisationFragment.KEY_MODE, AuthorisationFragment.MODE_CAN) }
+                Bundle().apply {
+                    putInt(
+                        AuthorisationFragment.KEY_MODE,
+                        AuthorisationFragment.MODE_CAN
+                    )
+                }
             showFragment(authorisationFragment)
+        }
+
+        override fun onInitilized() {
+            showFragment(introFragment)
         }
 
         override fun onError(error: String) {
@@ -105,7 +132,7 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
         setContentView(R.layout.activity_dropin_identification)
 
         identificationManager.addCallback(identificationCallback)
-        showFragment(introFragment)
+        showFragment(loaderFragment)
     }
 
     override fun startIdent() {
@@ -118,7 +145,8 @@ class DropInIdentificationActivity : IdentificationActivity(), IsIdentificationU
     }
 
     override fun showCertificate() {
-        supportFragmentManager.beginTransaction().addToBackStack("").replace(R.id.container, certificateFragment)
+        supportFragmentManager.beginTransaction().addToBackStack("")
+            .replace(R.id.container, certificateFragment)
             .commit()
     }
 
