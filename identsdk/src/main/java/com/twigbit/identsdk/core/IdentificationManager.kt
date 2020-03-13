@@ -213,6 +213,7 @@ class IdentificationManager {
         fun onRequestPin()
         fun onRequestPuk()
         fun onRequestCan()
+        fun onInitilized()
         fun onRequestCertificate(
             certificateInfo: CertificateInfo,
             certificateValidity: CertificateValidity
@@ -297,6 +298,8 @@ class IdentificationManager {
             Log.e(Tags.TAG_IDENT_DEBUG, e.toString())
             // TODO error
         }
+        callback?.onInitilized();
+        Log.d(Tags.TAG_IDENT_DEBUG, "Bound sdk")
     }
 
     fun dispatchNfcTag(tag: Tag) {
