@@ -23,14 +23,20 @@ class AuthorisationFragment : androidx.fragment.app.Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_authorisation, container, false)
-        v.buttonContinue.setOnClickListener { if(v.editPin.text.length != 6) {v.editPin.setError("Die PIN hat 6 Stellen")} else  onEntered(v.editPin.text.toString()) }
+        v.buttonContinue.setOnClickListener {
+            if (v.editPin.text.length != 6) {
+                v.editPin.setError("Die PIN hat 6 Stellen")
+            } else onEntered(v.editPin.text.toString())
+        }
         v.editPin.setOnEditorActionListener { v, actionId, event ->
-            onEntered(v.text.toString())
-            false
+            if (v.editPin.text.length != 6) {
+                v.editPin.setError("Die PIN hat 6 Stellen")
+            } else onEntered(v.editPin.text.toString())
+            true
         }
         this.mode = arguments?.getInt(KEY_MODE)
 
-        when(mode) {
+        when (mode) {
             MODE_CAN -> {
                 v.text?.text = getText(R.string.twigbit_ident_drop_in_enter_can)
             }
@@ -49,10 +55,11 @@ class AuthorisationFragment : androidx.fragment.app.Fragment() {
         super.onResume()
         view?.editPin?.text = null
     }
-    fun onEntered(pin: String){
+
+    fun onEntered(pin: String) {
         // TODO check pin lenght
         Log.d(Tags.TAG_IDENT_DEBUG, "Pin entered $pin");
-        when(mode) {
+        when (mode) {
             MODE_CAN -> {
                 activity?.asIdentificationUI()?.identificationManager?.setCan(pin)
             }
@@ -80,7 +87,7 @@ class AuthorisationFragment : androidx.fragment.app.Fragment() {
 
     var mode: Int? = MODE_CAN
         set(value) {
-            when(value){
+            when (value) {
                 MODE_CAN -> {
                     view?.text?.text = getText(R.string.twigbit_ident_drop_in_enter_can)
                 }
